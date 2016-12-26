@@ -89,7 +89,7 @@
   failed_when: False
 
 - name: Set Aegir administrator email in debconf database.
-  shell: "echo 'aegir3-hostmaster debconf aegir/email string {{ aegir_admin_email }}' | debconf-set-selections"
+  shell: "echo 'aegir3-hostmaster aegir/email string {{ aegir_admin_email }}' | debconf-set-selections"
   when: (aegir_admin_email is defined) and not (aegir_admin_email_debconf.stdout|search(aegir_admin_email))
 
 # aegir_makefile
@@ -100,7 +100,7 @@
   failed_when: False
 
 - name: Set Aegir Drush makefile in debconf database.
-  shell: "echo 'aegir3-hostmaster debconf aegir/makefile string {{ aegir_makefile }}' | debconf-set-selections"
+  shell: "echo 'aegir3-hostmaster aegir/makefile string {{ aegir_makefile }}' | debconf-set-selections"
   when: (aegir_makefile is defined) and not (aegir_makefile_debconf.stdout|search(aegir_makefile))
 
 # aegir_webserver
@@ -111,7 +111,7 @@
   failed_when: False
 
 - name: Set Aegir web server in debconf database.
-  shell: "echo 'aegir3-hostmaster debconf aegir/webserver string {{ aegir_http_service_type }}' | debconf-set-selections"
+  shell: "echo 'aegir3-hostmaster aegir/webserver string {{ aegir_http_service_type }}' | debconf-set-selections"
   when: (aegir_http_service_type is defined) and not (aegir_webserver_debconf.stdout|search(aegir_http_service_type))
 
 # aegir_working_copy
@@ -122,7 +122,7 @@
   failed_when: False
 
 - name: Set Aegir working-copy in debconf database.
-  shell: "echo 'aegir3-hostmaster debconf aegir/working-copy string {{ aegir_working_copy }}' | debconf-set-selections"
+  shell: "echo 'aegir3-hostmaster aegir/working-copy string {{ aegir_working_copy }}' | debconf-set-selections"
   when: (aegir_working_copy is defined) and not (aegir_working_copy_debconf.stdout|search(aegir_working_copy))
 
 # aegir_drush_version
@@ -133,7 +133,7 @@
   failed_when: False
 
 - name: Set Aegir-installed Drush version in debconf database.
-  shell: "echo 'aegir3-provision debconf aegir/drush_version string {{ aegir_drush_version }}' | debconf-set-selections"
+  shell: "echo 'aegir3-provision aegir/drush_version string {{ aegir_drush_version }}' | debconf-set-selections"
   when: (aegir_drush_version is defined) and not (aegir_drush_version_debconf.stdout|search(aegir_drush_version))
 
 
