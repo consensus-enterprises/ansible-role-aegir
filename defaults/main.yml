@@ -27,6 +27,9 @@ aegir_fix_ownership: false
 aegir_fix_permissions: false
 aegir_registry_rebuild: false
 
+aegir_admin_email: 'admin@admin.com'
+aegir_admin_password: 'admin'
+
 aegir_manage_dependencies: true
 aegir_dependencies:
   - mysql-client
@@ -58,4 +61,12 @@ aegir_dependencies_nginx_php5:
 aegir_dependencies_nginx_php7_0:
   - nginx
   - php7.0-fpm
+
+aegir_platforms_path: '/var/aegir/platforms/'
+aegir_platforms:
+  - name: prod-team
+    version: 8.6.3
+  - name: qa-team
+    version: 8.6.4
+
 

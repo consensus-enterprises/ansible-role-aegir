@@ -1,0 +1,24 @@
+---
+- name: Keeping only letters and numbers on platforn name plus suffix _drupalXXX, where XXX is the version
+  set_fact: 
+    platform: "{{ item.name | regex_replace('[^A-Za-z0-9]+', '') }}_drupal{{ item.version | replace('.','') }}"
+
+- name: verify if platform exists
+  stat:
+    path: '{{ aegir_platforms_path }}/{{ platform }}'
+  register: check_platform
+
+- name: Download Drupal and provision platform Build
+  shell: >
+    drush dl drupal-{{ item.version }} --drupal-project-rename="{{ platform }}" ;
+    drush provision-save @platform_{{ platform }} --context_type=platform --root={{ aegir_platforms_path }}/{{ platform }} ;
+    drush provision-verify @platform_{{ platform }} ;
+    drush @hostmaster hosting-import @platform_{{ platform }}
+  become: yes
+  become_user: "{{ aegir_user }}"
+  args:
+    chdir: "{{ aegir_platforms_path }}"
+  when: not check_platform.stat.exists
+
+
+

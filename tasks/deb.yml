@@ -151,9 +151,13 @@
   shell: "echo 'aegir3-provision aegir/drush_version string {{ aegir_drush_version }}' | debconf-set-selections"
   when: (aegir_drush_version is defined) and not (aegir_drush_version_debconf.stdout|search(aegir_drush_version))
 
-
 - name: Install Aegir 3.x package
   apt:
     name: "aegir3"
     state: present
     install_recommends: True
+
+- name: set admin password
+  shell: 'drush @hostmaster user-password admin --password="{{ aegir_admin_password }}"'
+  become: yes
+  become_user: aegir

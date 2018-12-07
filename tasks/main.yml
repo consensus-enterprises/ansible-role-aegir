@@ -45,3 +45,7 @@
   become: yes
   become_user: "{{ aegir_user }}"
   changed_when: False
+
+- include: platforms.yml
+  with_items:
+    - "{{ aegir_platforms }}"
