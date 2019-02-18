@@ -12,7 +12,7 @@ aegir_php_version: 5
 aegir_install_drush: true
 aegir_drush_version: 8.1.16
 aegir_install_additional_packages: true
-aegir_additional_packages: {}
+aegir_additional_packages: []
 aegir_provision_repo: http://git.drupal.org/project/provision.git
 aegir_provision_version: 7.x-3.x
 aegir_provision_update: false

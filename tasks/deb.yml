@@ -35,7 +35,7 @@
 
 - name: Set Aegir Drush version in debconf database.
   shell: "echo 'aegir3-provision aegir/drush_version string {{ aegir_drush_version }}' | debconf-set-selections"
-  when: (aegir_drush_version is defined) and not (aegir_drush_version_debconf.stdout|search(aegir_drush_version))
+  when: (aegir_drush_version is defined) and not (aegir_drush_version_debconf.stdout is search(aegir_drush_version))
 
 # aegir_frontend_url
 - name: Look up Aegir front-end URL in debconf database.
@@ -46,7 +46,7 @@
 
 - name: Set Aegir front-end URL in debconf database.
   shell: "echo 'aegir3-hostmaster aegir/site string {{ aegir_frontend_url }}' | debconf-set-selections"
-  when: (aegir_frontend_url is defined) and not (aegir_frontend_url_debconf.stdout|search(aegir_frontend_url))
+  when: (aegir_frontend_url is defined) and not (aegir_frontend_url_debconf.stdout is search(aegir_frontend_url))
 
 # aegir_db_host
 - name: Look up Aegir database host in debconf database.
@@ -57,7 +57,7 @@
 
 - name: Set Aegir database host in debconf database.
   shell: "echo 'aegir3-hostmaster aegir/db_host string {{ aegir_db_host }}' | debconf-set-selections"
-  when: (aegir_db_host is defined) and not (aegir_db_host_debconf.stdout|search(aegir_db_host))
+  when: (aegir_db_host is defined) and not (aegir_db_host_debconf.stdout is search(aegir_db_host))
 
 # aegir_db_user
 - name: Look up Aegir database root user in debconf database.
@@ -68,7 +68,7 @@
 
 - name: Set Aegir database root user in debconf database.
   shell: "echo 'aegir3-hostmaster aegir/db_user string {{ aegir_db_user }}' | debconf-set-selections"
-  when: (aegir_db_user is defined) and not (aegir_db_user_debconf.stdout|search(aegir_db_user))
+  when: (aegir_db_user is defined) and not (aegir_db_user_debconf.stdout is search(aegir_db_user))
 
 # aegir_db_password
 # N.B. We handle passwords differently, since we don't want to leave them in
@@ -90,7 +90,7 @@
 
 - name: Set Aegir administrator email in debconf database.
   shell: "echo 'aegir3-hostmaster aegir/email string {{ aegir_admin_email }}' | debconf-set-selections"
-  when: (aegir_admin_email is defined) and not (aegir_admin_email_debconf.stdout|search(aegir_admin_email))
+  when: (aegir_admin_email is defined) and not (aegir_admin_email_debconf.stdout is search(aegir_admin_email))
 
 # aegir_makefile
 - name: Ensure Aegir settings path exists.
@@ -116,7 +116,7 @@
 
 - name: Set Aegir Drush makefile in debconf database.
   shell: "echo 'aegir3-hostmaster aegir/makefile string {{ aegir_debian_makefile_upload_path }}' | debconf-set-selections"
-  when: (aegir_makefile is defined) and not (aegir_makefile_debconf.stdout|search(aegir_debian_makefile_upload_path))
+  when: (aegir_makefile is defined) and not (aegir_makefile_debconf.stdout is search(aegir_debian_makefile_upload_path))
 
 # aegir_webserver
 - name: Look up Aegir web server in debconf database.
@@ -127,7 +127,7 @@
 
 - name: Set Aegir web server in debconf database.
   shell: "echo 'aegir3-hostmaster aegir/webserver string {{ aegir_http_service_type }}' | debconf-set-selections"
-  when: (aegir_http_service_type is defined) and not (aegir_webserver_debconf.stdout|search(aegir_http_service_type))
+  when: (aegir_http_service_type is defined) and not (aegir_webserver_debconf.stdout is search(aegir_http_service_type))
 
 # aegir_working_copy
 - name: Look up Aegir working-copy in debconf database.
@@ -149,7 +149,7 @@
 
 - name: Set Aegir-installed Drush version in debconf database.
   shell: "echo 'aegir3-provision aegir/drush_version string {{ aegir_drush_version }}' | debconf-set-selections"
-  when: (aegir_drush_version is defined) and not (aegir_drush_version_debconf.stdout|search(aegir_drush_version))
+  when: (aegir_drush_version is defined) and not (aegir_drush_version_debconf.stdout is search(aegir_drush_version))
 
 
 - name: Install Aegir 3.x package

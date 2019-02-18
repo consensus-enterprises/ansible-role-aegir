@@ -5,10 +5,9 @@
 
 - name: Install additional packages.
   apt:
-    name: "{{ item }}"
-    state: installed
+    name: "{{ aegir_additional_packages }}"
+    state: present
   when: (aegir_install_additional_packages == true) and (ansible_os_family == 'Debian')
-  with_items: "{{ aegir_additional_packages }}"
 
 - name: Default Aegir database password to MySQL root password
   set_fact:
