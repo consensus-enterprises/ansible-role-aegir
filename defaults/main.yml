@@ -29,22 +29,24 @@ aegir_registry_rebuild: false
 
 aegir_manage_dependencies: true
 aegir_dependencies:
+  - git
   - mysql-client
   - postfix
-  - sudo
   - rsync
-  - git
+  - sudo
   - unzip
 aegir_dependencies_php5:
   - php5-cli
-  - php5-gd
-  - php5-mysql
   - php5-curl
+  - php5-gd
+  - php5-mbstring
+  - php5-mysql
 aegir_dependencies_php7_0:
   - php7.0-cli
-  - php7.0-mysql
-  - php7.0-gd
   - php7.0-curl
+  - php7.0-gd
+  - php7.0-mbstring
+  - php7.0-mysql
   - php7.0-xml
 aegir_dependencies_apache_php5:
   - apache2
