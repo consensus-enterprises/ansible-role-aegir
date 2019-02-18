@@ -10,7 +10,7 @@ aegir_user: aegir
 aegir_web_group: www-data
 aegir_php_version: 5
 aegir_install_drush: true
-aegir_drush_version: stable
+aegir_drush_version: 8.1.16
 aegir_install_additional_packages: true
 aegir_additional_packages: {}
 aegir_provision_repo: http://git.drupal.org/project/provision.git
