@@ -35,6 +35,10 @@
   include: override.yml
   when: aegir_provision_override
 
+- name: Enable extra modules and config.
+  include: extra.yml
+  when: aegir_extra_config
+
 - include: generate-keypair.yml
   when: aegir_generate_keypair
 

@@ -63,3 +63,7 @@ aegir_dependencies_nginx_php7_0:
   - nginx
   - php7.0-fpm
 
+aegir_extra_config: false
+aegir_extra_modules:
+  - hosting_subdirs
+
