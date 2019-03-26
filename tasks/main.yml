@@ -27,6 +27,10 @@
   include: deb.yml
   when: aegir_install_method == "deb"
 
+- name: Force upgrade of Composer.
+  include: composer.yml
+  when: aegir_upgrade_composer
+
 - name: Override Provision codebase.
   include: override.yml
   when: aegir_provision_override

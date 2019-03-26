@@ -9,6 +9,7 @@ aegir_root: /var/aegir
 aegir_user: aegir
 aegir_web_group: www-data
 aegir_php_version: 5
+aegir_upgrade_composer: false
 aegir_install_drush: true
 aegir_drush_version: 8.1.16
 aegir_install_additional_packages: true
