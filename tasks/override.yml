@@ -1,0 +1,32 @@
+---
+
+- name: Deploy Provision from custom repo and/or branch.
+  tags: provision-override
+  become: true
+  become_user: "{{ aegir_user }}"
+  git:
+    repo: "{{ aegir_provision_repo }}"
+    dest: "{{ aegir_root }}/.drush/provision"
+    update: "{{ aegir_provision_update }}"
+    version: "{{ aegir_provision_version }}"
+
+- name: Override Provision shipped with Debian package.
+  tags: provision-override
+  template:
+    src: files/local.drushrc.php.j2
+    dest: "{{ aegir_root }}/.drush/local.drushrc.php"
+    owner: "{{ aegir_user }}"
+    group: "{{ aegir_user }}"
+    mode: 0644
+
+- name: Re-verify default Aegir entities, to update w/ changes in custom Provision.
+  tags: provision-override
+  shell: "drush {{ item }} provision-verify"
+  become: yes
+  become_user: "{{ aegir_user }}"
+  changed_when: False
+  with_items:
+    - "@server_master"
+    - "@server_localhost"
+    - "@platform_hostmaster"
+    - "@hostmaster"

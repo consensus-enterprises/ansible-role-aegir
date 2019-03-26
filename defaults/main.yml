@@ -16,6 +16,7 @@ aegir_additional_packages: []
 aegir_provision_repo: http://git.drupal.org/project/provision.git
 aegir_provision_version: 7.x-3.x
 aegir_provision_update: false
+aegir_provision_override: false
 aegir_http_service_type: apache
 aegir_makefile: aegir.make
 aegir_makefile_path: "{{ playbook_dir }}/{{ aegir_makefile }}"
