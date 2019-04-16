@@ -12,9 +12,9 @@
 
 - name: Ensure Aegir's PHP 7 dependencies are installed.
   apt:
-    name: "{{ aegir_dependencies_php7_0 }}"
+    name: "{{ aegir_dependencies_php7 }}"
     state: present
-  when: (aegir_php_version == '7.0')
+  when: (aegir_php_version == '7')
 
 - name: Ensure Aegir's NGINX dependencies for PHP 5 are installed.
   apt:
@@ -22,11 +22,11 @@
     state: present
   when: (aegir_http_service_type == 'nginx') and (aegir_php_version == '5')
 
-- name: Ensure Aegir's NGINX dependencies for PHP 7.0 are installed.
+- name: Ensure Aegir's NGINX dependencies for PHP 7 are installed.
   apt:
-    name: "{{ aegir_dependencies_nginx_php7_0 }}"
+    name: "{{ aegir_dependencies_nginx_php7 }}"
     state: present
-  when: (aegir_http_service_type == 'nginx') and (aegir_php_version == '7.0')
+  when: (aegir_http_service_type == 'nginx') and (aegir_php_version == '7')
 
 - name: Ensure Aegir's Apache dependencies for PHP 5 are installed.
   apt:
@@ -34,9 +34,9 @@
     state: present
   when: (aegir_http_service_type == 'apache') and (aegir_php_version == '5')
 
-- name: Ensure Aegir's Apache dependencies for PHP 7.0 are installed.
+- name: Ensure Aegir's Apache dependencies for PHP 7 are installed.
   apt:
-    name: "{{ aegir_dependencies_apache_php7_0 }}"
+    name: "{{ aegir_dependencies_apache_php7 }}"
     state: present
-  when: (aegir_http_service_type == 'apache') and (aegir_php_version == '7.0')
+  when: (aegir_http_service_type == 'apache') and (aegir_php_version == '7')
 

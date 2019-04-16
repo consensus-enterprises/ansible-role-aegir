@@ -41,23 +41,23 @@ aegir_dependencies_php5:
   - php5-gd
   - php5-mbstring
   - php5-mysql
-aegir_dependencies_php7_0:
-  - php7.0-cli
-  - php7.0-curl
-  - php7.0-gd
-  - php7.0-mbstring
-  - php7.0-mysql
-  - php7.0-xml
+aegir_dependencies_php7:
+  - php-cli
+  - php-curl
+  - php-gd
+  - php-mbstring
+  - php-mysql
+  - php-xml
 aegir_dependencies_apache_php5:
   - apache2
   - libapache2-mod-php5
-aegir_dependencies_apache_php7_0:
+aegir_dependencies_apache_php7:
   - apache2
-  - libapache2-mod-php7.0
+  - libapache2-mod-php
 aegir_dependencies_nginx_php5:
   - nginx
   - php5-fpm
-aegir_dependencies_nginx_php7_0:
+aegir_dependencies_nginx_php7:
   - nginx
-  - php7.0-fpm
+  - php-fpm
 
