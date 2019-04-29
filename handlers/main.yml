@@ -1,13 +1,34 @@
 ---
+
+- name: Clear Aegir database root password from debconf database
+  shell: "echo 'UNREGISTER aegir/db_password' | debconf-communicate aegir3-hostmaster"
+
 - name: Clear Drush cache
   command: drush @none cc drush
   become: yes
   become_user: "{{ aegir_user }}"
+  notify: Ensure that the queue daemon is running
+
+- name: Clear Aegir front-end Drush cache.
+  shell: drush @hm cc drush
+  become: yes
+  become_user: "{{ aegir_user }}"
+  notify: Ensure that the queue daemon is running
 
 - name: Verify Aegir front-end
   shell: drush @hm cc drush && drush @hm hosting-task @hostmaster verify --force
   become: yes
   become_user: "{{ aegir_user }}"
+  notify: Restart the queue daemon
 
-- name: Clear Aegir database root password from debconf database
-  shell: "echo 'UNREGISTER aegir/db_password' | debconf-communicate aegir3-hostmaster"
+- name: Ensure that the queue daemon is running
+  service:
+    name: hosting-queued
+    state: started
+  become: true
+
+- name: Restart the queue daemon
+  service:
+    name: hosting-queued
+    state: restarted
+  become: true
