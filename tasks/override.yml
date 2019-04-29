@@ -18,6 +18,13 @@
     owner: "{{ aegir_user }}"
     group: "{{ aegir_user }}"
     mode: 0644
+  notify:
+    - Clear Drush cache
+    - Clear Aegir front-end Drush cache.
+    - Restart the queue daemon
+
+- name: Ensure new Provision code is used.
+  meta: flush_handlers
 
 - name: Re-verify default Aegir entities, to update w/ changes in custom Provision.
   tags: provision-override
