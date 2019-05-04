@@ -56,3 +56,8 @@
   become: yes
   become_user: "{{ aegir_user }}"
   changed_when: False
+
+- include: git_platforms.yml
+  with_items:
+    - "{{ aegir_git_platforms }}"
+  when: aegir_install_git_platforms

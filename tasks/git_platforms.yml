@@ -1,0 +1,43 @@
+
+---
+- name: Keeping only letters and numbers on platforn name
+  set_fact: 
+    platform: "{{ item.name | regex_replace('[^A-Za-z0-9]+', '') | replace('.','') }}"
+
+- name: verify if platform exists
+  stat:
+    path: '{{ aegir_platforms_path }}/{{ platform }}'
+  register: check_platform
+
+- name: Provision platform
+  shell: >
+    drush provision-save @platform_{{ platform }}
+    --deploy_from_git=true
+    --context_type=platform
+    --repo_url={{ item.repo }}
+    --git_ref={{ item.version }}
+    --repo_path={{ aegir_platforms_path }}/{{ platform }}
+    --root={{ aegir_platforms_path }}/{{ platform }}/web
+  become: yes
+  become_user: "{{ aegir_user }}"
+  args:
+    chdir: "{{ aegir_root }}"
+  when: not check_platform.stat.exists
+
+- name: provision-verify platform
+  shell: >
+    drush provision-verify @platform_{{ platform }};
+  become: yes
+  become_user: "{{ aegir_user }}"
+  args:
+    chdir: "{{ aegir_root }}"
+  when: not check_platform.stat.exists
+
+- name: hosting-import platform
+  shell: >
+    drush @hostmaster hosting-import @platform_{{ platform }}
+  become: yes
+  become_user: "{{ aegir_user }}"
+  args:
+    chdir: "{{ aegir_root }}"
+  when: not check_platform.stat.exists

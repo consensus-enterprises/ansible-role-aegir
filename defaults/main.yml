@@ -66,4 +66,12 @@ aegir_dependencies_nginx_php7:
 aegir_extra_config: false
 aegir_extra_modules:
   - hosting_subdirs
+  - hosting_git
+
+aegir_platforms_path: '/var/aegir/platforms/'
+aegir_install_git_platforms: false
+aegir_git_platforms:
+  - name: drupal8
+    repo: https://github.com/drupal-composer/drupal-project.git
+    version: 8.x
 
