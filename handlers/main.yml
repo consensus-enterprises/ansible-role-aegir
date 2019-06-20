@@ -16,7 +16,7 @@
   notify: Ensure that the queue daemon is running
 
 - name: Verify Aegir front-end
-  shell: drush @hm cc drush && drush @hm hosting-task @hostmaster verify --force
+  shell: drush @none cc drush && drush @hm cc drush && drush @hm hosting-task @hostmaster verify --force
   become: yes
   become_user: "{{ aegir_user }}"
   notify: Restart the queue daemon
