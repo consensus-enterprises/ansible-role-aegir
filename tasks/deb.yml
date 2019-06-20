@@ -12,9 +12,9 @@
     state: present
     update_cache: True
 
-- name: Install tools to allow idempotently settings options for Debian packages.
+- name: Install tools to allow idempotently setting options for Debian packages.
   apt:
-    name: "debconf-utils"
+    name: debconf-utils
     state: present
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#71-custom-options
