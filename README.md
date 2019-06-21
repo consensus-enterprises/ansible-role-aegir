@@ -26,7 +26,11 @@ The password for the Aegir database user. Defaults to the value of mysql_root_pa
 
 ## Role Tasks
 
-This role provides a task to generate and print a one-time login link for the installed Aegir system.
+This role provides some stand-alone tasks to:
+
+* Generate and print a one-time login link for the installed Aegir system;
+* Override the Drush Binary with an alternative from the source repo.
+
 See the Example Playbook, below.
 
 ## Dependencies
@@ -37,16 +41,29 @@ See the Example Playbook, below.
 
 ```
 - hosts: servers
+
+  vars:
+    drush_install_from_source: True         # optional
+    drush_source_install_version: "8.1.16"  # optional
+
   roles:
     - geerlingguy.mysql
     - consensus.aegir
+    - geerlingguy.drush  #optional
 
   tasks: 
 
+    # optional
     - name: Generate and print a one-time login link after Aegir installation.
       include_role:
         name: consensus.aegir
         tasks_from: login_link.yml
+
+    # optional
+    - name: Replace package-installed Drush with the executable from the source repo.
+      include_role:
+        name: consensus.aegir
+        tasks_from: override_drush.yml
 ```
 
 After the playbook runs, the Aegir front-end site will be available, as will

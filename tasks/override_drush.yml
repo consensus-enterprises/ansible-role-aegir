@@ -1,0 +1,14 @@
+---
+
+- name: Replace package-installed Drush with the executable from the source repo.
+  file:
+    state: link
+    dest: /usr/local/bin/drush
+    src: /usr/local/share/drush/drush
+    force: TRUE
+  notify:
+    - Clear Drush cache
+    - Verify Aegir front-end
+
+- name: Force handlers to run if necessary.
+  meta: flush_handlers
