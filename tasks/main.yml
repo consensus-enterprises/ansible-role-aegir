@@ -56,3 +56,6 @@
   become: yes
   become_user: "{{ aegir_user }}"
   changed_when: False
+
+- include: login_link.yml
+  when: aegir_login_link

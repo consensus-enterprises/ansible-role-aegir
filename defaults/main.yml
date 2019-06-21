@@ -28,6 +28,7 @@ aegir_generate_keypair: true
 aegir_fix_ownership: false
 aegir_fix_permissions: false
 aegir_registry_rebuild: false
+aegir_login_link: false
 
 aegir_manage_dependencies: true
 aegir_dependencies:
