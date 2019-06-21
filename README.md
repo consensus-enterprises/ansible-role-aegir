@@ -24,6 +24,10 @@ The name of the Aegir database user. Defaults to the value of mysql_root_usernam
 
 The password for the Aegir database user. Defaults to the value of mysql_root_password.
 
+## Role Tasks
+
+This role provides a task to generate and print a one-time login link for the installed Aegir system.
+See the Example Playbook, below.
 
 ## Dependencies
 
@@ -31,10 +35,19 @@ The password for the Aegir database user. Defaults to the value of mysql_root_pa
 
 ## Example Playbook
 
-    - hosts: servers
-      roles:
-        - geerlingguy.mysql
-        - ergonlogic.aegir
+```
+- hosts: servers
+  roles:
+    - geerlingguy.mysql
+    - consensus.aegir
+
+  tasks: 
+
+    - name: Generate and print a one-time login link after Aegir installation.
+      include_role:
+        name: consensus.aegir
+        tasks_from: login_link.yml
+```
 
 After the playbook runs, the Aegir front-end site will be available, as will
 the Drush extensions (Provision, et. al.) that do the heavy lifting.
