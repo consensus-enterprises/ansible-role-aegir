@@ -29,27 +29,27 @@
 
 - name: Force upgrade of Composer.
   include: composer.yml
-  when: aegir_upgrade_composer
+  when: aegir_upgrade_composer | bool
 
 - name: Override Provision codebase.
   include: override.yml
-  when: aegir_provision_override
+  when: aegir_provision_override | bool
 
 - name: Enable extra modules and config.
   include: extra.yml
-  when: aegir_extra_config
+  when: aegir_extra_config | bool
 
 - include: generate-keypair.yml
-  when: aegir_generate_keypair
+  when: aegir_generate_keypair | bool
 
 - include: fix_permissions.yml
-  when: aegir_fix_permissions
+  when: aegir_fix_permissions | bool
 
 - include: fix_ownership.yml
-  when: aegir_fix_ownership
+  when: aegir_fix_ownership | bool
 
 - include: registry_rebuild.yml
-  when: aegir_registry_rebuild
+  when: aegir_registry_rebuild | bool
 
 - name: Ensure Hosting is recognized as enabled
   shell: drush @hostmaster cc drush
@@ -58,4 +58,4 @@
   changed_when: False
 
 - include: login_link.yml
-  when: aegir_login_link
+  when: aegir_login_link | bool
