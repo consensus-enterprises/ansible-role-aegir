@@ -1,9 +1,11 @@
 ---
 aegir_install_method: deb
 aegir_deb_release: stable
-aegir_debian_makefile_etc_path: /etc/aegir
-aegir_debian_makefile_upload_path: "{{ aegir_debian_makefile_etc_path }}/aegir.make.yml"
 aegir_repo_key_id: "5ADF93A03376CCF9"
+
+aegir_etc_path: /etc/aegir
+aegir_makefile: aegir.make
+aegir_makefile_path: "{{ aegir_etc_path }}/{{ aegir_makefile | basename }}"
 
 aegir_root: /var/aegir
 aegir_user: aegir
@@ -19,9 +21,6 @@ aegir_provision_version: 7.x-3.x
 aegir_provision_update: false
 aegir_provision_override: false
 aegir_http_service_type: apache
-aegir_makefile: aegir.make
-aegir_makefile_path: "{{ playbook_dir }}/{{ aegir_makefile }}"
-aegir_makefile_contents: "{{ lookup('file', aegir_makefile_path) }}"
 aegir_platform_version: 7.x-3.x
 aegir_frontend_url: aegir.local
 aegir_generate_keypair: true
