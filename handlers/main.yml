@@ -19,7 +19,11 @@
   shell: drush @none cc drush && drush @hm cc drush && drush @hm hosting-task @hostmaster verify --force
   become: yes
   become_user: "{{ aegir_user }}"
-  notify: Restart the queue daemon
+
+- name: Clear Aegir task queue lock
+  shell: drush @hm hosting-release-lock
+  become: yes
+  become_user: "{{ aegir_user }}"
 
 - name: Ensure that the queue daemon is running
   service:
