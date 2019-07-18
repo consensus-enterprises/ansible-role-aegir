@@ -54,7 +54,7 @@
   when: aegir_registry_rebuild | bool
 
 - name: Ensure Hosting is recognized as enabled
-  shell: drush @hostmaster cc drush
+  shell: drush @none cc drush && drush @hostmaster cc drush
   become: yes
   become_user: "{{ aegir_user }}"
   changed_when: False

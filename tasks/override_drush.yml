@@ -1,5 +1,16 @@
 ---
 
+- name: Determine whether we need to pause the Aegir queue in anticipation of replacing Drush.
+  stat:
+    path: /usr/local/bin/drush
+  register: drush_stat
+
+- name: Wait for tasks in the Aegir queue to complete so we can replace Drush safely.
+  shell: drush @hostmaster hosting-pause
+  become: true
+  become_user: "{{ aegir_user }}"
+  when: not drush_stat.stat.islnk 
+
 - name: Replace package-installed Drush with the executable from the source repo.
   file:
     state: link
@@ -9,6 +20,7 @@
   notify:
     - Clear Drush cache
     - Verify Aegir front-end
+    - Restart the queue daemon
 
 - name: Force handlers to run if necessary.
   meta: flush_handlers
