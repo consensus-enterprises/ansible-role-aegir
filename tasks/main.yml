@@ -37,8 +37,12 @@
   include: override.yml
   when: aegir_provision_override | bool
 
-- name: Enable extra modules and config.
-  include: extra.yml
+- name: Enable extra modules.
+  include: extra-modules.yml
+  when: aegir_extra_modules | length > 0
+
+- name: Perform miscellaneous tasks.
+  include: misc.yml
   when: aegir_extra_config | bool
 
 - include: generate-keypair.yml

@@ -1,0 +1,17 @@
+---
+
+- name: "Check if extra module {{ aegir_extra_module }} is enabled"
+  shell: "drush @hm pm-info --fields=status --format=list {{ aegir_extra_module }} | egrep 'disabled|not installed'"
+  become: True
+  become_user: "{{ aegir_user }}"
+  register: aegir_extra_module_enabled
+  changed_when: False
+  failed_when: False
+  ignore_errors: yes
+
+- name: "Enable extra module {{ aegir_extra_module }}"
+  command: "drush @hm --yes en {{ aegir_extra_module }} --no-verify --strict=0"
+  become: True
+  become_user: "{{ aegir_user }}"
+  when: aegir_extra_module_enabled.rc == 0
+  notify: Verify Aegir front-end

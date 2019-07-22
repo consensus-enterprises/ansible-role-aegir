@@ -1,23 +1,5 @@
 ---
 
-- name: Check if extra modules are enabled
-  shell: "drush @hm pm-info --fields=status --format=list {{ item }} | egrep 'disabled|not installed'"
-  become: True
-  become_user: "{{ aegir_user }}"
-  register: aegir_extra_modules_enabled
-  with_items: "{{ aegir_extra_modules }}"
-  changed_when: False
-  failed_when: False
-  ignore_errors: yes
-
-- name: Enable extra modules
-  command: "drush @hm --yes en {{ item.1 }} --no-verify --strict=0"
-  become: True
-  become_user: "{{ aegir_user }}"
-  with_indexed_items: "{{ aegir_extra_modules }}"
-  when: aegir_extra_modules_enabled.results[item.0].rc == 0
-  notify: Verify Aegir front-end
-
 - name: Check if sites can be deleted without first being disabled
   shell: "drush @hm vget hosting_require_disable_before_delete | grep 'false$'"
   become: True

@@ -1,0 +1,7 @@
+---
+
+- name: Enable extra modules
+  include: extra-module.yml
+  loop: "{{ aegir_extra_modules }}"
+  loop_control:
+    loop_var: aegir_extra_module
