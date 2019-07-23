@@ -67,3 +67,4 @@ aegir_extra_config: false
 aegir_extra_modules:
   - hosting_subdirs
 
+aegir_use_hosting_queued: true

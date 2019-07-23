@@ -36,3 +36,4 @@
     name: hosting-queued
     state: restarted
   become: true
+  when: aegir_use_hosting_queued
