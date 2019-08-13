@@ -30,6 +30,7 @@
     name: hosting-queued
     state: started
   become: true
+  when: aegir_use_hosting_queued
 
 - name: Restart the queue daemon
   service:
