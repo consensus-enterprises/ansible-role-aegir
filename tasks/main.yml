@@ -33,8 +33,12 @@
   include: composer.yml
   when: aegir_upgrade_composer | bool
 
+- name: Override default Drush install.
+  include: override_drush.yml
+  when: aegir_drush_override | bool
+
 - name: Override Provision codebase.
-  include: override.yml
+  include: override_provision.yml
   when: aegir_provision_override | bool
 
 - name: Enable extra modules.

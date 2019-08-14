@@ -12,8 +12,6 @@ aegir_user: aegir
 aegir_web_group: www-data
 aegir_php_version: 5
 aegir_upgrade_composer: false
-aegir_install_drush: true
-aegir_drush_version: 8.1.16
 aegir_install_additional_packages: true
 aegir_additional_packages: []
 aegir_provision_repo: http://git.drupal.org/project/provision.git
@@ -28,6 +26,20 @@ aegir_fix_ownership: false
 aegir_fix_permissions: false
 aegir_registry_rebuild: false
 aegir_login_link: false
+
+# Drush
+aegir_install_drush: true
+aegir_drush_version: 8.1.16
+# Install from source (git clone + composer-based install).
+aegir_drush_override: false
+aegir_drush_source_repo: https://github.com/drush-ops/drush.git
+aegir_drush_source_install_bin_path: /usr/local/bin/drush
+aegir_drush_source_install_path: /usr/local/share/drush
+aegir_drush_source_install_version: "8.1.16"
+aegir_drush_keep_updated: false
+aegir_drush_force_update: false
+aegir_drush_force_composer_install: false
+aegir_drush_clone_depth: 1
 
 aegir_manage_dependencies: true
 aegir_dependencies:
@@ -68,3 +80,4 @@ aegir_extra_modules:
   - hosting_subdirs
 
 aegir_use_hosting_queued: true
+

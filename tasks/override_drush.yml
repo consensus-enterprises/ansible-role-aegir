@@ -1,26 +1,42 @@
 ---
 
-- name: Determine whether we need to pause the Aegir queue in anticipation of replacing Drush.
-  stat:
-    path: /usr/local/bin/drush
-  register: drush_stat
+- name: Clone Drush from GitHub.
+  git:
+    repo: "{{ aegir_drush_source_repo }}"
+    dest: "{{ aegir_drush_source_install_path }}"
+    version: "{{ aegir_drush_source_install_version }}"
+    update: "{{ aegir_drush_keep_updated }}"
+    force: "{{ aegir_drush_force_update }}"
+    depth: "{{ aegir_drush_clone_depth }}"
+  register: drush_clone_result
 
-- name: Wait for tasks in the Aegir queue to complete so we can replace Drush safely.
-  shell: drush @hostmaster hosting-pause
-  become: true
-  become_user: "{{ aegir_user }}"
-  when: not drush_stat.stat.islnk 
-
-- name: Replace package-installed Drush with the executable from the source repo.
-  file:
-    state: link
-    dest: /usr/local/bin/drush
-    src: /usr/local/share/drush/drush
-    force: TRUE
-  notify:
-    - Clear Drush cache
-    - Verify Aegir front-end
-    - Restart the queue daemon
-
-- name: Force handlers to run if necessary.
-  meta: flush_handlers
+- name: Run Drush updates.
+  when: drush_clone_result.changed
+  block:
+  - name: Wait for tasks in the Aegir queue to complete so we can update Drush safely.
+    shell: drush @hostmaster hosting-pause
+    become: true
+    become_user: "{{ aegir_user }}"
+  - name: Install Drush dependencies with Composer.
+    command: "composer install --prefer-dist --no-interaction"
+    args:
+      chdir: "{{ aegir_drush_source_install_path }}"
+  - name: Create drush symlink.
+    file:
+      src: "{{ aegir_drush_source_install_path }}/drush"
+      dest: "{{ aegir_drush_source_install_bin_path }}"
+      state: link
+      force: true
+    notify:
+      - Clear Drush cache
+      - Clear Aegir front-end Drush cache
+      - Verify Aegir front-end
+      - Restart the queue daemon
+    when: drush_clone_result.changed
+  - name: Force handlers to run if necessary.
+    meta: flush_handlers
+  - name: Run drush to finish setting it up.
+    command: "{{ aegir_drush_source_install_bin_path }}"
+    register: drush_result
+    changed_when: "'Execute a drush command' not in drush_result.stdout"
+    become: false

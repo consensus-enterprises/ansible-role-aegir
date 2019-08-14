@@ -9,14 +9,14 @@
   become_user: "{{ aegir_user }}"
   notify: Ensure that the queue daemon is running
 
-- name: Clear Aegir front-end Drush cache.
+- name: Clear Aegir front-end Drush cache
   shell: drush @hm cc drush
   become: yes
   become_user: "{{ aegir_user }}"
   notify: Ensure that the queue daemon is running
 
 - name: Verify Aegir front-end
-  shell: drush @none cc drush && drush @hm cc drush && drush @hm hosting-task @hostmaster verify --force
+  shell: drush @hm hosting-task @hostmaster verify --force && drush @hm hosting-tasks
   become: yes
   become_user: "{{ aegir_user }}"
 
@@ -30,11 +30,11 @@
     name: hosting-queued
     state: started
   become: true
-  when: aegir_use_hosting_queued
+  when: aegir_use_hosting_queued |bool
 
 - name: Restart the queue daemon
   service:
     name: hosting-queued
     state: restarted
   become: true
-  when: aegir_use_hosting_queued
+  when: aegir_use_hosting_queued |bool
