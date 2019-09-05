@@ -9,24 +9,27 @@
     force: "{{ aegir_drush_force_update }}"
     depth: "{{ aegir_drush_clone_depth }}"
   register: drush_clone_result
+  become: yes
 
 - name: Run Drush updates.
   when: drush_clone_result.changed
   block:
   - name: Wait for tasks in the Aegir queue to complete so we can update Drush safely.
     shell: drush @hostmaster hosting-pause
-    become: true
+    become: yes
     become_user: "{{ aegir_user }}"
   - name: Install Drush dependencies with Composer.
     command: "composer install --prefer-dist --no-interaction"
     args:
       chdir: "{{ aegir_drush_source_install_path }}"
+    become: yes
   - name: Create drush symlink.
     file:
       src: "{{ aegir_drush_source_install_path }}/drush"
       dest: "{{ aegir_drush_source_install_bin_path }}"
       state: link
       force: true
+    become: yes
     notify:
       - Clear Drush cache
       - Clear Aegir front-end Drush cache

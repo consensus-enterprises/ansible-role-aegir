@@ -5,9 +5,11 @@
     repo: 'https://git.drupal.org/project/registry_rebuild.git'
     version: '7.x-2.5'
     dest: "{{ aegir_root }}/.drush/registry_rebuild"
+  become: yes
+  become_user: "{{ aegir_user }}"
 
 - name: Refresh Drush cache to ensure new commandfile is found.
   shell: drush @none cc drush
-  become: true
+  become: yes
   become_user: "{{ aegir_user }}"
   changed_when: false

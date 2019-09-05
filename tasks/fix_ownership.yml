@@ -3,7 +3,7 @@
 - name: Find the hostmaster platform path.
   shell: drush @hm status --fields=root --field-labels=0
   become_user: "{{ aegir_user }}"
-  become: true
+  become: yes
   register: hostmaster_platform_path
   changed_when: false
 
@@ -15,12 +15,12 @@
   shell: "/bin/bash {{ hostmaster_platform_path }}/profiles/hostmaster/modules/aegir/hosting_tasks_extra/fix_ownership/scripts/install.sh"
   args:
     creates: /etc/sudoers.d/fix-drupal-platform-ownership
-  become: true
+  become: yes
   become_user: root
 
 - name: Check if fix_ownership module is enabled
   shell: "drush @hm pm-info --fields=status --format=list fix_ownership | egrep 'disabled|not installed'"
-  become: True
+  become: yes
   become_user: "{{ aegir_user }}"
   register: fix_ownership_enabled
   changed_when: False
@@ -29,7 +29,7 @@
 
 - name: Enable fix_ownership module
   command: "drush @hm --yes en fix_ownership --no-verify --strict=0"
-  become: True
+  become: yes
   become_user: "{{ aegir_user }}"
   when: fix_ownership_enabled.rc == 0
   notify: Verify Aegir front-end

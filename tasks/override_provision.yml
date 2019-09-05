@@ -2,7 +2,7 @@
 
 - name: Deploy Provision from custom repo and/or branch.
   tags: provision-override
-  become: true
+  become: yes
   become_user: "{{ aegir_user }}"
   git:
     repo: "{{ aegir_provision_repo }}"
@@ -19,6 +19,8 @@
     owner: "{{ aegir_user }}"
     group: "{{ aegir_user }}"
     mode: 0644
+  become: yes
+  become_user: "{{ aegir_user }}"
   notify:
     - Restart the queue daemon
 
