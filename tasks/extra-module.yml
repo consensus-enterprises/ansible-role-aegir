@@ -13,5 +13,5 @@
   command: "drush @hm --yes en {{ aegir_extra_module }} --no-verify --strict=0"
   become: True
   become_user: "{{ aegir_user }}"
-  when: aegir_extra_module_enabled.rc != 0
+  when: (aegir_extra_module_enabled.rc is defined) and (aegir_extra_module_enabled.rc != 0)
   notify: Verify Aegir front-end

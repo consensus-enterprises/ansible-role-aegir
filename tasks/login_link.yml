@@ -13,3 +13,4 @@
 - name: Print the login link
   debug:
     var: aegir_login_link_output.stdout_lines
+  when: aegir_login_link_output.stdout_lines is defined
