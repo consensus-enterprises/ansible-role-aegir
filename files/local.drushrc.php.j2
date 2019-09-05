@@ -1,5 +1,7 @@
 <?php
 
+# {{ ansible_managed }}
+
 # Override the version of Provision that ships with the Debian package, so that
 # we can deploy fixes that haven't been merged upstream yet.
 $options['include']['provision'] = '{{ aegir_root }}/.drush/provision';

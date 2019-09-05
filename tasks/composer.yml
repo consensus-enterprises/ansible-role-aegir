@@ -1,5 +1,7 @@
 ---
 
+# TODO: document why we need to do this.
+
 - name: Ensure composer upgrade dependency php-psr-log is installed # we can install this one via apt
   tags: composer-upgrade
   apt:
