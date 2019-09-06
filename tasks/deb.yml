@@ -5,12 +5,21 @@
     state: present
     url: http://debian.aegirproject.org/key.asc
 
-- name: Add Aegir Project APT repository.
-  apt_repository:
-    repo: "deb http://debian.aegirproject.org {{ aegir_deb_release }} main"
-    #filename: "aegir-{{ aegir_deb_release }}"
-    state: present
-    update_cache: True
+- name: Remove obsolete Aegir Project APT repository list, if present.
+  file:
+    path: /etc/apt/sources.list.d/debian_aegirproject_org.list
+    state: absent
+
+- name: Add Aegir Project APT repository list.
+  template:
+    src: aegir-apt-repository.list.j2
+    dest: "/etc/apt/sources.list.d/aegir-{{ aegir_deb_release }}.list"
+  register: aegir_apt_repository_list
+
+- name: Update apt cache from Aegir repository.
+  apt:
+    update_cache: yes
+  when: (aegir_apt_repository_list.changed is defined) and (aegir_apt_repository_list.changed | bool)
 
 - name: Install tools to allow idempotently setting options for Debian packages.
   apt:
