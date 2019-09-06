@@ -14,7 +14,7 @@
 - name: Override Provision shipped with Debian package.
   tags: provision-override
   template:
-    src: files/local.drushrc.php.j2
+    src: local.drushrc.php.j2
     dest: "{{ aegir_root }}/.drush/local.drushrc.php"
     owner: "{{ aegir_user }}"
     group: "{{ aegir_user }}"
