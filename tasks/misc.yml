@@ -1,7 +1,7 @@
 ---
 
 - name: Check if sites can be deleted without first being disabled
-  shell: "drush @hm vget hosting_require_disable_before_delete | grep 'false$'"
+  shell: "drush @hostmaster vget hosting_require_disable_before_delete | grep 'false$'"
   become: yes
   become_user: "{{ aegir_user }}"
   register: disable_before_delete_check
@@ -10,7 +10,7 @@
   ignore_errors: yes
 
 - name: Allow site deletion without disabling first.
-  command: drush @hm vset --format=boolean hosting_require_disable_before_delete 0
+  shell: drush @hostmaster vset --format=boolean hosting_require_disable_before_delete 0
   become: yes
   become_user: "{{ aegir_user }}"
   when: disable_before_delete_check is failed

@@ -28,7 +28,7 @@
   - name: Clear Drush cache
     shell: drush @none cc drush
   - name: Clear Aegir front-end Drush cache
-    shell: drush @hm cc drush
+    shell: drush @hostmaster cc drush
   - name: Re-verify default Aegir entities, to update w/ changes in custom Provision.
     tags: provision-override
     shell: "drush {{ item }} provision-verify"

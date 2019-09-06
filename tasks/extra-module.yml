@@ -1,7 +1,7 @@
 ---
 
 - name: "Check if extra module {{ aegir_extra_module }} is enabled"
-  shell: "drush @hm pm-info --fields=status --format=list {{ aegir_extra_module }} | egrep 'enabled'"
+  shell: "drush @hostmaster pm-info --fields=status --format=list {{ aegir_extra_module }} | egrep 'enabled'"
   become: True
   become_user: "{{ aegir_user }}"
   register: aegir_extra_module_enabled
@@ -10,7 +10,7 @@
   ignore_errors: yes
 
 - name: "Enable extra module {{ aegir_extra_module }}"
-  command: "drush @hm --yes en {{ aegir_extra_module }} --no-verify --strict=0"
+  shell: "drush @hostmaster --yes en {{ aegir_extra_module }} --no-verify --strict=0"
   become: True
   become_user: "{{ aegir_user }}"
   when: (aegir_extra_module_enabled.rc is defined) and (aegir_extra_module_enabled.rc != 0)

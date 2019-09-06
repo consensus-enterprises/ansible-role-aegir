@@ -1,7 +1,7 @@
 ---
 
 - name: Find the hostmaster platform path.
-  shell: drush @hm status --fields=root --field-labels=0
+  shell: drush @hostmaster status --fields=root --field-labels=0
   become_user: "{{ aegir_user }}"
   become: yes
   register: hostmaster_platform_path
@@ -19,7 +19,7 @@
   become_user: root
 
 - name: Check if fix_ownership module is enabled
-  shell: "drush @hm pm-info --fields=status --format=list fix_ownership | egrep 'disabled|not installed'"
+  shell: "drush @hostmaster pm-info --fields=status --format=list fix_ownership | egrep 'disabled|not installed'"
   become: yes
   become_user: "{{ aegir_user }}"
   register: fix_ownership_enabled
@@ -28,7 +28,7 @@
   ignore_errors: yes
 
 - name: Enable fix_ownership module
-  command: "drush @hm --yes en fix_ownership --no-verify --strict=0"
+  shell: "drush @hostmaster --yes en fix_ownership --no-verify --strict=0"
   become: yes
   become_user: "{{ aegir_user }}"
   when: fix_ownership_enabled.rc == 0

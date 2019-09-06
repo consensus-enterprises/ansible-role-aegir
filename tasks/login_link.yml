@@ -3,7 +3,7 @@
 - name: Generate one-time login link
   shell: "
   echo '////////////// You can access the front-end of your Aegir install at: //////////////////////';
-  drush @hm uli;
+  drush @hostmaster uli;
   "
   become: True
   become_user: "{{ aegir_user }}"

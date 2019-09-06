@@ -4,24 +4,24 @@
   shell: "echo 'UNREGISTER aegir/db_password' | debconf-communicate aegir3-hostmaster"
 
 - name: Clear Drush cache
-  command: drush @none cc drush
+  shell: drush @none cc drush
   become: yes
   become_user: "{{ aegir_user }}"
   notify: Ensure that the queue daemon is running
 
 - name: Clear Aegir front-end Drush cache
-  shell: drush @hm cc drush
+  shell: drush @hostmaster cc drush
   become: yes
   become_user: "{{ aegir_user }}"
   notify: Ensure that the queue daemon is running
 
 - name: Verify Aegir front-end
-  shell: drush @hm hosting-task @hostmaster verify --force && drush @hm hosting-tasks
+  shell: drush @hostmaster hosting-task @hostmaster verify --force && drush @hostmaster hosting-tasks
   become: yes
   become_user: "{{ aegir_user }}"
 
 - name: Clear Aegir task queue lock
-  shell: drush @hm hosting-release-lock
+  shell: drush @hostmaster hosting-release-lock
   become: yes
   become_user: "{{ aegir_user }}"
 
