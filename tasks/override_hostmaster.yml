@@ -1,0 +1,24 @@
+- debug: var=aegir_root
+- debug: var=aegir_platform_version
+- debug: var=aegir_makefile_path
+- debug: var=aegir_makefile_template
+- name: Write Hostmaster makefile.
+  template:
+    src: "{{ aegir_makefile_template }}"
+    dest: "{{ aegir_makefile_path }}"
+    mode: 0644
+  become: yes
+
+- name: Ensure Aegir front-end is running on the designated version.
+  block:
+  - name: Build Hostmaster platform.
+    shell: "drush make {{ aegir_makefile_path }} {{ aegir_root }}/hostmaster-{{ aegir_platform_version }} --working-copy --no-gitinfofile"
+    args:
+      creates: "{{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/"
+#  - name: Migrate Aegir front-end to new platform.
+#    shell: "drush @none --yes hostmaster-migrate --debug --working-copy --aegir_db_host={{ aegir_db_host | default('localhost') }} --aegir_db_user={{ aegir_db_user }} --aegir_db_pass={{ aegir_db_password }} --aegir_version={{ aegir_platform_version }} --http_service_type={{ aegir_http_service_type }} {{ aegir_frontend_url }} --strict=0 --root={{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/"
+#    args:
+#      creates: "{{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/sites/{{ aegir_frontend_url }}/"
+  become: yes
+  become_user: "{{ aegir_user }}"
+#  tags: "hostmaster_override"

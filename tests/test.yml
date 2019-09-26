@@ -1,0 +1,9 @@
+---
+- hosts: localhost
+  gather_facts: False
+
+  vars:
+    ansible_os_family: 'Debian'
+
+  roles:
+    - consensus.aegir

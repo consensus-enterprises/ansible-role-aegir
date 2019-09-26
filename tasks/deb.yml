@@ -94,27 +94,27 @@
   shell: "echo 'aegir3-hostmaster aegir/email string {{ aegir_admin_email }}' | debconf-set-selections"
   when: (aegir_admin_email_debconf.stdout is defined) and (aegir_admin_email not in aegir_admin_email_debconf.stdout)
 
-# aegir_makefile
+# aegir_makefile_path
 - name: Ensure Aegir settings path exists.
   file:
     state: directory
     path: "{{ aegir_etc_path }}"
     mode: 0755
-  when: aegir_makefile is defined
+  when: aegir_makefile_path is defined
 
 - name: Write Hostmaster makefile.
-  copy:
+  template:
+    src: "{{ aegir_makefile_template }}"
     dest: "{{ aegir_makefile_path }}"
-    src: "{{ aegir_makefile }}"
     mode: 0644
-  when: aegir_makefile is defined
+  when: aegir_makefile_path is defined
 
 - name: Look up Aegir Drush makefile in debconf database.
   shell: "debconf-get-selections | grep aegir/makefile"
   register: aegir_makefile_debconf
   changed_when: False
   failed_when: False
-  when: aegir_makefile is defined
+  when: aegir_makefile_path is defined
 
 - name: Set Aegir Drush makefile in debconf database.
   shell: "echo 'aegir3-hostmaster aegir/makefile string {{ aegir_makefile_path }}' | debconf-set-selections"
