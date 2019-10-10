@@ -1,0 +1,8 @@
+---
+- hosts: localhost
+
+  tasks:
+
+  - include_role:
+      name: consensus.aegir
+      tasks_from: dependencies.yml
