@@ -16,4 +16,4 @@ tests:
     - make ansible
   script:
     - source d
-    - make ansible-role-test; RESULT=$? make -s ntfy-ci
+    - make ansible-role-test; make -s ntfy-ci NOTIFY_CI_RESULT=$?
