@@ -20,7 +20,6 @@
     group: "{{ aegir_user }}"
     mode: 0644
   become: yes
-  become_user: "{{ aegir_user }}"
   notify:
     - Restart the queue daemon
 
