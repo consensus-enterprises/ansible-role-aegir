@@ -22,6 +22,10 @@
     aegir_db_user: "{{ mysql_root_user }}"
   when: (aegir_db_user is not defined) and (mysql_root_user is defined)
 
+- name: Force upgrade of Composer.
+  include: composer.yml
+  when: aegir_upgrade_composer | bool
+
 - name: Install Aegir via Git.
   include: git.yml
   when: aegir_install_method == "git"
@@ -30,10 +34,6 @@
   include: deb.yml
   become: yes
   when: aegir_install_method == "deb"
-
-- name: Force upgrade of Composer.
-  include: composer.yml
-  when: aegir_upgrade_composer | bool
 
 - name: Override default Drush install.
   include: override_drush.yml
