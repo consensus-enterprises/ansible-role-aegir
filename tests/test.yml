@@ -9,7 +9,7 @@
       file: consensus.aegir/defaults/main.yml
 
   - name: Include dependency installation tasks.
-    include: ../tasks/git/user.yml
+    include: ../tasks/dependencies.yml
     vars:
       aegir_http_service_type: nginx
       aegir_php_version: 7
