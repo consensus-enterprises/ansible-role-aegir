@@ -3,7 +3,6 @@
 
 - name: Ensure Aegir's dependencies are installed.
   include: dependencies.yml
-  become: yes
   when: (aegir_manage_dependencies == true) and (ansible_os_family == 'Debian')
 
 - name: Install additional packages.

@@ -2,10 +2,6 @@
 - name: "'Unit-test' playbook."
   hosts: all
 
-  vars:
-    aegir_http_service_type: nginx
-    aegir_php_version: 7
-
   tasks:
 
   - include_vars:
@@ -14,6 +10,9 @@
   - include_role:
       name: consensus.aegir
       tasks_from: dependencies.yml
+    vars:
+      aegir_http_service_type: nginx
+      aegir_php_version: 7
 
   - name: Check that dependency packages are installed
     shell: "dpkg -l|grep '^ii  {{ item }}'"

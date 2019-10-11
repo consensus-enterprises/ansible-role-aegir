@@ -1,6 +1,6 @@
 ---
 - name: Escalate privileges to install packages.
-  become: true
+  become: yes
   block:
   - name: Ensure Aegir's common dependencies are installed.
     apt:
