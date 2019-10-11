@@ -42,3 +42,9 @@
   - name: Check that Drush is installed.
     shell: "drush status"
 
+  - name: Include Provision install tasks.
+    include: ../tasks/git/provision.yml
+
+  - name: Check that Provision is installed.
+    shell: "[ -d /var/aegir/.drush/provision ]"
+

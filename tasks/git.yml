@@ -10,20 +10,7 @@
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#43-install-provision
 - name: Clone Provision
-  git:
-    repo: "{{ aegir_provision_repo }}"
-    dest: "{{ aegir_root }}/.drush/provision"
-    depth: 1 # speeds things up
-    version: "{{ aegir_provision_version }}"
-    update: "{{ aegir_provision_update }}"
-  become: yes
-  become_user: "{{ aegir_user }}"
-- name: Clear Drush cache for Provision extension
-  shell: drush @none cc drush
-  args:
-    creates: "{{ aegir_root }}/.drush/cache/"
-  become: yes
-  become_user: "{{ aegir_user }}"
+  include: git/provision.yml
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#321-apache-configuration
 - include: git/setup-apache.yml
