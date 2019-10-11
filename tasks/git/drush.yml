@@ -1,22 +1,5 @@
 ---
 
-# Ref.: http://docs.drush.org/en/master/install/
+- name: Install Drush
+  include: "drush/{{ aegir_drush_install_method }}.yml"
 
-- name: Use a specific release of Drush
-  set_fact:
-    drush_phar_download_url: "https://github.com/drush-ops/drush/releases/download/{{ aegir_drush_version }}/drush.phar"
-  changed_when: False
-
-- name: Download Drush phar
-  get_url:
-    url: "{{ drush_phar_download_url }}"
-    dest: /usr/local/bin/drush
-
-- name: Ensure Drush is executable
-  file:
-    path: /usr/local/bin/drush
-    mode: "a+x"
-
-- name: Test Drush install
-  shell: drush core-status
-  changed_when: False

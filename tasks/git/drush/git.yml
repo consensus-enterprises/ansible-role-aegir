@@ -14,10 +14,6 @@
 - name: Run Drush updates.
   when: drush_clone_result.changed
   block:
-  - name: Wait for tasks in the Aegir queue to complete so we can update Drush safely.
-    shell: drush @hostmaster hosting-pause
-    become: yes
-    become_user: "{{ aegir_user }}"
   - name: Install Drush dependencies with Composer.
     command: "composer install --prefer-dist --no-interaction"
     args:
@@ -30,14 +26,10 @@
       state: link
       force: true
     become: yes
-    notify:
-      - Clear Drush cache
-      - Clear Aegir front-end Drush cache
-      - Verify Aegir front-end
-      - Restart the queue daemon
-    when: drush_clone_result.changed
-  - name: Force handlers to run if necessary.
-    meta: flush_handlers
+  - name: Clear Drush cache
+    shell: drush @none cc drush
+    become: yes
+    become_user: "{{ aegir_user }}"
   - name: Run drush to finish setting it up.
     command: "{{ aegir_drush_source_install_bin_path }}"
     register: drush_result

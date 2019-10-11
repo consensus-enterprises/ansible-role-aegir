@@ -29,6 +29,7 @@ aegir_login_link: false
 
 # Drush
 aegir_install_drush: true
+aegir_drush_install_method: phar
 aegir_drush_version: 8.1.16
 # Install from source (git clone + composer-based install).
 aegir_drush_override: false
