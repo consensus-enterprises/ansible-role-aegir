@@ -1,8 +1,20 @@
 ---
-- hosts: localhost
+- name: "'Unit-test' playbook."
+  hosts: localhost
+
+  vars:
+    aegir_http_service_type: nginx
+    aegir_php_version: 7
 
   tasks:
+
+  - include_vars:
+      file: consensus.aegir/defaults/main.yml
 
   - include_role:
       name: consensus.aegir
       tasks_from: dependencies.yml
+
+  - name: Check that dependency packages are installed
+    shell: "dpkg -l|grep '^ii  {{ item }}'"
+    loop: "{{ aegir_dependencies + aegir_dependencies_php7 + aegir_dependencies_nginx_php7 }}"
