@@ -18,3 +18,19 @@
   - name: Check that dependency packages are installed
     shell: "dpkg -l|grep '^ii  {{ item }}'"
     loop: "{{ aegir_dependencies + aegir_dependencies_php7 + aegir_dependencies_nginx_php7 }}"
+
+  - include_role:
+      name: consensus.aegir
+      tasks_from: git/user.yml
+
+  - name: Check that 'aegir' user exists.
+    shell: "getent passwd aegir"
+
+  - name: Check that 'aegir' group exists.
+    shell: "getent group aegir"
+
+  - name: Check that 'aegir' home directory exists.
+    shell: "[ -d /var/aegir ]"
+
+  - name: Check that 'aegir' Drush directory exists.
+    shell: "[ -d /var/aegir/.drush ]"
