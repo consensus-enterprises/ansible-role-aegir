@@ -1,6 +1,6 @@
 ---
 - name: "'Unit-test' playbook."
-  hosts: localhost
+  hosts: all
 
   vars:
     aegir_http_service_type: nginx
