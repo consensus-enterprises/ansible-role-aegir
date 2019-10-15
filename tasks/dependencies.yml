@@ -6,8 +6,6 @@
     apt:
       name: "{{ aegir_dependencies }}"
       state: present
-  - debug: var=aegir_php_version
-  - debug: var=aegir_http_service_type
   - name: Ensure Aegir's PHP 5 dependencies are installed.
     apt:
       name: "{{ aegir_dependencies_php5 }}"

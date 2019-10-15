@@ -8,9 +8,6 @@
     include_vars:
       file: consensus.aegir/defaults/main.yml
 
-  - debug: var=aegir_php_version
-  - debug: var=aegir_http_service_type
-
   - name: Include dependency installation tasks.
     include: ../tasks/dependencies.yml
     vars:
@@ -21,7 +18,6 @@
     shell: "dpkg -l|grep '^ii  {{ item }}'"
     loop: "{{ aegir_dependencies + aegir_dependencies_php7 + aegir_dependencies_nginx_php7 }}"
     changed_when: False
-    ignore_errors: yes # TODO: this is a workaround for CI so that tests pass; fix permanently, pls
 
   - name: Include user creation tasks.
     include: ../tasks/git/user.yml
