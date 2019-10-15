@@ -35,14 +35,6 @@
   become: yes
   when: aegir_install_method == "deb"
 
-- name: Override default Drush install.
-  include: override_drush.yml
-  when: aegir_drush_override | bool
-
-- name: Override Provision codebase.
-  include: override_provision.yml
-  when: aegir_provision_override | bool
-
 - name: Enable extra modules.
   include: extra-modules.yml
   when: aegir_extra_modules | length > 0

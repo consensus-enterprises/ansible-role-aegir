@@ -17,7 +17,6 @@ aegir_additional_packages: []
 aegir_provision_repo: http://git.drupal.org/project/provision.git
 aegir_provision_version: 7.x-3.x
 aegir_provision_update: false
-aegir_provision_override: false
 aegir_http_service_type: apache
 aegir_platform_version: 7.x-3.x
 aegir_frontend_url: aegir.local
@@ -32,7 +31,6 @@ aegir_install_drush: true
 aegir_drush_install_method: phar
 aegir_drush_version: 8.1.16
 # Install from source (git clone + composer-based install).
-aegir_drush_override: false
 aegir_drush_source_repo: https://github.com/drush-ops/drush.git
 aegir_drush_source_install_bin_path: /usr/local/bin/drush
 aegir_drush_source_install_path: /usr/local/share/drush
