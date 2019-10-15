@@ -8,6 +8,8 @@
     include_vars:
       file: consensus.aegir/defaults/main.yml
 
+  ### Dependencies ###
+
   - name: Include dependency installation tasks.
     include: ../tasks/dependencies.yml
     vars:
@@ -18,6 +20,8 @@
     shell: "dpkg -l|grep '^ii  {{ item }}'"
     loop: "{{ aegir_dependencies + aegir_dependencies_php7 + aegir_dependencies_nginx_php7 }}"
     changed_when: False
+
+  ### User and group ###
 
   - name: Include user creation tasks.
     include: ../tasks/git/user.yml
@@ -37,6 +41,8 @@
   - name: Check that 'aegir' Drush directory exists.
     shell: "[ -d /var/aegir/.drush ]"
     changed_when: False
+
+  ### Composer/Drush/Provision installation ###
 
   - name: Include Composer install tasks.
     include: ../tasks/composer.yml
