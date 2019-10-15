@@ -67,3 +67,13 @@
     shell: "[ -d /var/aegir/.drush/provision ]"
     changed_when: False
 
+  ### Nginx setup ###
+
+  - name: Include Nginx setup tasks.
+    include: ../tasks/git/setup-nginx.yml
+
+  - name: Check that Nginx config file exists.
+    shell: "[ -f /etc/nginx/conf.d/aegir.conf ]"
+    changed_when: False
+
+
