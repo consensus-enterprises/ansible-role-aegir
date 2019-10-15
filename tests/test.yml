@@ -8,6 +8,9 @@
     include_vars:
       file: consensus.aegir/defaults/main.yml
 
+  - debug: var=aegir_php_version
+  - debug: var=aegir_http_service_type
+
   - name: Include dependency installation tasks.
     include: ../tasks/dependencies.yml
     vars:
