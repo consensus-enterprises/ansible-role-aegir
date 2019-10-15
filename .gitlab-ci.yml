@@ -2,6 +2,9 @@ image: ubuntu:bionic
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
+  # Overcome world-writeable dir complaints. See:
+  # https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
+  ANSIBLE_CONFIG: ansible.cfg
 
 tests:
   before_script:
