@@ -35,6 +35,9 @@
   become: yes
   when: aegir_install_method == "deb"
 
+- name: Install global config file.
+  include: global.yml
+
 - name: Enable extra modules.
   include: extra-modules.yml
   when: aegir_extra_modules | length > 0

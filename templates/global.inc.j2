@@ -1,0 +1,38 @@
+<?php # global settings.php
+
+### {{ ansible_managed }}
+
+{% if aegir_https_proxy_ip_range is defined %}
+
+/**
+ * Tell all Drupal sites that we're running behind an HTTPS proxy.
+ */
+// Drupal 7 site require a patch from https://www.drupal.org/project/drupal/issues/2466417.
+// Once that gets in, simply follow the Drupal 8 format below.
+if (defined('VERSION') && explode('.', VERSION)[0] == 7) {
+  $proxies = array();
+  for ($count = 0; $count <= 255; $count++) {
+    $proxies[$count] = "{{ aegir_https_proxy_ip_range | regex_replace('0/24', '') }}" . $count;
+  }
+  $conf['reverse_proxy_addresses'] = $proxies;
+
+  // Force the protocol provided by the proxy. This isn't always done
+  // automatically in Drupal 7. Otherwise, you'll get mixed content warnings
+  // and/or some assets will be blocked by the browser.
+  if (php_sapi_name() != 'cli' && isset($_SERVER['HTTP_X_FORWARDED_PROTO'])) {
+    if (isset($_SERVER['SITE_SUBDIR']) && isset($_SERVER['RAW_HOST'])) {
+      // Handle subdirectory mode.
+      $base_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . '://' . $_SERVER['RAW_HOST'] . '/' . $_SERVER['SITE_SUBDIR'];
+    }
+    else {
+      $base_url = $_SERVER['HTTP_X_FORWARDED_PROTO'] . '://' . $_SERVER['SERVER_NAME'];
+    }
+  }
+}
+// Drupal 8 configuration.
+else {
+  $settings['reverse_proxy'] = TRUE;
+  $settings['reverse_proxy_addresses'] = ['{{ aegir_https_proxy_ip_range }}'];
+}
+
+{% endif %}

@@ -85,3 +85,14 @@
     shell: "[ -f /etc/sudoers.d/aegir ]"
     changed_when: False
     become: yes
+
+  ### Aegir global include setup ###
+
+  - name: Setup global include file.
+    include: ../tasks/global.yml
+    vars:
+      aegir_https_proxy_ip_range: "192.168.177.0/24"
+
+  - name: Confirm that Aegir global include file contains proxy support.
+    shell: "grep '192.168.177.0/24' /var/aegir/config/includes/global.inc"
+    changed_when: False

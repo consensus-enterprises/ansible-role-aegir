@@ -80,3 +80,5 @@ aegir_extra_modules:
 
 aegir_use_hosting_queued: true
 
+# Configure HTTPS proxy settings for all Drupal sites.
+#aegir_https_proxy_ip_range: "192.168.177.0/24"

@@ -1,0 +1,8 @@
+---
+- name: Deploy Aegir global settings.php include file.
+  template:
+    src: global.inc.j2
+    dest: "/var/aegir/config/includes/global.inc"
+    owner: aegir
+    group: aegir
+  become: yes
