@@ -13,19 +13,18 @@
   include: git/provision.yml
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#321-apache-configuration
-- include: git/setup-apache.yml
+- name: Setup Apache.
+  include: git/setup-apache.yml
   when: aegir_http_service_type == 'apache'
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#322-nginx-configuration
-- include: git/setup-nginx.yml
+- name: Setup Nginx.
+  include: git/setup-nginx.yml
   when: aegir_http_service_type == 'nginx'
 
-# Ref.: http://docs.aegirproject.org/en/3.x/install/#34-sudo-configuration
-- name: Configure sudo for aegir user
-  copy:
-    dest: "/etc/sudoers.d/{{ aegir_user }}"
-    content: "{{ aegir_user }} ALL=NOPASSWD: /usr/sbin/apache2ctl\n{{ aegir_user }} ALL=NOPASSWD: /etc/init.d/nginx\n\n"
-    mode: 0440
+# Ref.: http://docs.aegirproject.org/en/3.x/install/#34-sudo-configuration 
+- name: Configure sudo for aegir user.
+  include: git/sudo.yml
 
 - name: Write Hostmaster makefile
   copy:
