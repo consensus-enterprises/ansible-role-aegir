@@ -15,7 +15,7 @@
 
 - name: Hit Aegir front-end and see expected output.
   uri:
-    url: http://127.0.0.1/user/login
+    url: http://localhost/user/login
     return_content: yes
     headers:
       Host: "aegir.local"
