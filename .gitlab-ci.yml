@@ -1,5 +1,8 @@
 image: ubuntu:bionic
 
+stages:
+  - test
+
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
   # Overcome world-writeable dir complaints. See:
@@ -7,18 +10,32 @@ variables:
   ANSIBLE_CONFIG: ansible.cfg
   DEBIAN_FRONTEND: noninteractive
 
-tests:
+unit-tests: &test-defaults
+  stage: test
+  variables:
+    ANSIBLE_TEST_PLAYBOOK: tests/unit-tests.yml 
   before_script:
     # Install Git and GNU Make
     - apt-get update -yqq
     - apt-get install -yqq git make unzip
-    # TODO: Figure out a way to intall these system packages as dependecies of
+    # TODO: Figure out a way to install these system packages as dependecies of
     # the targets that use them.
     - apt-get install -yqq python3-minimal python3-pip python3-yaml python3-jinja2 python3-apt
     - pip3 install ntfy[matrix]
     - update-alternatives --install /usr/bin/python python /usr/bin/python3 1
     - make ansible
+    - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-mysql.git tests/roles/geerlingguy.mysql
   script:
     - source d
-    - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-mysql.git tests/roles/geerlingguy.mysql
-    - ANSIBLE_TEST_PLAYBOOK=tests/unit-tests.yml make ansible-role-test #TODO: notify is busted somehow, no time to fix; make -s ntfy-ci NOTIFY_CI_RESULT=$?
+    - make ansible-role-test #TODO: notify is busted somehow, no time to fix; make -s ntfy-ci NOTIFY_CI_RESULT=$?
+
+git-deploy:
+  <<: *test-defaults
+  variables:
+    ANSIBLE_TEST_PLAYBOOK: tests/git-deploy.yml
+
+deb-deploy:
+  <<: *test-defaults
+  variables:
+    ANSIBLE_TEST_PLAYBOOK: tests/deb-deploy.yml
+

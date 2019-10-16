@@ -1,0 +1,27 @@
+---
+- name: "End-to-end git build playbook."
+  hosts: all
+
+  vars:
+    aegir_http_service_type: nginx
+    aegir_php_version: 7
+    aegir_install_method: git
+    aegir_db_user: 'root'
+    aegir_db_password: 'root'
+    aegir_db_host: 'localhost'
+
+  roles:
+    - geerlingguy.mysql
+    - consensus.aegir
+
+  tasks:
+
+  - name: Hit Aegir front-end and see expected output.
+    uri:
+      url: http://localhost/user/login
+      return_content: yes
+      headers:
+        Host: "aegir.local"
+    register: this
+    failed_when: "'Login | aegir.local' not in this.content"
+    changed_when: False
