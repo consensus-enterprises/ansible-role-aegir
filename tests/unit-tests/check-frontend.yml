@@ -5,9 +5,14 @@
   become: yes
   become_user: "aegir"
 
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
+
 - name: Hit Aegir front-end and see expected output.
   uri:
-    url: http://localhost/user/login
+    url: http://docker/user/login
     return_content: yes
     headers:
       Host: "aegir.local"
