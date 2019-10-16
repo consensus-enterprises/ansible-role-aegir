@@ -6,5 +6,6 @@
     path: /etc/nginx/conf.d/aegir.conf
     src: "{{ aegir_root }}/config/nginx.conf"
     force: yes  # the target doesn't exist yet
+  become: yes
   when: (ansible_distribution == "Ubuntu") or (ansible_distribution == "Debian")
 
