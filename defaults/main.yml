@@ -3,9 +3,10 @@ aegir_install_method: deb
 aegir_deb_release: stable
 aegir_repo_key_id: "5ADF93A03376CCF9"
 
+aegir_generate_makefile: false
 aegir_etc_path: /etc/aegir
-aegir_makefile: aegir.make
-aegir_makefile_path: "{{ aegir_etc_path }}/{{ aegir_makefile | basename }}"
+aegir_makefile_template: aegir.make.yml.j2
+aegir_makefile_path: "{{ aegir_etc_path }}/{{ aegir_makefile_template | splitext | first }}"
 
 aegir_root: /var/aegir
 aegir_user: aegir

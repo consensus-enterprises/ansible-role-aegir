@@ -26,6 +26,10 @@
   include: composer.yml
   when: aegir_upgrade_composer | bool
 
+- name: Generate Aegir Drush makefile.
+  include: makefile.yml
+  when: aegir_generate_makefile | bool
+
 - name: Install Aegir via Git.
   include: git.yml
   when: aegir_install_method == "git"

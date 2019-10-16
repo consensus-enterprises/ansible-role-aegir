@@ -1,0 +1,15 @@
+---
+- name: Ensure Aegir settings path exists.
+  file:
+    state: directory
+    path: "{{ aegir_etc_path }}"
+    mode: 0755
+  become: yes
+
+- name: Write Hostmaster makefile.
+  template:
+    dest: "{{ aegir_makefile_path }}"
+    src: "{{ aegir_makefile_template }}"
+    mode: 0644
+  become: yes
+  when: aegir_generate_makefile | bool

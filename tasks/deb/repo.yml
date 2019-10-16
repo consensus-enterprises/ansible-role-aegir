@@ -1,0 +1,26 @@
+---
+- name: Add Aegir Project APT key.
+  apt_key:
+    id: "{{ aegir_repo_key_id }}"
+    state: present
+    url: http://debian.aegirproject.org/key.asc
+  become: yes
+
+- name: Remove obsolete Aegir Project APT repository list, if present.
+  file:
+    path: /etc/apt/sources.list.d/debian_aegirproject_org.list
+    state: absent
+  become: yes
+
+- name: Add Aegir Project APT repository list.
+  template:
+    src: aegir-apt-repository.list.j2
+    dest: "/etc/apt/sources.list.d/aegir-{{ aegir_deb_release }}.list"
+  register: aegir_apt_repository_list
+  become: yes
+
+- name: Update apt cache from Aegir repository.
+  apt:
+    update_cache: yes
+  when: (aegir_apt_repository_list.changed is defined) and (aegir_apt_repository_list.changed | bool)
+  become: yes

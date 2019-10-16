@@ -1,0 +1,8 @@
+---
+
+- name: Install tools to allow idempotently setting options for Debian packages.
+  apt:
+    name: debconf-utils
+    state: present
+  become: yes
+

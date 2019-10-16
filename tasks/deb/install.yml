@@ -1,0 +1,6 @@
+---
+- name: Install Aegir 3.x package
+  apt:
+    name: "aegir3"
+    state: present
+    install_recommends: True

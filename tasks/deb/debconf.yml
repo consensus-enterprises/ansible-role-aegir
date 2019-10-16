@@ -1,0 +1,127 @@
+---
+
+# Ref.: http://docs.aegirproject.org/en/3.x/install/#71-custom-options
+
+# The general pattern for the following 'debconf-set-selections' tasks is that
+# they'll be set ONLY IF:
+#   (1) the relevant variable has been defined, AND
+#   (2) EITHER:
+#     (2.1) the selection hasn't been set yet, OR
+#     (2.2) the selection doesn't match the variable's value.
+
+# aegir_frontend_url
+- name: Look up Aegir front-end URL in debconf database.
+  shell: "debconf-get-selections | grep aegir/site"
+  register: aegir_frontend_url_debconf
+  changed_when: False
+  failed_when: False
+  when: aegir_frontend_url is defined
+
+- name: Set Aegir front-end URL in debconf database.
+  shell: "echo 'aegir3-hostmaster aegir/site string {{ aegir_frontend_url }}' | debconf-set-selections"
+  become: yes
+  when: (aegir_frontend_url_debconf.stdout is defined) and (aegir_frontend_url not in aegir_frontend_url_debconf.stdout)
+
+# aegir_db_host
+- name: Look up Aegir database host in debconf database.
+  shell: "debconf-get-selections | grep aegir/db_host"
+  register: aegir_db_host_debconf
+  changed_when: False
+  failed_when: False
+  when: aegir_db_host is defined
+
+- name: Set Aegir database host in debconf database.
+  shell: "echo 'aegir3-hostmaster aegir/db_host string {{ aegir_db_host }}' | debconf-set-selections"
+  become: yes
+  when: (aegir_db_host_debconf.stdout is defined) and (aegir_db_host not in aegir_db_host_debconf.stdout)
+
+# aegir_db_user
+- name: Look up Aegir database root user in debconf database.
+  shell: "debconf-get-selections | grep aegir/db_user"
+  register: aegir_db_user_debconf
+  changed_when: False
+  failed_when: False
+  when: aegir_db_user is defined
+
+- name: Set Aegir database root user in debconf database.
+  shell: "echo 'aegir3-hostmaster aegir/db_user string {{ aegir_db_user }}' | debconf-set-selections"
+  become: yes
+  when: (aegir_db_user_debconf.stdout is defined) and (aegir_db_user not in aegir_db_user_debconf.stdout)
+
+# aegir_db_password
+# N.B. We handle passwords differently, since we don't want to leave them in
+# the debconf database, and couldn't read them anyway. So, we clear the
+# database password at the end of the playbook, and set it each time. To
+# preserve idempotence, we don't count this as 'changed'.
+- name: Set Aegir database root password in debconf database.
+  shell: "echo 'aegir3-hostmaster aegir/db_password password {{ aegir_db_password }}' | debconf-set-selections"
+  become: yes
+  when: aegir_db_password is defined
+  changed_when: False
+  notify: Clear Aegir database root password from debconf database
+
+# aegir_admin_email
+- name: Look up Aegir administrator email in debconf database.
+  shell: "debconf-get-selections | grep aegir/email"
+  register: aegir_admin_email_debconf
+  changed_when: False
+  failed_when: False
+  when: aegir_admin_email is defined
+
+- name: Set Aegir administrator email in debconf database.
+  shell: "echo 'aegir3-hostmaster aegir/email string {{ aegir_admin_email }}' | debconf-set-selections"
+  become: yes
+  when: (aegir_admin_email_debconf.stdout is defined) and (aegir_admin_email not in aegir_admin_email_debconf.stdout)
+
+# aegir_makefile
+- name: Look up Aegir Drush makefile in debconf database.
+  shell: "debconf-get-selections | grep aegir/makefile"
+  register: aegir_makefile_debconf
+  changed_when: False
+  failed_when: False
+  when: aegir_generate_makefile is defined
+
+- name: Set Aegir Drush makefile in debconf database.
+  shell: "echo 'aegir3-hostmaster aegir/makefile string {{ aegir_makefile_path }}' | debconf-set-selections"
+  become: yes
+  when: (aegir_makefile_debconf.stdout is defined) and (aegir_makefile_path not in aegir_makefile_debconf.stdout)
+
+# aegir_webserver
+- name: Look up Aegir web server in debconf database.
+  shell: "debconf-get-selections | grep aegir/webserver"
+  register: aegir_webserver_debconf
+  changed_when: False
+  failed_when: False
+  when: aegir_http_service_type is defined
+
+- name: Set Aegir web server in debconf database.
+  shell: "echo 'aegir3-hostmaster aegir/webserver string {{ aegir_http_service_type }}' | debconf-set-selections"
+  become: yes
+  when: (aegir_webserver_debconf.stdout is defined) and (aegir_http_service_type not in aegir_webserver_debconf.stdout)
+
+# aegir_working_copy
+- name: Look up Aegir working-copy in debconf database.
+  shell: "debconf-get-selections | grep aegir/working-copy"
+  register: aegir_working_copy_debconf
+  changed_when: False
+  failed_when: False
+  when: aegir_working_copy is defined
+
+- name: Set Aegir working-copy in debconf database.
+  shell: "echo 'aegir3-hostmaster aegir/working-copy string {{ aegir_working_copy }}' | debconf-set-selections"
+  become: yes
+  when: (aegir_working_copy_debconf.stdout is defined) and (aegir_working_copy not in aegir_working_copy_debconf.stdout)
+
+# aegir_drush_version
+- name: Look up Aegir-installed Drush version in debconf database.
+  shell: "debconf-get-selections | grep aegir/drush_version"
+  register: aegir_drush_version_debconf
+  changed_when: False
+  failed_when: False
+  when: aegir_drush_version is defined
+
+- name: Set Aegir-installed Drush version in debconf database.
+  shell: "echo 'aegir3-provision aegir/drush_version string {{ aegir_drush_version }}' | debconf-set-selections"
+  become: yes
+  when: (aegir_drush_version_debconf.stdout is defined) and (aegir_drush_version not in aegir_drush_version_debconf.stdout)
+
