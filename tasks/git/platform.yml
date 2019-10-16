@@ -1,4 +1,9 @@
 ---
+- name: Default to Aegir Drush makefile from Provision.
+  set_fact:
+    aegir_makefile_path: "{{ aegir_root }}/.drush/provision/aegir.make"
+  when: aegir_generate_makefile | bool == False
+
 - name: Build Hostmaster platform.
   shell: "drush make {{ aegir_makefile_path }} {{ aegir_root }}/hostmaster-{{ aegir_platform_version }} --working-copy --no-gitinfofile"
   args:
