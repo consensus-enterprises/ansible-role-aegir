@@ -14,11 +14,14 @@
   become_user: "aegir"
 
 - name: Hit Aegir front-end and see expected output.
-  uri:
-    url: http://127.0.0.1/user/login
-    return_content: yes
-    headers:
-      Host: "aegir.local"
-  register: this
-  failed_when: "'Login | aegir.local' not in this.content"
+  shell: "curl localhost/user/login --header 'Host: aegir.local' -s | grep 'Login | aegir.local'"
   changed_when: False
+
+#  uri:
+#    url: http://127.0.0.1/user/login
+#    return_content: yes
+#    headers:
+#      Host: "aegir.local"
+#  register: this
+#  failed_when: "'Login | aegir.local' not in this.content"
+#  changed_when: False
