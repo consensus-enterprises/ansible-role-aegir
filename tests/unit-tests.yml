@@ -14,7 +14,7 @@
   - include: unit-tests/provision.yml
   - include: unit-tests/nginx.yml
   - include: unit-tests/sudo.yml
-  - include: unit-tests/global.yml
   - include: unit-tests/makefile.yml
   - include: unit-tests/debconf.yml
 
+#  - include: unit-tests/global.yml

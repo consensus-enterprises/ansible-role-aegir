@@ -19,4 +19,4 @@ tests:
     - make ansible
   script:
     - source d
-    - make ansible-role-test #TODO: notify is busted somehow, no time to fix; make -s ntfy-ci NOTIFY_CI_RESULT=$?
+    - ANSIBLE_TEST_PLAYBOOK=tests/unit-tests.yml make ansible-role-test #TODO: notify is busted somehow, no time to fix; make -s ntfy-ci NOTIFY_CI_RESULT=$?
