@@ -2,6 +2,9 @@
 - name: "'Unit-test' playbook."
   hosts: all
 
+  roles:
+    - geerlingguy.mysql
+
   tasks:
 
   - name: Include default variables, since we call task includes separately.
