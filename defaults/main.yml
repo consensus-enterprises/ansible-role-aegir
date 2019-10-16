@@ -76,6 +76,7 @@ aegir_dependencies_nginx_php7:
   - nginx
   - php-fpm
 aegir_drush_dependencies:
+  - curl
   - composer
 
 aegir_extra_config: false
