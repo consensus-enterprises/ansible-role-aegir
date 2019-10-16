@@ -1,0 +1,8 @@
+- name: Setup sudo for aegir user.
+  include: ../../tasks/git/sudo.yml
+
+- name: Check that sudo config file exists.
+  shell: "[ -f /etc/sudoers.d/aegir ]"
+  changed_when: False
+  become: yes
+

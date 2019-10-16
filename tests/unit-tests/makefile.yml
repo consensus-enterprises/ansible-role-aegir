@@ -1,0 +1,24 @@
+- name: Ensure that test makefile doesn't exist.
+  file:
+    path: '/etc/aegir/aegir.make.yml'
+    state: absent
+  changed_when: False
+  become: yes
+
+- name: Deploy Aegir Drush makefile.
+  include: ../../tasks/makefile.yml
+
+- name: Confirm custom Aegir Drush makefile does not exist.
+  shell: "[ ! -f /etc/aegir/aegir.make.yml ]"
+  changed_when: False
+
+- name: Deploy custom Aegir Drush makefile.
+  include: ../../tasks/makefile.yml
+  vars:
+    aegir_generate_makefile: yes
+
+- name: Check that custom Aegir Drush makefile exists.
+  shell: "[ -f /etc/aegir/aegir.make.yml ]"
+  changed_when: False
+  become: yes
+

@@ -1,0 +1,19 @@
+- name: Include user creation tasks.
+  include: ../../tasks/git/user.yml
+
+- name: Check that 'aegir' user exists.
+  shell: "getent passwd aegir"
+  changed_when: False
+
+- name: Check that 'aegir' group exists.
+  shell: "getent group aegir"
+  changed_when: False
+
+- name: Check that 'aegir' home directory exists.
+  shell: "[ -d /var/aegir ]"
+  changed_when: False
+
+- name: Check that 'aegir' Drush directory exists.
+  shell: "[ -d /var/aegir/.drush ]"
+  changed_when: False
+

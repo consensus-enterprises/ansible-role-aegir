@@ -1,0 +1,20 @@
+---
+- name: "'Unit-test' playbook."
+  hosts: all
+
+  tasks:
+
+  - name: Include default variables, since we call task includes separately.
+    include_vars:
+      file: consensus.aegir/defaults/main.yml
+
+  - include: unit-tests/dependencies.yml
+  - include: unit-tests/user.yml
+  - include: unit-tests/drush.yml
+  - include: unit-tests/provision.yml
+  - include: unit-tests/nginx.yml
+  - include: unit-tests/sudo.yml
+  - include: unit-tests/global.yml
+  - include: unit-tests/makefile.yml
+  - include: unit-tests/debconf.yml
+

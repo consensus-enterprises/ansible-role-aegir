@@ -1,0 +1,26 @@
+- name: Install debconf utilities.
+  include: ../../tasks/deb/utils.yml
+
+- name: Clear any existing debconf selections for Aegir Drush makefile.
+  shell: "debconf-get-selections | grep -v aegir/makefile || echo UNREGISTER aegir/makefile | debconf-communicate aegir3-hostmaster"
+  changed_when: False
+  become: yes
+
+- name: Override Debian package config with defaults.
+  include: ../../tasks/deb/debconf.yml
+
+- name: Check that debconf will use default Aegir Drush makefile.
+  shell: "debconf-get-selections | grep -v aegir/makefile"
+  changed_when: False
+  become: yes
+
+- name: Override Debian package config to use custom Aegir Drush makefile.
+  include: ../../tasks/deb/debconf.yml
+  vars:
+    generate_makefile: yes
+
+- name: Check that debconf will use custom Aegir Drush makefile.
+  shell: "debconf-get-selections | grep aegir/makefile"
+  changed_when: False
+  become: yes
+
