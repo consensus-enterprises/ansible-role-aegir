@@ -44,6 +44,7 @@ aegir_drush_clone_depth: 1
 aegir_manage_dependencies: true
 aegir_dependencies:
   - composer
+  - cron
   - git
   - mysql-client
   - postfix
