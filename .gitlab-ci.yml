@@ -25,6 +25,9 @@ unit-tests: &test-defaults
     - update-alternatives --install /usr/bin/python python /usr/bin/python3 1
     - make ansible
     - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-mysql.git tests/roles/geerlingguy.mysql
+    # Make our base URL resolve.
+    - echo `hostname -I` aegir.local >> /etc/hosts
+
   script:
     - source d
     - make ansible-role-test #TODO: notify is busted somehow, no time to fix; make -s ntfy-ci NOTIFY_CI_RESULT=$?
