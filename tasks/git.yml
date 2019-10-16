@@ -26,19 +26,8 @@
 - name: Configure sudo for aegir user.
   include: git/sudo.yml
 
-- name: Write Hostmaster makefile
-  copy:
-    dest: "{{ aegir_root }}/aegir.make"
-    content: "{{ aegir_makefile_contents }}"
-    owner: "{{ aegir_user }}"
-    group: "{{ aegir_user }}"
-
-- name: Build Hostmaster platform
-  shell: "drush make {{ aegir_root }}/aegir.make {{ aegir_root }}/hostmaster-{{ aegir_platform_version }} --working-copy --no-gitinfofile"
-  args:
-    creates: "{{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/"
-  become: yes
-  become_user: "{{ aegir_user }}"
+- name: Build hostmaster platform.
+  include: git/platform.yml
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#44-running-hostmaster-install
 - name: Install Aegir front-end
@@ -47,4 +36,3 @@
     creates: "{{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/sites/{{ aegir_frontend_url }}/"
   become: yes
   become_user: "{{ aegir_user }}"
-

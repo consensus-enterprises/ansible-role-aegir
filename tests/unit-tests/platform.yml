@@ -1,0 +1,8 @@
+---
+- name: Include Hostmaster platform deployment tasks.
+  include: ../../tasks/git/platform.yml
+
+- name: Check that Hostmaster platform is deployed.
+  shell: "[ -d {{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/profiles/hostmaster ]"
+  changed_when: False
+
