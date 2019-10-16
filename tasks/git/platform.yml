@@ -5,4 +5,3 @@
     creates: "{{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/"
   become: yes
   become_user: "{{ aegir_user }}"
-
