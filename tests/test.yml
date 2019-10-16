@@ -66,7 +66,7 @@
     include: ../tasks/git/setup-nginx.yml
 
   - name: Check that Nginx config file exists.
-    shell: "[ -f /etc/nginx/conf.d/aegir.conf ]"
+    shell: "[ -L /etc/nginx/conf.d/aegir.conf ]"
     changed_when: False
 
   ### Sudo setup ###
