@@ -17,5 +17,5 @@
   - include: unit-tests/makefile.yml
   - include: unit-tests/debconf.yml
   - include: unit-tests/platform.yml
-
-#  - include: unit-tests/global.yml
+  - include: unit-tests/install.yml
+  - include: unit-tests/global.yml

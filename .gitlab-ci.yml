@@ -5,6 +5,7 @@ variables:
   # Overcome world-writeable dir complaints. See:
   # https://docs.ansible.com/ansible/devel/reference_appendices/config.html#cfg-in-world-writable-dir
   ANSIBLE_CONFIG: ansible.cfg
+  DEBIAN_FRONTEND: noninteractive
 
 tests:
   before_script:
