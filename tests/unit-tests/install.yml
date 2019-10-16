@@ -1,5 +1,5 @@
 ---
-- name: Include Aegir front end install tasks.
+- name: Include Aegir front-end install tasks.
   include: ../../tasks/git/install.yml
   vars:
     aegir_db_user: 'root'
@@ -7,9 +7,18 @@
     aegir_db_host: 'localhost'
     aegir_http_service_type: 'nginx'
 
-- name: Check that Aegir front end is installed.
+- name: Check that Aegir front-end is installed.
   shell: "drush @hm status"
   changed_when: False
   become: yes
   become_user: "aegir"
 
+- name: Hit Aegir front-end and see expected output.
+  uri:
+    url: http://localhost/user/login
+    return_content: yes
+    headers:
+      Host: "aegir.local"
+  register: this
+  failed_when: "'Login | aegir.local' not in this.content"
+  changed_when: False
