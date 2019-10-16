@@ -42,14 +42,7 @@
     shell: "[ -d /var/aegir/.drush ]"
     changed_when: False
 
-  ### Composer/Drush/Provision installation ###
-
-  - name: Include Composer install tasks.
-    include: ../tasks/composer.yml
-
-  - name: Check that Composer is installed.
-    shell: "composer"
-    changed_when: False
+  ### Drush/Provision installation ###
 
   - name: Include Drush install tasks.
     include: ../tasks/git/drush.yml

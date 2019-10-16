@@ -43,6 +43,7 @@ aegir_drush_clone_depth: 1
 
 aegir_manage_dependencies: true
 aegir_dependencies:
+  - composer
   - git
   - mysql-client
   - postfix
@@ -74,6 +75,8 @@ aegir_dependencies_nginx_php5:
 aegir_dependencies_nginx_php7:
   - nginx
   - php-fpm
+aegir_drush_dependencies:
+  - composer
 
 aegir_extra_config: false
 aegir_extra_modules:

@@ -1,5 +1,11 @@
 ---
 
+- name: Ensure Drush's dependencies are installed.
+  apt:
+    name: "{{ aegir_drush_dependencies }}"
+    state: present
+  become: yes
+ 
 - name: Install Drush
   include: "drush/{{ aegir_drush_install_method }}.yml"
 
