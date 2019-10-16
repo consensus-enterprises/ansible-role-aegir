@@ -7,3 +7,9 @@
     aegir_db_host: 'localhost'
     aegir_http_service_type: 'nginx'
 
+- name: Check that Aegir front-end is installed.
+  shell: "drush @hm status"
+  changed_when: False
+  become: yes
+  become_user: "aegir"
+

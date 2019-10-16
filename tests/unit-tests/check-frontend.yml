@@ -5,12 +5,6 @@
   become: yes
   become_user: "aegir"
 
-- name: Ensure nginx is running.
-  service:
-    name: nginx
-    state: started
-  become: yes
-
 - name: Hit Aegir front-end and see expected output.
   uri:
     url: http://aegir.local/user/login

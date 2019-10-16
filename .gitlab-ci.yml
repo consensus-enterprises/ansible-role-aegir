@@ -24,7 +24,10 @@ unit-tests: &test-defaults
     - pip3 install ntfy[matrix]
     - update-alternatives --install /usr/bin/python python /usr/bin/python3 1
     - make ansible
+    # Fetch role dependencies
     - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-mysql.git tests/roles/geerlingguy.mysql
+    - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-nginx.git tests/roles/geerlingguy.nginx
+    - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-php.git tests/roles/geerlingguy.php
     # Make our base URL resolve.
     - echo `hostname -I` aegir.local >> /etc/hosts
 
