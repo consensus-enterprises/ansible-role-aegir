@@ -11,11 +11,13 @@
   get_url:
     url: "{{ drush_phar_download_url }}"
     dest: /usr/local/bin/drush
+  become: yes
 
 - name: Ensure Drush is executable
   file:
     path: /usr/local/bin/drush
     mode: "a+x"
+  become: yes
 
 - name: Test Drush install
   shell: drush core-status
