@@ -13,3 +13,9 @@
     mode: 0644
   become: yes
   when: aegir_generate_makefile | bool
+
+- name: Default to Aegir Drush makefile from Provision.
+  set_fact:
+    aegir_makefile_path: "{{ aegir_root }}/.drush/provision/aegir.make"
+  when: aegir_generate_makefile | bool == False
+
