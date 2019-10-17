@@ -14,8 +14,12 @@
   become: yes
   when: aegir_generate_makefile | bool
 
-- name: Default to Aegir Drush makefile from Provision.
+- name: Default to Aegir Drush makefile from Provision deployed from Git.
   set_fact:
     aegir_makefile_path: "{{ aegir_root }}/.drush/provision/aegir.make"
-  when: aegir_generate_makefile | bool == False
+  when: (aegir_generate_makefile | bool == False) and (aegir_install_method == 'git')
 
+- name: Default to Aegir Drush makefile from Provision deployed from Debian package.
+  set_fact:
+    aegir_makefile_path: "/usr/share/drush/commands/provision/aegir.make"
+  when: (aegir_generate_makefile | bool == False) and (aegir_install_method == 'deb')

@@ -5,7 +5,7 @@
   changed_when: False
   become: yes
 
-- name: Deploy Aegir Drush makefile.
+- name: Use default Aegir Drush makefile.
   include: ../../tasks/makefile.yml
 
 - name: Confirm custom Aegir Drush makefile does not exist.
@@ -16,6 +16,8 @@
   include: ../../tasks/makefile.yml
   vars:
     aegir_generate_makefile: yes
+    # We have to reset this, since the use of the default above will override it.
+    aegir_makefile_path: "/etc/aegir/aegir.make.yml"
 
 - name: Check that custom Aegir Drush makefile exists.
   shell: "[ -f /etc/aegir/aegir.make.yml ]"
