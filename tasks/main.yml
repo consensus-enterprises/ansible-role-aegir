@@ -24,7 +24,6 @@
 
 - name: Generate Aegir Drush makefile.
   include: makefile.yml
-  when: aegir_generate_makefile | bool
 
 - name: Install Aegir via Git.
   include: git.yml
