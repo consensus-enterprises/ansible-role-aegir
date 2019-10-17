@@ -12,12 +12,15 @@
   shell: "[ ! -f /etc/aegir/aegir.make.yml ]"
   changed_when: False
 
+  # We have to reset this, since the use of the default above will override it.
+- name: Reset Aegir Drush makefile path to default.
+  set_fact:
+    aegir_makefile_path: "/etc/aegir/aegir.make.yml"
+
 - name: Deploy custom Aegir Drush makefile.
   include: ../../tasks/makefile.yml
   vars:
     aegir_generate_makefile: yes
-    # We have to reset this, since the use of the default above will override it.
-    aegir_makefile_path: "/etc/aegir/aegir.make.yml"
 
 - name: Check that custom Aegir Drush makefile exists.
   shell: "[ -f /etc/aegir/aegir.make.yml ]"
