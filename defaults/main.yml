@@ -27,6 +27,10 @@ aegir_fix_permissions: false
 aegir_registry_rebuild: false
 aegir_login_link: false
 
+aegir_db_password: "{{ mysql_root_password | default(_default_aegir_db_password) }}"
+aegir_db_user: "{{ mysql_root_username | default(_default_aegir_db_user) }}"
+aegir_db_host: 'localhost'
+
 # Drush
 aegir_install_drush: true
 aegir_drush_install_method: phar

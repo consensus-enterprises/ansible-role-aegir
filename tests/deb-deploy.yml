@@ -11,9 +11,6 @@
     php_enable_webserver: False
     php_set_cli_memory_limit: True
     # This role
-    aegir_db_user: 'root'
-    aegir_db_password: 'root'
-    aegir_db_host: 'localhost'
     aegir_http_service_type: nginx
     aegir_php_version: 7
 

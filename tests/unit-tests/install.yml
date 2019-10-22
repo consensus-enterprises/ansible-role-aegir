@@ -2,9 +2,6 @@
 - name: Include Aegir front-end install tasks.
   include: ../../tasks/git/install.yml
   vars:
-    aegir_db_user: 'root'
-    aegir_db_password: 'root'
-    aegir_db_host: 'localhost'
     aegir_http_service_type: 'nginx'
 
 - name: Check that Aegir front-end is installed.
