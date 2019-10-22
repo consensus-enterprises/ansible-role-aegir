@@ -1,7 +1,7 @@
 ---
 - name: Include vaulted variables.
   include_vars: "vars/vault.yml"
-  no_log: True
+  no_log: True # See https://github.com/ansible/ansible/issues/18184
 
 - name: Check that we can read vaulted variable.
   assert:
