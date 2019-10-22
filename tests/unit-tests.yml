@@ -22,3 +22,4 @@
   - include: unit-tests/platform.yml
   - include: unit-tests/install.yml
   - include: unit-tests/global.yml
+  - include: unit-tests/vault.yml
