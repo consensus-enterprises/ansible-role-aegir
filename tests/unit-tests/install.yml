@@ -1,12 +1,16 @@
 ---
-- name: Include Aegir front-end install tasks.
-  include: ../../tasks/git/install.yml
-  vars:
-    aegir_http_service_type: 'nginx'
-
-- name: Check that Aegir front-end is installed.
-  shell: "drush @hm status"
-  changed_when: False
-  become: yes
-  become_user: "aegir"
+- name: Test Aegir frontend install.
+  block:
+  - name: Include Aegir front-end install tasks.
+    include: ../../tasks/git/install.yml
+  - name: Check that Aegir front-end is installed.
+    shell: "drush @hm status"
+    changed_when: False
+    become: yes
+    become_user: "aegir"
+  - name: Include Aegir front-end install tasks (again).
+    include: ../../tasks/git/install.yml
+  - name: Check that Aegir front-end install task is idempotent.
+    assert:
+      that: aegir_install_task_result.changed == False
 

@@ -1,0 +1,8 @@
+---
+- name: Upgrade Aegir front-end.
+  shell: "drush @hostmaster --yes hostmaster-migrate {{ aegir_frontend_url }} {{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/ --debug --working-copy"
+  args:
+    creates: "{{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/sites/{{ aegir_frontend_url }}/"
+  become: yes
+  become_user: "{{ aegir_user }}"
+  register: aegir_upgrade_task_result

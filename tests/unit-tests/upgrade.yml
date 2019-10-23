@@ -1,0 +1,43 @@
+---
+
+- name: Test Aegir front-end upgrade.
+  block:
+
+  - name: Deploy new Hostmaster platform.
+    include: ../../tasks/git/platform.yml
+    vars:
+      # We set this to the current Unix timestamp to ensure a new platform is
+      # always built.
+      aegir_platform_version: "{{ ansible_facts.date_time.epoch }}"
+  - name: Include Aegir front-end install tasks.
+    include: ../../tasks/git/install.yml
+    vars:
+      aegir_platform_version: "{{ ansible_facts.date_time.epoch }}"
+  - name: Check that Aegir front-end install task is idempotent.
+    assert:
+      that: aegir_install_task_result.changed == False
+  - name: Include Aegir front-end upgrade tasks.
+    include: ../../tasks/git/upgrade.yml
+    vars:
+      aegir_platform_version: "{{ ansible_facts.date_time.epoch }}"
+  - name: Check that Aegir front-end upgrade task ran.
+    assert:
+      that: aegir_upgrade_task_result.changed | bool
+  - name: Check that Aegir front-end still works.
+    shell: "drush @hostmaster status"
+    changed_when: False
+    become: yes
+    become_user: "aegir"
+  - name: Check that Aegir front-end is on intended platform.
+    shell: "drush sa @hostmaster|grep root|grep '{{ ansible_facts.date_time.epoch }}'"
+    changed_when: False
+    become: yes
+    become_user: "aegir"
+  - name: Include Aegir front-end upgrade tasks (again).
+    include: ../../tasks/git/upgrade.yml
+    vars:
+      aegir_platform_version: "{{ ansible_facts.date_time.epoch }}"
+  - name: Check that Aegir front-end upgrade task is idempotent.
+    assert:
+      that: aegir_upgrade_task_result.changed == False
+
