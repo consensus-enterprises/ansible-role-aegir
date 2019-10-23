@@ -1,3 +1,4 @@
+---
 - name: Ensure that test makefile doesn't exist.
   file:
     path: '/etc/aegir/aegir.make.yml'
@@ -17,6 +18,8 @@
   set_fact:
     aegir_makefile_path: "/etc/aegir/aegir.make.yml"
 
+  # Because we are deleting it above, this step will write the Aegir Drush
+  # makefile every time this test is executed; this is ok.
 - name: Deploy custom Aegir Drush makefile.
   include: ../../tasks/makefile.yml
   vars:
