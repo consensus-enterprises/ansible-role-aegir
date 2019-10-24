@@ -40,6 +40,11 @@ git-deploy:
   variables:
     ANSIBLE_TEST_PLAYBOOK: tests/git-deploy.yml
 
+custom-deploy:
+  <<: *test-defaults
+  variables:
+    ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
+
 deb-deploy:
   <<: *test-defaults
   variables:
