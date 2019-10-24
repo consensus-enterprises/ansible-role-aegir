@@ -7,62 +7,25 @@ api: 2
 projects:
   drupal:
     type: "core"
-  # Chain into hostmaster from git's 3.x branch
   hostmaster:
     type: "profile"
     download:
       type: "git"
-      url: "http://git.drupal.org/project/hostmaster.git"
-      branch: "7.x-3.x"
+      url: {{ aegir_hostmaster_repo }}
+      branch: {{ aegir_hostmaster_version }}
       working-copy: TRUE
 
-  # We're overriding hosting that comes with hostmaster profile to apply unmerged fixes.
-  # (see https://www.drupal.org/project/hostmaster/issues/3034235)
-  # We're overriding provision as well; see playbook.yml.
-  # Once our fixes are merged upstream, we should remove this and use what's shipped with hostmaster.
-  hosting:
-    download:
-      type: "git"
-      url: "http://git.drupal.org/project/hosting.git"
-      branch: "7.x-3.x"
-      working-copy: TRUE
+  {% for module_name in (_default_aegir_contrib_modules + aegir_contrib_modules) %}
+{{ module_name }}:
+    version: {{ aegir_contrib_module_versions[module_name] | default('~') }}
+  {% endfor %}
 
-  features:
-    version: ~
-  aegir_objects:
+  {% for module_name,repo_url in (_default_aegir_custom_module_repos | combine(aegir_custom_module_repos)).items() %}
+{{ module_name }}:
     download:
       type: "git"
-      url: "http://git.drupal.org/project/aegir_objects.git"
-      branch: "7.x-3.x"
+      url: {{ repo_url }}
+      branch: {{ aegir_custom_module_versions[module_name] | default(aegir_release) }}
       working-copy: TRUE
-  hosting_deploy:
-    download:
-      type: "git"
-      url: "http://git.drupal.org/project/hosting_deploy.git"
-      branch: "7.x-3.x"
-      working-copy: TRUE
-  hosting_site_audit:
-    download:
-      type: "git"
-      url: "http://git.drupal.org/project/hosting_site_audit.git"
-      branch: "7.x-3.x"
-      working-copy: TRUE
-  hosting_monitor:
-    download:
-      type: "git"
-      url: "http://git.drupal.org/project/hosting_monitor.git"
-      branch: "7.x-3.x"
-      working-copy: TRUE
-  hosting_report:
-    download:
-      type: "git"
-      url: "http://git.drupal.org/project/hosting_report.git"
-      branch: "7.x-3.x"
-      working-copy: TRUE
-  hosting_skynet:
-    download:
-      type: "git"
-      url: "https://gitlab.com/consensus.enterprises/aegir/hosting_skynet.git"
-      branch: "master"
-      working-copy: TRUE
+  {% endfor %}
 

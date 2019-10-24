@@ -8,6 +8,16 @@ aegir_etc_path: /etc/aegir
 aegir_makefile_template: aegir.make.yml.j2
 aegir_makefile_path: "{{ aegir_etc_path }}/{{ aegir_makefile_template | splitext | first }}"
 
+# Aegir modules
+aegir_custom_module_repos: {}
+# These will default to the value of `aegir_release`.
+aegir_custom_module_versions:
+  hosting_skynet: master
+aegir_contrib_modules: []
+# These will default to '~', which will fetch the latest release.
+aegir_contrib_module_versions: {}
+aegir_release: "{{ _default_aegir_release }}"
+
 aegir_root: /var/aegir
 aegir_user: aegir
 aegir_web_group: www-data
@@ -15,9 +25,6 @@ aegir_php_version: 5
 aegir_upgrade_composer: false
 aegir_install_additional_packages: true
 aegir_additional_packages: []
-aegir_provision_repo: http://git.drupal.org/project/provision.git
-aegir_provision_version: 7.x-3.x
-aegir_provision_update: false
 aegir_http_service_type: apache
 aegir_platform_version: 7.x-3.x
 aegir_frontend_url: aegir.local
@@ -27,9 +34,19 @@ aegir_fix_permissions: false
 aegir_registry_rebuild: false
 aegir_login_link: false
 
+# Database
 aegir_db_password: "{{ mysql_root_password | default(_default_aegir_db_password) }}"
 aegir_db_user: "{{ mysql_root_username | default(_default_aegir_db_user) }}"
 aegir_db_host: 'localhost'
+
+# Hostmaster
+aegir_hostmaster_repo: http://git.drupal.org/project/hostmaster.git
+aegir_hostmaster_version: "{{ aegir_release }}"
+
+# Provision
+aegir_provision_repo: http://git.drupal.org/project/provision.git
+aegir_provision_version: 7.x-3.x
+aegir_provision_update: false
 
 # Drush
 aegir_install_drush: true

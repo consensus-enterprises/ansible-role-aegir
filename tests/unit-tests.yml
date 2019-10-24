@@ -11,6 +11,10 @@
 
   tasks:
 
+  - name: Include static variables, since we call task includes separately.
+    include_vars:
+      file: consensus.aegir/vars/main.yml
+
   - name: Include default variables, since we call task includes separately.
     include_vars:
       file: consensus.aegir/defaults/main.yml
@@ -37,3 +41,4 @@
   - include: unit-tests/vault.yml
   - include: unit-tests/custom-drush.yml
   - include: unit-tests/custom-provision.yml
+  - include: unit-tests/custom-modules.yml

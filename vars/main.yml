@@ -1,3 +1,14 @@
 ---
 _default_aegir_db_password: 'root'
 _default_aegir_db_user: 'root'
+_default_aegir_custom_module_repos:
+  aegir_objects: "http://git.drupal.org/project/aegir_objects.git"
+  hosting: "http://git.drupal.org/project/hosting.git"
+  hosting_deploy: "http://git.drupal.org/project/hosting_deploy.git"
+  hosting_site_audit: "http://git.drupal.org/project/hosting_site_audit.git"
+  hosting_monitor: "http://git.drupal.org/project/hosting_monitor.git"
+  hosting_report: "http://git.drupal.org/project/hosting_report.git"
+  hosting_skynet: "https://gitlab.com/consensus.enterprises/aegir/hosting_skynet.git"
+_default_aegir_release: '7.x-3.x'
+_default_aegir_contrib_modules:
+  - features
