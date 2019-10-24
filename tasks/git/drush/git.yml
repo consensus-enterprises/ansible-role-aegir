@@ -5,9 +5,9 @@
     repo: "{{ aegir_drush_source_repo }}"
     dest: "{{ aegir_drush_source_install_path }}"
     version: "{{ aegir_drush_source_install_version }}"
-    update: "{{ aegir_drush_keep_updated }}"
-    force: "{{ aegir_drush_force_update }}"
-    depth: "{{ aegir_drush_clone_depth }}"
+    update: "{{ aegir_drush_source_update }}"
+    force: "{{ aegir_drush_source_force_update }}"
+    depth: "{{ aegir_drush_source_clone_depth }}"
   register: drush_clone_result
   become: yes
 

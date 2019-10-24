@@ -1,7 +1,5 @@
 - name: Include Drush install tasks.
   include: ../../tasks/git/drush.yml
-  vars:
-    aegir_drush_install_method: git
 
 - name: Check that Drush is installed.
   shell: "drush status"

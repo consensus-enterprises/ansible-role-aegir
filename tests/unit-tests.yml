@@ -35,3 +35,5 @@
   - include: unit-tests/upgrade.yml
   - include: unit-tests/global.yml
   - include: unit-tests/vault.yml
+  - include: unit-tests/custom-drush.yml
+  - include: unit-tests/custom-provision.yml

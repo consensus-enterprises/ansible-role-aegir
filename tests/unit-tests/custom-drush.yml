@@ -1,0 +1,31 @@
+---
+
+- name: Include Drush deployment tasks.
+  include: ../../tasks/git/drush.yml
+  vars:
+    aegir_drush_install_method: git
+    aegir_drush_source_repo: https://github.com/drush-ops/drush.git
+    aegir_drush_source_install_version: "8.1.16"
+    aegir_drush_source_update: True
+
+- name: Check that our custom Drush is using the correct repo.
+  shell: "git remote show origin|grep 'Fetch URL:'|grep https://github.com/drush-ops/drush.git"
+  args:
+    chdir: "{{ aegir_drush_source_install_path }}"
+  changed_when: False
+  become: yes
+  become_user: "aegir"
+
+- name: Check that our custom Drush is using the correct branch/tag.
+  shell: "git symbolic-ref -q --short HEAD || git describe --tags --exact-match| grep 8.1.16"
+  args:
+    chdir: "{{ aegir_drush_source_install_path }}"
+  changed_when: False
+  become: yes
+  become_user: "aegir"
+
+- name: Test our custom Drush install
+  shell: "drush core-status|grep 'Drush version'|grep 8.1.16"
+  changed_when: False
+  # TODO:
+  # ensure that our custom drush is actually being used

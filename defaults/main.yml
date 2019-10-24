@@ -40,10 +40,9 @@ aegir_drush_source_repo: https://github.com/drush-ops/drush.git
 aegir_drush_source_install_bin_path: /usr/local/bin/drush
 aegir_drush_source_install_path: /usr/local/share/drush
 aegir_drush_source_install_version: "8.1.16"
-aegir_drush_keep_updated: false
-aegir_drush_force_update: false
-aegir_drush_force_composer_install: false
-aegir_drush_clone_depth: 1
+aegir_drush_source_update: false
+aegir_drush_source_force_update: false
+aegir_drush_source_clone_depth: 1
 
 aegir_manage_dependencies: true
 aegir_dependencies:

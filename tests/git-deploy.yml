@@ -24,7 +24,6 @@
     # This role
     - consensus.aegir
 
-
   tasks:
 
   - include: unit-tests/check-frontend.yml

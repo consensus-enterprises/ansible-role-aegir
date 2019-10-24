@@ -20,12 +20,12 @@
 
   # Because we are deleting it above, this step will write the Aegir Drush
   # makefile every time this test is executed; this is ok.
-- name: Deploy custom Aegir Drush makefile.
+- name: Deploy Aegir Drush makefile from template.
   include: ../../tasks/makefile.yml
   vars:
     aegir_generate_makefile: yes
 
-- name: Check that custom Aegir Drush makefile exists.
+- name: Check that Aegir Drush makefile from template exists.
   shell: "[ -f /etc/aegir/aegir.make.yml ]"
   changed_when: False
   become: yes

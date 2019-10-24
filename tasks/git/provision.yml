@@ -8,11 +8,11 @@
     version: "{{ aegir_provision_version }}"
   become: yes
   become_user: "{{ aegir_user }}"
+  register: aegir_provision_git_deploy_result
 
 - name: Clear Drush cache for Provision extension
   shell: drush @none cc drush
-  args:
-    creates: "{{ aegir_root }}/.drush/cache/"
   become: yes
   become_user: "{{ aegir_user }}"
+  when: aegir_provision_git_deploy_result.changed | bool
 

@@ -1,0 +1,32 @@
+---
+- name: Include Provision deployment tasks.
+  include: ../../tasks/git/provision.yml
+  vars:
+    aegir_provision_repo: 'https://gitlab.com/consensus.enterprises/aegir/provision.git'
+    aegir_provision_version: '7.x-3.x'
+    aegir_provision_update: True
+
+- name: Check that our custom Provision is using the correct repo.
+  shell: "git remote show origin|grep 'Fetch URL:'|grep https://gitlab.com/consensus.enterprises/aegir/provision.git"
+  args:
+    chdir: "{{ aegir_root }}/.drush/provision"
+  changed_when: False
+  become: yes
+  become_user: "aegir"
+
+- name: Check that our custom Provision is using the correct branch/tag.
+  shell: "git symbolic-ref -q --short HEAD || git describe --tags --exact-match| grep '7.x-3.x'"
+  args:
+    chdir: "{{ aegir_root }}/.drush/provision"
+  changed_when: False
+  become: yes
+  become_user: "aegir"
+
+- name: Test our custom Provision install
+  shell: "drush provision-verify --help"
+  changed_when: False
+  become: yes
+  become_user: "aegir"
+  # TODO:
+  # ensure that our custom Provision is actually being used
+
