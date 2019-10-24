@@ -1,0 +1,33 @@
+---
+
+- name: Deploy Aegir Drush makefile from template with updated contrib modules.
+  include: ../../tasks/makefile.yml
+  vars:
+    aegir_generate_makefile: yes
+    aegir_makefile_path: /tmp/aegir-contrib-test.make.yml
+    aegir_contrib_modules:
+      - token
+      - webform
+    aegir_contrib_module_versions:
+      token: 1.6
+
+- name: Check that one of our contrib module customizations was recorded in the generated Aegir Drush makefile.
+  shell: "grep 'webform' /tmp/aegir-contrib-test.make.yml"
+  changed_when: false
+
+- name: Build a platform using generated Aegir Drush makefile with updated contrib modules.
+  include: ../../tasks/git/platform.yml
+  vars:
+    # We set this to the current Unix timestamp to ensure a new platform is
+    # always built.
+    aegir_platform_version: "contrib-{{ ansible_facts.date_time.epoch }}"
+    aegir_makefile_path: /tmp/aegir-contrib-test.make.yml
+
+- name: Check that our contrib module is deployed at the correct version.
+  shell: "grep 'version' token.info|grep '1.6'"
+  args:
+    chdir: "{{ aegir_root }}/hostmaster-contrib-{{ ansible_facts.date_time.epoch }}/sites/all/modules/token"
+  changed_when: False
+  become: yes
+  become_user: "aegir"
+

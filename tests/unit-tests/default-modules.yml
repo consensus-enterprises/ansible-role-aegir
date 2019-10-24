@@ -1,0 +1,28 @@
+---
+
+- name: Deploy Aegir Drush makefile from template.
+  include: ../../tasks/makefile.yml
+  vars:
+    aegir_generate_makefile: yes
+    aegir_makefile_path: /tmp/aegir-default-test.make.yml
+
+- name: Check that one of our module customizations was recorded in the generated Aegir Drush makefile.
+  shell: "grep 'https://gitlab.com/consensus.enterprises/aegir/hosting_skynet.git' /tmp/aegir-default-test.make.yml"
+  changed_when: false
+
+- name: Build a platform using generated Aegir Drush makefile.
+  include: ../../tasks/git/platform.yml
+  vars:
+    # We set this to the current Unix timestamp to ensure a new platform is
+    # always built.
+    aegir_platform_version: "default-{{ ansible_facts.date_time.epoch }}"
+    aegir_makefile_path: /tmp/aegir-default-test.make.yml
+
+- name: Check that our custom module is using the correct branch/tag.
+  shell: "git symbolic-ref -q --short HEAD || git describe --tags --exact-match| grep 'master'"
+  args:
+    chdir: "{{ aegir_root }}/hostmaster-default-{{ ansible_facts.date_time.epoch }}/sites/all/modules/hosting_skynet"
+  changed_when: False
+  become: yes
+  become_user: "aegir"
+

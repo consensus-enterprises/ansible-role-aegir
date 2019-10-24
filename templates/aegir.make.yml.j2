@@ -25,7 +25,7 @@ projects:
     download:
       type: "git"
       url: {{ repo_url }}
-      branch: {{ aegir_custom_module_versions[module_name] | default(aegir_release) }}
+      branch: {{ (_default_aegir_custom_module_versions | combine(aegir_custom_module_versions))[module_name] }}
       working-copy: TRUE
   {% endfor %}
 

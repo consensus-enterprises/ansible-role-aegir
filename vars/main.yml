@@ -1,4 +1,5 @@
 ---
+_default_aegir_release: '7.x-3.x'
 _default_aegir_db_password: 'root'
 _default_aegir_db_user: 'root'
 _default_aegir_custom_module_repos:
@@ -9,6 +10,13 @@ _default_aegir_custom_module_repos:
   hosting_monitor: "http://git.drupal.org/project/hosting_monitor.git"
   hosting_report: "http://git.drupal.org/project/hosting_report.git"
   hosting_skynet: "https://gitlab.com/consensus.enterprises/aegir/hosting_skynet.git"
-_default_aegir_release: '7.x-3.x'
+_default_aegir_custom_module_versions:
+  aegir_objects: "{{ _default_aegir_release }}"
+  hosting: "{{ _default_aegir_release }}"
+  hosting_deploy: "{{ _default_aegir_release }}"
+  hosting_site_audit: "{{ _default_aegir_release }}"
+  hosting_monitor: "{{ _default_aegir_release }}"
+  hosting_report: "{{ _default_aegir_release }}"
+  hosting_skynet: 'master'
 _default_aegir_contrib_modules:
   - features

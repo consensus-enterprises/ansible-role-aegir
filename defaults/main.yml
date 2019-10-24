@@ -11,8 +11,7 @@ aegir_makefile_path: "{{ aegir_etc_path }}/{{ aegir_makefile_template | splitext
 # Aegir modules
 aegir_custom_module_repos: {}
 # These will default to the value of `aegir_release`.
-aegir_custom_module_versions:
-  hosting_skynet: master
+aegir_custom_module_versions: {}
 aegir_contrib_modules: []
 # These will default to '~', which will fetch the latest release.
 aegir_contrib_module_versions: {}

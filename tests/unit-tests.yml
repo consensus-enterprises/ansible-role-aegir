@@ -41,4 +41,6 @@
   - include: unit-tests/vault.yml
   - include: unit-tests/custom-drush.yml
   - include: unit-tests/custom-provision.yml
+  - include: unit-tests/default-modules.yml
+  - include: unit-tests/contrib-modules.yml
   - include: unit-tests/custom-modules.yml

@@ -1,12 +1,29 @@
 ---
 
-- name: Deploy Aegir Drush makefile from template.
+- name: Deploy Aegir Drush makefile from template updated with both overridden and additional module data, and an overridden profile.
   include: ../../tasks/makefile.yml
   vars:
     aegir_generate_makefile: yes
+    aegir_makefile_path: /tmp/aegir-custom-test.make.yml
+    aegir_hostmaster_repo: https://git.drupalcode.org/project/hostmaster.git
+    aegir_hostmaster_version: 7.x-3.161
+    aegir_custom_module_repos:
+      token: https://git.drupalcode.org/project/token
+      hosting: https://gitlab.com/consensus.enterprises/aegir/hosting
+    aegir_custom_module_versions:
+      token: 7.x-1.5
+      hosting: dev/consensus
 
-- name: Check that one of our module customizations was recorded in the generated Aegir Drush makefile.
-  shell: "grep 'https://gitlab.com/consensus.enterprises/aegir/hosting_skynet.git' /etc/aegir/aegir.make.yml"
+- name: Check that our additional module was recorded in the generated Aegir Drush makefile.
+  shell: "grep 'https://git.drupalcode.org/project/token' /tmp/aegir-custom-test.make.yml"
+  changed_when: false
+
+- name: Check that our overridden module was recorded in the generated Aegir Drush makefile.
+  shell: "grep 'https://gitlab.com/consensus.enterprises/aegir/hosting' /tmp/aegir-custom-test.make.yml"
+  changed_when: false
+
+- name: Check that our overridden profile was recorded in the generated Aegir Drush makefile.
+  shell: "grep 'https://git.drupalcode.org/project/hostmaster' /tmp/aegir-custom-test.make.yml"
   changed_when: false
 
 - name: Build a platform using generated Aegir Drush makefile.
@@ -14,20 +31,30 @@
   vars:
     # We set this to the current Unix timestamp to ensure a new platform is
     # always built.
-    aegir_platform_version: "default-{{ ansible_facts.date_time.epoch }}"
+    aegir_platform_version: "custom-{{ ansible_facts.date_time.epoch }}"
+    aegir_makefile_path: /tmp/aegir-custom-test.make.yml
 
-- name: Check that our custom module is using the correct branch/tag.
-  shell: "git symbolic-ref -q --short HEAD || git describe --tags --exact-match| grep 'master'"
+- name: Check that our additional module is using the correct branch/tag.
+  shell: "git symbolic-ref -q --short HEAD || git describe --tags --exact-match| grep '7.x-1.5'"
   args:
-    chdir: "{{ aegir_root }}/hostmaster-default-{{ ansible_facts.date_time.epoch }}/sites/all/modules/hosting_skynet"
+    chdir: "{{ aegir_root }}/hostmaster-custom-{{ ansible_facts.date_time.epoch }}/sites/all/modules/token"
   changed_when: False
   become: yes
   become_user: "aegir"
 
-# TODO: tests to write
-#
-# - perform an include, with passed-in vars 
-# - then check that we can configure custom repos per module
-# - try adding a brand new module, too (same test? separate one?)
-# - perform an include, with passed-in new release var 
-# - then check that this customized version was configured in makefile
+- name: Check that our overridden module is using the correct branch/tag.
+  shell: "git symbolic-ref -q --short HEAD || git describe --tags --exact-match| grep 'dev/consensus'"
+  args:
+    chdir: "{{ aegir_root }}/hostmaster-custom-{{ ansible_facts.date_time.epoch }}/sites/all/modules/hosting"
+  changed_when: False
+  become: yes
+  become_user: "aegir"
+
+- name: Check that our overridden profile is using the correct branch/tag.
+  shell: "git symbolic-ref -q --short HEAD || git describe --tags --exact-match| grep '7.x-3.161'"
+  args:
+    chdir: "{{ aegir_root }}/hostmaster-custom-{{ ansible_facts.date_time.epoch }}/profiles/hostmaster"
+  changed_when: False
+  become: yes
+  become_user: "aegir"
+
