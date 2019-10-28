@@ -1,5 +1,5 @@
 - name: Include Nginx setup tasks.
-  include: ../../tasks/git/setup-nginx.yml
+  include: ../../../tasks/git/setup-nginx.yml
 
 - name: Check that Nginx config file exists.
   shell: "[ -L /etc/nginx/conf.d/aegir.conf ]"

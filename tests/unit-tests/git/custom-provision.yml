@@ -1,6 +1,6 @@
 ---
 - name: Include Provision deployment tasks.
-  include: ../../tasks/git/provision.yml
+  include: ../../../tasks/git/provision.yml
   vars:
     aegir_provision_repo: 'https://gitlab.com/consensus.enterprises/aegir/provision.git'
     aegir_provision_version: '7.x-3.x'

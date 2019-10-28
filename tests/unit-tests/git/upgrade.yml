@@ -4,20 +4,20 @@
   block:
 
   - name: Deploy new Hostmaster platform.
-    include: ../../tasks/git/platform.yml
+    include: ../../../tasks/git/platform.yml
     vars:
       # We set this to the current Unix timestamp to ensure a new platform is
       # always built.
       aegir_platform_version: "{{ ansible_facts.date_time.epoch }}"
   - name: Include Aegir front-end install tasks.
-    include: ../../tasks/git/install.yml
+    include: ../../../tasks/git/install.yml
     vars:
       aegir_platform_version: "{{ ansible_facts.date_time.epoch }}"
   - name: Check that Aegir front-end install task is idempotent.
     assert:
       that: aegir_install_task_result.changed == False
   - name: Include Aegir front-end upgrade tasks.
-    include: ../../tasks/git/upgrade.yml
+    include: ../../../tasks/git/upgrade.yml
     vars:
       aegir_platform_version: "{{ ansible_facts.date_time.epoch }}"
   - name: Check that Aegir front-end upgrade task ran.
@@ -34,7 +34,7 @@
     become: yes
     become_user: "aegir"
   - name: Include Aegir front-end upgrade tasks (again).
-    include: ../../tasks/git/upgrade.yml
+    include: ../../../tasks/git/upgrade.yml
     vars:
       aegir_platform_version: "{{ ansible_facts.date_time.epoch }}"
   - name: Check that Aegir front-end upgrade task is idempotent.

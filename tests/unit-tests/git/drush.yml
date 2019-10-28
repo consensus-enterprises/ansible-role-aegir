@@ -1,5 +1,5 @@
 - name: Include Drush install tasks.
-  include: ../../tasks/git/drush.yml
+  include: ../../../tasks/git/drush.yml
 
 - name: Check that Drush is installed.
   shell: "drush status"

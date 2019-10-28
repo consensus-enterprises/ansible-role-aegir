@@ -1,7 +1,7 @@
 ---
 
 - name: Include Drush deployment tasks.
-  include: ../../tasks/git/drush.yml
+  include: ../../../tasks/git/drush.yml
   vars:
     aegir_drush_install_method: git
     aegir_drush_source_repo: https://github.com/drush-ops/drush.git

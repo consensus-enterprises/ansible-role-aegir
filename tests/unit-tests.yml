@@ -26,21 +26,33 @@
     set_fact:
       aegir_http_service_type: nginx
 
+  # Common tasks
   - include: unit-tests/dependencies.yml
-  - include: unit-tests/user.yml
-  - include: unit-tests/drush.yml
-  - include: unit-tests/provision.yml
-  - include: unit-tests/nginx.yml
-  - include: unit-tests/sudo.yml
   - include: unit-tests/makefile.yml
+
+  # Debian-specific
   - include: unit-tests/debconf.yml
-  - include: unit-tests/platform.yml
-  - include: unit-tests/install.yml
-  - include: unit-tests/upgrade.yml
-  - include: unit-tests/global.yml
-  - include: unit-tests/vault.yml
-  - include: unit-tests/custom-drush.yml
-  - include: unit-tests/custom-provision.yml
+
+  # Git-build-specific
+  - include: unit-tests/git/user.yml
+  - include: unit-tests/git/drush.yml
+  - include: unit-tests/git/provision.yml
+  - include: unit-tests/git/nginx.yml
+  - include: unit-tests/git/sudo.yml
+  - include: unit-tests/git/platform.yml
+  - include: unit-tests/git/install.yml
+  - include: unit-tests/git/upgrade.yml
+  - include: unit-tests/git/custom-drush.yml
+  - include: unit-tests/git/custom-provision.yml
+
+  # Custom front-end modules
   - include: unit-tests/default-modules.yml
   - include: unit-tests/contrib-modules.yml
   - include: unit-tests/custom-modules.yml
+
+  # Miscellaneous
+  - include: unit-tests/global.yml
+  - include: unit-tests/vault.yml
+
+  # Skynet
+  # TBD
