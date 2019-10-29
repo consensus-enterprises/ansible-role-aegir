@@ -7,7 +7,7 @@
   become: yes
 
 - name: Use default Aegir Drush makefile.
-  include: ../../tasks/makefile.yml
+  include: ../../../tasks/makefile.yml
 
 - name: Confirm custom Aegir Drush makefile does not exist.
   shell: "[ ! -f /etc/aegir/aegir.make.yml ]"
@@ -21,7 +21,7 @@
   # Because we are deleting it above, this step will write the Aegir Drush
   # makefile every time this test is executed; this is ok.
 - name: Deploy Aegir Drush makefile from template.
-  include: ../../tasks/makefile.yml
+  include: ../../../tasks/makefile.yml
   vars:
     aegir_generate_makefile: yes
 

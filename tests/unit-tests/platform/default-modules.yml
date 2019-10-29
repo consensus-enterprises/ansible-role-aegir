@@ -1,7 +1,7 @@
 ---
 
 - name: Deploy Aegir Drush makefile from template.
-  include: ../../tasks/makefile.yml
+  include: ../../../tasks/makefile.yml
   vars:
     aegir_generate_makefile: yes
     aegir_makefile_path: /tmp/aegir-default-test.make.yml
@@ -11,7 +11,7 @@
   changed_when: false
 
 - name: Build a platform using generated Aegir Drush makefile.
-  include: ../../tasks/git/platform.yml
+  include: ../../../tasks/git/platform.yml
   vars:
     # We set this to the current Unix timestamp to ensure a new platform is
     # always built.

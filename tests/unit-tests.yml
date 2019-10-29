@@ -28,7 +28,7 @@
 
   # Common tasks
   - include: unit-tests/dependencies.yml
-  - include: unit-tests/makefile.yml
+  - include: unit-tests/platform/makefile.yml
 
   # Debian-specific
   - include: unit-tests/debconf.yml
@@ -46,9 +46,9 @@
   - include: unit-tests/git/custom-provision.yml
 
   # Custom front-end modules
-  - include: unit-tests/default-modules.yml
-  - include: unit-tests/contrib-modules.yml
-  - include: unit-tests/custom-modules.yml
+  - include: unit-tests/platform/default-modules.yml
+  - include: unit-tests/platform/contrib-modules.yml
+  - include: unit-tests/platform/custom-modules.yml
 
   # Miscellaneous
   - include: unit-tests/global.yml
