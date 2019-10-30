@@ -1,0 +1,6 @@
+---
+- name: Check that Skynet is running.
+  shell: "service aegir-skynet status | egrep 'running'"
+  changed_when: False
+  become: yes
+

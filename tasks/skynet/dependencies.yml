@@ -1,0 +1,15 @@
+---
+
+- name: Ensure Skynet's dependencies are installed.
+  apt:
+    state: present
+    name: "{{ aegir_skynet_dependencies }}"
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+- name: Install Cement
+  pip:
+    name: cement
+    state: present
+    executable: pip3
+  become: yes

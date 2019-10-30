@@ -1,0 +1,10 @@
+---
+- name: Include tasks to deploy and start the Skynet service.
+  include: ../tasks/skynet/service.yml
+
+- name: Check that systemd config file exists.
+  shell: "[ -f /etc/systemd/system/aegir-skynet.service ]"
+  changed_when: False
+  become: yes
+
+# TODO: look for log output where we expect to find it

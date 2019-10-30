@@ -1,0 +1,17 @@
+---
+- name: Include Skynet dependency tasks.
+  include: skynet/dependencies.yml
+
+- name: Include Skynet sudo tasks.
+  include: skynet/sudo.yml
+
+- name: Include Skynet installation and deployment tasks.
+  include: skynet/install.yml
+
+- name: Include tasks for working around App-armour.
+  include: skynet/app-armour.yml
+
+- name: Include tasks for launching Skynet Systemd service.
+  include: skynet/service.yml
+
+# TODO: clean up legacy hosting queue daemon and supervisord config files if they exist

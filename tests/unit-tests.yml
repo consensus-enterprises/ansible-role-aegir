@@ -55,4 +55,9 @@
   - include: unit-tests/vault.yml
 
   # Skynet
-  # TBD
+  # TODO: consider testing tasks/skynet/app-armour.yml and stanardizing spelling of armour/armor :D
+  - include: unit-tests/skynet/dependencies.yml
+  - include: unit-tests/skynet/sudo.yml
+  - include: unit-tests/skynet/install.yml
+  - include: unit-tests/skynet/service.yml
+  - include: unit-tests/check-skynet.yml

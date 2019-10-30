@@ -57,11 +57,15 @@
 - include: registry_rebuild.yml
   when: aegir_registry_rebuild | bool
 
-- name: Ensure Hosting is recognized as enabled
+- name: Ensure Hosting is recognized as enabled.
   shell: drush @none cc drush && drush @hostmaster cc drush
   become: yes
   become_user: "{{ aegir_user }}"
   changed_when: False
+
+- name: Deploy Skynet queue daemon.
+  include: skynet.yml
+  when: aegir_skynet_enable | bool
 
 - include: login_link.yml
   when: aegir_login_link | bool

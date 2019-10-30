@@ -1,0 +1,11 @@
+---
+
+- name: Enable Skynet module
+  include: ../extra-module.yml
+  vars:
+    aegir_extra_module: hosting_skynet
+
+- name: Wait until the Skynet script is deployed.
+  wait_for:
+    path: "{{ default_aegir_skynet_bin_path }}"
+

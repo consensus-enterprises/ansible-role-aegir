@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Aegir Skynet
+After=mysql.service
+
+[Service]
+ExecStart={{ aegir_skynet_service_command }}
+User={{ aegir_user }}
+Restart=on-failure
+RestartSec=3
+StartLimitInterval=60
+StartLimitBurst=5
+Environment="HOME={{ aegir_root }}"
+Environment="USER={{ aegir_user }}"
+StandardOutput=file:/var/log/aegir-skynet.log
+StandardError=file:/var/log/aegir-skynet.err
+
+[Install]
+WantedBy=multi-user.target
+

@@ -1,0 +1,7 @@
+---
+- name: Allow 'aegir' user to restart Skynet queue
+  template:
+    dest: "/etc/sudoers.d/{{ aegir_user }}-skynet"
+    src: aegir-skynet-sudoers.j2
+    mode: 0440
+  become: yes

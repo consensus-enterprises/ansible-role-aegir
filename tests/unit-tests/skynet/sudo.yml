@@ -1,0 +1,9 @@
+---
+- name: Setup sudo for Skynet service.
+  include: ../tasks/skynet/sudo.yml
+
+- name: Check that sudo config file exists.
+  shell: "[ -f /etc/sudoers.d/aegir-skynet ]"
+  changed_when: False
+  become: yes
+

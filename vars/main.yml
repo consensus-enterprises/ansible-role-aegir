@@ -20,3 +20,5 @@ _default_aegir_custom_module_versions:
   hosting_skynet: 'master'
 _default_aegir_contrib_modules:
   - features
+default_aegir_skynet_bin_path: "{{ aegir_root }}/config/skynet/skynet.py"
+

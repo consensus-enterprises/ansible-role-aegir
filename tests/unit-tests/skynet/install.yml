@@ -1,0 +1,13 @@
+---
+- name: Include tasks to enable Skynet module.
+  include: ../tasks/skynet/install.yml
+
+- name: Check that Skynet module is enabled.
+  shell: "drush @hostmaster pm-info --fields=status --format=list hosting_skynet | egrep 'enabled'"
+  changed_when: False
+  become: yes
+  become_user: aegir
+
+- name: Check that Skynet script is deployed.
+  shell: "[ -f /var/aegir/config/skynet/skynet.py ]"
+  changed_when: False
