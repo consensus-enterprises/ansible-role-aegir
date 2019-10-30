@@ -20,7 +20,6 @@ aegir_release: "{{ _default_aegir_release }}"
 aegir_root: /var/aegir
 aegir_user: aegir
 aegir_web_group: www-data
-aegir_php_version: 5
 aegir_upgrade_composer: false
 aegir_install_additional_packages: true
 aegir_additional_packages: []

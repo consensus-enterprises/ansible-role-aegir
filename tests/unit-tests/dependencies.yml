@@ -1,10 +1,8 @@
 - name: Include dependency installation tasks.
   include: ../../tasks/dependencies.yml
-  vars:
-    aegir_php_version: 7
 
 - name: Check that dependency packages are installed
   shell: "dpkg -l|grep '^ii  {{ item }}'"
-  loop: "{{ aegir_dependencies + aegir_dependencies_php7 + aegir_dependencies_nginx_php7 }}"
+  loop: "{{ aegir_dependencies + aegir_dependencies_nginx }}"
   changed_when: False
 

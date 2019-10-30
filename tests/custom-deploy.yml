@@ -14,7 +14,6 @@
     # This role
     aegir_http_service_type: nginx
     aegir_install_method: git
-    aegir_php_version: 7
     aegir_skynet_enable: true
     # Custom Drush
     aegir_drush_install_method: git

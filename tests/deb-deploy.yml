@@ -12,7 +12,6 @@
     php_set_cli_memory_limit: True
     # This role
     aegir_http_service_type: nginx
-    aegir_php_version: 7
 
   roles:
     # Dependencies
