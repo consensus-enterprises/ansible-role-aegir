@@ -3,14 +3,14 @@
 
 - name: Ensure Aegir's dependencies are installed.
   include: dependencies.yml
-  when: (aegir_manage_dependencies == true) and (ansible_os_family == 'Debian')
+  when: aegir_manage_dependencies | bool
 
 - name: Install additional packages.
   apt:
     name: "{{ aegir_additional_packages }}"
     state: present
   become: yes
-  when: (aegir_install_additional_packages == true) and (ansible_os_family == 'Debian')
+  when: aegir_install_additional_packages | bool
 
 - name: Default Aegir database password to MySQL root password
   set_fact:

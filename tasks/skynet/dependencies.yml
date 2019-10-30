@@ -5,7 +5,6 @@
     state: present
     name: "{{ aegir_skynet_dependencies }}"
   become: yes
-  when: ansible_os_family == 'Debian'
 
 - name: Install Cement
   pip:
