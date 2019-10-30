@@ -13,8 +13,9 @@ StartLimitInterval=60
 StartLimitBurst=5
 Environment="HOME={{ aegir_root }}"
 Environment="USER={{ aegir_user }}"
-StandardOutput=file:/var/log/aegir-skynet.log
-StandardError=file:/var/log/aegir-skynet.err
+# TODO: Figure out how to properly write/append to dedicated log files.
+#StandardOutput=file:/var/log/aegir-skynet.log
+#StandardError=file:/var/log/aegir-skynet.err
 
 [Install]
 WantedBy=multi-user.target

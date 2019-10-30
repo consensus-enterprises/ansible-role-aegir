@@ -14,7 +14,6 @@
     # This role
     aegir_http_service_type: nginx
     aegir_install_method: git
-    aegir_skynet_enable: true
 
   roles:
     # Dependencies
@@ -27,4 +26,3 @@
   tasks:
 
   - include: unit-tests/check-frontend.yml
-  - include: unit-tests/check-skynet.yml

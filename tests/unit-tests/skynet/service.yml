@@ -7,4 +7,5 @@
   changed_when: False
   become: yes
 
-# TODO: look for log output where we expect to find it
+- name: Confirm skynet service is logging output.
+  shell: "journalctl -u aegir-skynet|grep 'INFO: Waiting for next task.'"
