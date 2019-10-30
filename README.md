@@ -1,6 +1,6 @@
 # Ansible Role: Aegir
 
-[![Build Status](https://travis-ci.org/ergonlogic/ansible-role-aegir.svg?branch=master)](https://travis-ci.org/ergonlogic/ansible-role-aegir)
+[![pipeline status](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/badges/master/pipeline.svg)](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/commits/master)
 
 Installs Aegir, a control panel for deploying and managing large networks of Drupal sites.
 
