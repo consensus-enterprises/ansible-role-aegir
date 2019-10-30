@@ -13,5 +13,14 @@
   shell: "drush @hostmaster --yes en {{ aegir_extra_module }} --no-verify --strict=0"
   become: True
   become_user: "{{ aegir_user }}"
+  register: enable_extra_module_result
   when: (aegir_extra_module_enabled.rc is defined) and (aegir_extra_module_enabled.rc != 0)
-  notify: Verify Aegir front-end
+
+- name: Verify Aegir front-end
+  block:
+  - shell: drush @hostmaster cc drush
+  - shell: drush @hostmaster hosting-task @hostmaster verify --force
+  - shell: drush @hostmaster hosting-tasks
+  become: yes
+  become_user: "{{ aegir_user }}"
+  when: enable_extra_module_result.changed | bool
