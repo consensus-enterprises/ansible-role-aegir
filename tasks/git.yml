@@ -30,5 +30,8 @@
   include: git/platform.yml
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#44-running-hostmaster-install
-- name: Install Aegir front-end
+- name: Install Aegir front-end.
   include: git/install.yml
+
+- name: Upgrade Aegir front-end.
+  include: git/upgrade.yml

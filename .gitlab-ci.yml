@@ -45,6 +45,15 @@ custom-deploy:
   variables:
     ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
 
+custom-upgrade:
+  <<: *test-defaults
+  variables:
+    ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
+  script:
+    - source d
+    - make ansible-role-test
+    - make ansible-role-test ANSIBLE_TEST_PLAYBOOK=tests/upgrade.yml
+
 deb-deploy:
   <<: *test-defaults
   variables:
