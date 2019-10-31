@@ -8,6 +8,8 @@
     nginx_remove_default_vhost: True
     php_enable_php_fpm: True
     php_enable_webserver: False
+    php_cli_memory_limit: "2048M"
+    php_set_cli_memory_limit: True
     # This role
     aegir_http_service_type: nginx
 
