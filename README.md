@@ -11,10 +11,10 @@ supports apt) should work, too.
 
 A MySQL server is required. This server can be installed on the same machine,
 or a separate one (hence why this isn't listed as a dependency). See
-aegir_mysql_* variables, below.
+`aegir_mysql_*` variables, below.
 
 A web server configured with PHP is required; Apache (the default) and Nginx
-are currently supported (see aegir_http_service_type variable, below). Apt
+are currently supported (see `aegir_http_service_type` variable, below). Apt
 package(s) for the selected server will be installed if not already present.
 
 ## Role Variables
@@ -23,11 +23,11 @@ Available variables are listed below, along with default values (see `defaults/m
 
     aegir_db_username: "{{ mysql_root_username }}"
 
-The name of the Aegir database user. Defaults to the value of mysql_root_username.
+The name of the Aegir database user. Defaults to the value of `mysql_root_username`.
 
     aegir_db_password: "{{ mysql_root_password }}"
 
-The password for the Aegir database user. Defaults to the value of mysql_root_password.
+The password for the Aegir database user. Defaults to the value of `mysql_root_password`.
 
 ## Role Tasks
 
