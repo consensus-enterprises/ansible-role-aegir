@@ -6,57 +6,32 @@ Installs the [Aegir](https://www.aegirproject.org/) hosting system, a control pa
 
 ## Requirements
 
-Ubuntu bionic is the currently supported OS version. Debian (or any OS that
-supports apt) should work, too.
+Ubuntu Bionic (18.04) is the currently supported OS version. Debian (or any OS that
+supports apt) should work, too, but YMMV.
 
 A MySQL server is required. This server can be installed on the same machine,
-or a separate one (hence why this isn't listed as a dependency). See
-`aegir_mysql_*` variables, below.
+or a separate one (hence why this isn't listed as a dependency). See below for
+[an example](#example-playbook) of how to install MySQL using the
+[geerlingguy.mysql](https://github.com/geerlingguy/ansible-role-mysql) role.
+For details on configuring this role to talk to local or remote MySQL servers,
+see the `aegir_mysql_*` [role
+variables](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/blob/master/defaults/main.yml).
 
-A web server configured with PHP is required; Apache (the default) and Nginx
-are currently supported (see `aegir_http_service_type` variable, below). Apt
-package(s) for the selected server will be installed if not already present.
+For further details regarding installation of Aegir, see the relevant [Aegir documentation](https://docs.aegirproject.org/install/#system-requirements).
 
 ## Role Variables
 
-Available variables are listed below, along with default values (see `defaults/main.yml`):
-
-    aegir_db_username: "{{ mysql_root_username }}"
-
-The name of the Aegir database user. Defaults to the value of `mysql_root_username`.
-
-    aegir_db_password: "{{ mysql_root_password }}"
-
-The password for the Aegir database user. Defaults to the value of `mysql_root_password`.
-
-## Role Tasks
-
-This role provides various stand-alone task files in the tasks/ directory;
-although these could be executed separately, the intention is to use this role
-for end-to-end Aegir installation from scratch. See the [Aegir project
-documentation](https://docs.aegirproject.org/) to learn more about everyday
-Aegir operations.
-
-## Dependencies
-
-For installation from git:
-
-  * See Requirements, above
-  * See dependencies listed under the various *_dependencies vars in defaults/main.yml 
-
-Additionally, for .deb installation:
-
-  * apt
-  * debconf
+The default Debian package install should suffice in the majority of cases.
+However, this role allows for extensive customization of all aspects of the
+Aegir install process via role variables. For more details, see
+[`defaults/main.yml`](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/blob/master/defaults/main.yml).
 
 ## Example Playbook
 
 ```
-- hosts: servers
-
-  vars:
-    drush_install_from_source: True         # optional
-    drush_source_install_version: "8.1.16"  # optional
+---
+- name: "Default Aegir install via Debian package."
+  hosts: all
 
   roles:
     - geerlingguy.mysql
@@ -69,16 +44,16 @@ Additionally, for .deb installation:
       include_role:
         name: consensus.aegir
         tasks_from: login_link.yml
-
-    # optional
-    - name: Replace package-installed Drush with the executable from the source repo.
-      include_role:
-        name: consensus.aegir
-        tasks_from: override_drush.yml
 ```
 
 After the playbook runs, the Aegir front-end site will be available, as will
 the Drush extensions (Provision, et. al.) that do the heavy lifting.
+
+See [the various included test playbooks](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/tree/master/tests) for examples of other ways this role can be configured:
+
+* [deb-nginx.yml](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/blob/master/tests/deb-nginx.yml): Aegir Debian package build with Nginx.
+* [git-deploy.yml](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/blob/master/tests/git-deploy.yml): End-to-end Aegir build from git source.
+* [custom-deploy.yml](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/blob/master/tests/custom-deploy.yml): End-to-end Aegir build from source, with custom git repos and versions (for Drush, Provision, etc.)
 
 ## License
 
@@ -86,6 +61,6 @@ the Drush extensions (Provision, et. al.) that do the heavy lifting.
 
 ## Author Information
 
-This role was originally created in 2015 by [Christopher Gervais](http://ergonlogic.com/), lead maintainer of the [Aegir Hosting System](http://www.aegirproject.org).
+This role was originally created in 2015 by [Christopher Gervais](https://consensus.enterprises/team/christopher/), lead maintainer of the [Aegir Hosting System](http://www.aegirproject.org).
 
 It has also had input from [Dan Friedman](https://consensus.enterprises/team/dan/) and other folks at [Consensus Enterprises](https://consensus.enterprises).

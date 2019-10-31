@@ -1,0 +1,15 @@
+---
+- name: "Default Aegir install via Debian package."
+  hosts: all
+
+  roles:
+    - geerlingguy.mysql
+    - consensus.aegir
+
+  tasks: 
+
+    # optional
+    - name: Generate and print a one-time login link after Aegir installation.
+      include_role:
+        name: consensus.aegir
+        tasks_from: login_link.yml

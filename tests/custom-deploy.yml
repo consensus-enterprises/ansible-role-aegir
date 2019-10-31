@@ -1,5 +1,5 @@
 ---
-- name: "End-to-end custom code build playbook."
+- name: "End-to-end Aegir build from source, with custom git repos and versions."
   hosts: all
 
   vars:

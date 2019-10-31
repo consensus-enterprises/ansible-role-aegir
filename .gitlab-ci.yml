@@ -54,8 +54,13 @@ custom-upgrade:
     - make ansible-role-test
     - make ansible-role-test ANSIBLE_TEST_PLAYBOOK=tests/upgrade.yml
 
-deb-deploy:
+deb-default:
   <<: *test-defaults
   variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/deb-deploy.yml
+    ANSIBLE_TEST_PLAYBOOK: tests/deb-default.yml
+
+deb-nginx:
+  <<: *test-defaults
+  variables:
+    ANSIBLE_TEST_PLAYBOOK: tests/deb-nginx.yml
 

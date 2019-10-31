@@ -1,15 +1,13 @@
 ---
-- name: "End-to-end Debian package build playbook."
+- name: "Aegir Debian package build with Nginx."
   hosts: all
 
   vars:
     # Dependencies
     nginx_manage_config: False
     nginx_remove_default_vhost: True
-    php_cli_memory_limit: "2048M"
     php_enable_php_fpm: True
     php_enable_webserver: False
-    php_set_cli_memory_limit: True
     # This role
     aegir_http_service_type: nginx
 
