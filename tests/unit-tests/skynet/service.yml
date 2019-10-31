@@ -1,11 +1,13 @@
 ---
-- name: Include tasks to deploy and start the Skynet service.
-  include: ../tasks/skynet/service.yml
-
-- name: Check that systemd config file exists.
-  shell: "[ -f /etc/systemd/system/aegir-skynet.service ]"
-  changed_when: False
-  become: yes
-
-- name: Confirm skynet service is logging output.
-  shell: "journalctl -u aegir-skynet|grep 'INFO: Waiting for next task.'"
+- name: Allow live Skynet testing to be disabled in CI.
+  # see: https://gitlab.com/gitlab-org/gitlab-runner/issues/3270
+  when: aegir_skynet_enable | bool
+  block:
+  - name: Include tasks to deploy and start the Skynet service.
+    include: ../tasks/skynet/service.yml
+  - name: Check that systemd config file exists.
+    shell: "[ -f /etc/systemd/system/aegir-skynet.service ]"
+    changed_when: False
+    become: yes
+  - name: Confirm skynet service is logging output.
+    shell: "journalctl -u aegir-skynet|grep 'INFO: Waiting for next task.'"

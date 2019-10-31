@@ -1,6 +1,10 @@
 ---
-- name: Check that Skynet is running.
-  shell: "service aegir-skynet status | egrep 'running'"
-  changed_when: False
-  become: yes
+- name: Allow live Skynet testing to be disabled in CI.
+  # see: https://gitlab.com/gitlab-org/gitlab-runner/issues/3270
+  when: aegir_skynet_enable | bool
+  block:
+  - name: Check that Skynet is running.
+    shell: "service aegir-skynet status | egrep 'running'"
+    changed_when: False
+    become: yes
 
