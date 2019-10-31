@@ -32,14 +32,14 @@
       hosting: https://gitlab.com/consensus.enterprises/aegir/hosting
     aegir_custom_module_versions:
       hosting: dev/consensus
-    # This upgrade test.    
+    # This upgrade test.
     aegir_platform_version: upgraded-platform
 
   roles:
     # Dependencies
-    - geerlingguy.mysql
-    - geerlingguy.nginx
-    - geerlingguy.php
+#    - geerlingguy.mysql
+#    - geerlingguy.nginx
+#    - geerlingguy.php
     # This role
     - consensus.aegir
 
