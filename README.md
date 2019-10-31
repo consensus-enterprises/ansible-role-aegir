@@ -2,15 +2,20 @@
 
 [![pipeline status](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/badges/master/pipeline.svg)](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/commits/master)
 
-Installs Aegir, a control panel for deploying and managing large networks of Drupal sites.
+Installs the [Aegir](https://www.aegirproject.org/) hosting system, a control panel for deploying and managing large networks of Drupal sites.
 
 ## Requirements
 
+Ubuntu bionic is the currently supported OS version. Debian (or any OS that
+supports apt) should work, too.
+
 A MySQL server is required. This server can be installed on the same machine,
-or a separate one (hence why this isn't listed as a dependency.) See the
-'Example Playbook' section below for a simple method of installing a mysql
-server with Ansible. If this role is not present, then the
-`mysql_root_username`and `mysql_root_password` variables must be set.
+or a separate one (hence why this isn't listed as a dependency). See
+aegir_mysql_* variables, below.
+
+A web server configured with PHP is required; Apache (the default) and Nginx
+are currently supported (see aegir_http_service_type variable, below). Apt
+package(s) for the selected server will be installed if not already present.
 
 ## Role Variables
 
@@ -26,16 +31,23 @@ The password for the Aegir database user. Defaults to the value of mysql_root_pa
 
 ## Role Tasks
 
-This role provides some stand-alone tasks to:
-
-* Generate and print a one-time login link for the installed Aegir system;
-* Override the Drush Binary with an alternative from the source repo.
-
-See the Example Playbook, below.
+This role provides various stand-alone task files in the tasks/ directory;
+although these could be executed separately, the intention is to use this role
+for end-to-end Aegir installation from scratch. See the [Aegir project
+documentation](https://docs.aegirproject.org/) to learn more about everyday
+Aegir operations.
 
 ## Dependencies
 
-- ergonlogic.drush (Installs Drush).
+For installation from git:
+
+  * See Requirements, above
+  * See dependencies listed under the various *_dependencies vars in defaults/main.yml 
+
+Additionally, for .deb installation:
+
+  * apt
+  * debconf
 
 ## Example Playbook
 
@@ -49,7 +61,6 @@ See the Example Playbook, below.
   roles:
     - geerlingguy.mysql
     - consensus.aegir
-    - geerlingguy.drush  #optional
 
   tasks: 
 
@@ -71,8 +82,10 @@ the Drush extensions (Provision, et. al.) that do the heavy lifting.
 
 ## License
 
-MIT / BSD
+[GNU AGPLv3](https://www.gnu.org/licenses/agpl-3.0.en.html)
 
 ## Author Information
 
-This role was created in 2015 by [Christopher Gervais](http://ergonlogic.com/), lead maintainer of the [Aegir Hosting System](http://www.aegirproject.org).
+This role was originally created in 2015 by [Christopher Gervais](http://ergonlogic.com/), lead maintainer of the [Aegir Hosting System](http://www.aegirproject.org).
+
+It has also had input from [Dan Friedman](https://consensus.enterprises/team/dan/) and other folks at [Consensus Enterprises](https://consensus.enterprises).
