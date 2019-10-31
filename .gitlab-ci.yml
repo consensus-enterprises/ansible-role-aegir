@@ -59,7 +59,7 @@ custom-upgrade:
   script:
     - source d
     - make ansible-role-test
-    - make ansible-role-test ANSIBLE_TEST_PLAYBOOK=tests/upgrade.yml
+    - make ansible-role-test EXTRA_VARS="${EXTRA_VARS} aegir_platform_version=upgraded-platform"
 
 unit-tests: 
   <<: *test-defaults
