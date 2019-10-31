@@ -10,9 +10,9 @@ variables:
   ANSIBLE_CONFIG: ansible.cfg
   DEBIAN_FRONTEND: noninteractive
 
-deb-default: &test-defaults
+deb-nginx:
   variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/deb-default.yml
+    ANSIBLE_TEST_PLAYBOOK: tests/deb-nginx.yml
   stage: test
   before_script:
     # Install Git and GNU Make
@@ -34,36 +34,4 @@ deb-default: &test-defaults
   script:
     - source d
     - make ansible-role-test #TODO: notify is busted somehow, no time to fix; make -s ntfy-ci NOTIFY_CI_RESULT=$?
-
-deb-nginx:
-  <<: *test-defaults
-  variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/deb-nginx.yml
-
-git-deploy:
-  <<: *test-defaults
-  variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/git-deploy.yml
-
-custom-deploy:
-  <<: *test-defaults
-  variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
-    EXTRA_VARS: aegir_skynet_enable=False
-
-custom-upgrade:
-  <<: *test-defaults
-  variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
-    EXTRA_VARS: aegir_skynet_enable=False
-  script:
-    - source d
-    - make ansible-role-test
-    - make ansible-role-test EXTRA_VARS="${EXTRA_VARS} aegir_platform_version=upgraded-platform"
-
-unit-tests: 
-  <<: *test-defaults
-  variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/unit-tests.yml 
-    EXTRA_VARS: aegir_skynet_enable=False
 
