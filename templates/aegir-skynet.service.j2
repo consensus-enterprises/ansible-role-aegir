@@ -3,14 +3,14 @@
 [Unit]
 Description=Aegir Skynet
 After=mysql.service
+StartLimitIntervalSec=0
 
 [Service]
 ExecStart={{ aegir_skynet_service_command }}
 User={{ aegir_user }}
-Restart=on-failure
-RestartSec=3
-StartLimitInterval=60
-StartLimitBurst=5
+Type=simple
+Restart=always
+RestartSec=1
 Environment="HOME={{ aegir_root }}"
 Environment="USER={{ aegir_user }}"
 # TODO: Figure out how to properly write/append to dedicated log files.
