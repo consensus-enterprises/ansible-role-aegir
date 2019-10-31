@@ -2,7 +2,6 @@
 - name: Escalate privileges to install packages.
   become: yes
   block:
-  - debug: var=aegir_http_service_type
   - name: Ensure Aegir's common dependencies are installed.
     apt:
       name: "{{ aegir_dependencies }}"

@@ -18,9 +18,12 @@
 
 - name: Verify Aegir front-end
   block:
-  - shell: drush @hostmaster cc drush
-  - shell: drush @hostmaster hosting-task @hostmaster verify --force
-  - shell: drush @hostmaster hosting-tasks
+  - name: Clear drush cache.
+    shell: drush @hostmaster cc drush
+  - name: Add verify task to queue. 
+    shell: drush @hostmaster hosting-task @hostmaster verify --force
+  - name: Process task queue.
+    shell: drush @hostmaster hosting-tasks
   become: yes
   become_user: "{{ aegir_user }}"
   when: enable_extra_module_result.changed | bool
