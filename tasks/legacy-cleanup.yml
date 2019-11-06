@@ -1,0 +1,45 @@
+---
+
+- name: Uninstall Aegir3 and related obsolete apt packages.
+  apt:
+    name:
+      - 'aegir3'
+      - 'aegir3-hostmaster'
+      - 'aegir3-provision'
+      - 'supervisor'
+    state: absent
+    purge: yes
+  become: yes
+  ignore_errors: yes
+
+- name: Remove Aegir Project APT key.
+  apt_key:
+    id: "{{ aegir_repo_key_id }}"
+    state: absent
+  become: yes
+
+- name: Remove obsolete Aegir Project APT repository lists and legacy Supervisor config if present.
+  file:
+    path: "{{ item }}"
+    state: absent
+  become: yes
+  with_items:
+    - "/etc/apt/sources.list.d/debian_aegirproject_org.list"
+    - "/etc/apt/sources.list.d/aegir-{{ aegir_deb_release }}.list"
+    - "/etc/supervisor/conf.d/skynet-queue.conf"
+
+- name: Update apt cache to remove packages from Aegir repository.
+  apt:
+    update_cache: yes
+  become: yes
+
+- name: Ensure that hosting-queued service is stopped and disabled.
+  service:
+    name: hosting-queued
+    state: stopped
+    enabled: no
+  become: yes
+  ignore_errors: yes
+
+- name: Stop execution.
+  meta: end_play
