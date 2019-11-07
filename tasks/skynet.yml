@@ -8,9 +8,6 @@
 - name: Include Skynet installation and deployment tasks.
   include: skynet/install.yml
 
-- name: Include tasks for working around App-armour.
-  include: skynet/app-armour.yml
-
 - name: Include tasks for launching Skynet Systemd service.
   include: skynet/service.yml
 
