@@ -1,7 +1,23 @@
 ---
 
-- name: Enable extra modules
+- name: "Initialize semaphore for verifying Aegir front-end after enabling module(s)."
+  set_fact:
+    aegir_frontend_verify_required: false
+
+- name: Enable extra modules.
   include: extra-module.yml
   loop: "{{ aegir_extra_modules }}"
   loop_control:
     loop_var: aegir_extra_module
+
+- name: Verify Aegir front-end after enabling module(s).
+  block:
+  - name: Clear drush cache.
+    shell: drush @hostmaster cc drush
+  - name: Add verify task to queue.
+    shell: drush @hostmaster hosting-task @hostmaster verify --force
+  - name: Process task queue.
+    shell: drush @hostmaster hosting-tasks
+  become: yes
+  become_user: "{{ aegir_user }}"
+  when: aegir_frontend_verify_required | bool

@@ -16,14 +16,8 @@
   register: enable_extra_module_result
   when: (aegir_extra_module_enabled.rc is defined) and (aegir_extra_module_enabled.rc != 0)
 
-- name: Verify Aegir front-end
-  block:
-  - name: Clear drush cache.
-    shell: drush @hostmaster cc drush
-  - name: Add verify task to queue. 
-    shell: drush @hostmaster hosting-task @hostmaster verify --force
-  - name: Process task queue.
-    shell: drush @hostmaster hosting-tasks
-  become: yes
-  become_user: "{{ aegir_user }}"
+- name: "Set semaphore to verify Aegir front-end after enabling module(s)."
+  set_fact:
+    aegir_frontend_verify_required: true
   when: enable_extra_module_result.changed | bool
+
