@@ -25,6 +25,7 @@ aegir_install_additional_packages: true
 aegir_additional_packages: []
 aegir_http_service_type: apache
 aegir_platform_version: 7.x-3.x
+aegir_build_hostmaster_platform_upgrades: false
 aegir_frontend_url: aegir.local
 aegir_generate_keypair: true
 aegir_fix_ownership: false

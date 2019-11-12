@@ -11,8 +11,20 @@
       dest: "{{ aegir_makefile_path }}"
       src: "{{ aegir_makefile_template }}"
       mode: 0644
+    register: aegir_hostmaster_makefile_result
   become: yes
   when: aegir_generate_makefile | bool
+
+- name: Set unique Aegir platform version.
+  block:
+  - name: Retrieve Hostmaster makefile timestamp.
+    stat:
+      path: "{{ aegir_makefile_path }}"
+    register: aegir_hostmaster_makefile_stat_result
+  - name: Set Aegir platform version based on makefile timestamp.
+    set_fact:
+      aegir_platform_version: "{{ '%Y-%m-%d_%H.%M.%S' | strftime(aegir_hostmaster_makefile_stat_result.stat.mtime) }}"
+  when: aegir_build_hostmaster_platform_upgrades | bool
 
 - name: Default to Aegir Drush makefile from Provision deployed from Git.
   set_fact:

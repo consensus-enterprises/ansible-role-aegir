@@ -1,0 +1,6 @@
+---
+# TODO: Add a test based on custom-modules.yml in this directory where we:
+#
+# * Set the aegir_build_hostmaster_platform_upgrades = true
+# * Run the upgrade and confirm a new platform directory with timestamp in its name is created.
+# * Run the upgrade again and confirm nothing changes (idempotency test).
