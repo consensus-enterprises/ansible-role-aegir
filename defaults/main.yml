@@ -17,6 +17,23 @@ aegir_contrib_modules: []
 aegir_contrib_module_versions: {}
 aegir_release: "{{ _default_aegir_release }}"
 
+# For git-based deployments, we can explicitely set a platform version that
+# gets interpolated into the platform path, etc.
+aegir_platform_version: 7.x-3.x
+# However, with git-based deployments, the makefile may not get re-written,
+# since most modules will usually be pointing at a branch. In that case, we
+# have to force a new platform to be built. This will usually be triggered by
+# passing in this var at the command-line.
+# (eg. `ansible-playbook -e"aegir_force_upgrade=True"`).
+aegir_force_upgrade: false
+# When we want to force an update, there's likely to already be a platform
+# using the default version variable above. So we can generate one using the
+# timestamp of the makefile, to ensure that it's unique, but only gets built
+# when the makefile changes.
+# We can also explicitely set this to `True`, so that our hostmaster platforms
+# always use this naming convention.
+aegir_set_automatic_hostmaster_platform_version: "{{ aegir_force_upgrade }}"
+
 aegir_root: /var/aegir
 aegir_user: aegir
 aegir_web_group: www-data
@@ -24,8 +41,6 @@ aegir_upgrade_composer: false
 aegir_install_additional_packages: true
 aegir_additional_packages: []
 aegir_http_service_type: apache
-aegir_platform_version: 7.x-3.x
-aegir_build_hostmaster_platform_upgrades: false
 aegir_frontend_url: aegir.local
 aegir_generate_keypair: true
 aegir_fix_ownership: false
