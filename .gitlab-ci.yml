@@ -49,13 +49,13 @@ custom-deploy:
   <<: *test-defaults
   variables:
     ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
-    ANSIBLE_EXTRA_VARS: aegir_skynet_enable=False
+    extra_vars: aegir_skynet_enable=False
 
 custom-upgrade:
   <<: *test-defaults
   variables:
     ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
-    ANSIBLE_EXTRA_VARS: aegir_skynet_enable=False
+    extra_vars: aegir_skynet_enable=False
   script:
     - source d
     - make ansible-role-test
@@ -65,5 +65,5 @@ unit-tests:
   <<: *test-defaults
   variables:
     ANSIBLE_TEST_PLAYBOOK: tests/unit-tests.yml
-    ANSIBLE_EXTRA_VARS: aegir_skynet_enable=False
+    extra_vars: aegir_skynet_enable=False
 
