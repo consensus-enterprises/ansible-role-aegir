@@ -33,7 +33,7 @@ deb-default: &test-defaults
 
   script:
     - source d
-    - make ansible-role-test; make -s ntfy-ci NOTIFY_CI_RESULT=$?
+    - make ansible-role-test; make -s matrix-ci NOTIFY_CI_RESULT=$?
 
 deb-nginx:
   <<: *test-defaults
