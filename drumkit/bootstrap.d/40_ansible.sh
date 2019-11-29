@@ -1,1 +1,1 @@
-export PYTHONPATH=.mk/.local/src/ansible/ansible-latest/lib
+../../.mk/drumkit/bootstrap.d/40_ansible.sh
