@@ -49,21 +49,21 @@ custom-deploy:
   <<: *test-defaults
   variables:
     ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
-    EXTRA_VARS: aegir_skynet_enable=False
+    ANSIBLE_EXTRA_VARS: aegir_skynet_enable=False
 
 custom-upgrade:
   <<: *test-defaults
   variables:
     ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
-    EXTRA_VARS: aegir_skynet_enable=False
+    ANSIBLE_EXTRA_VARS: aegir_skynet_enable=False
   script:
     - source d
     - make ansible-role-test
-    - make ansible-role-test ANSIBLE_TEST_PLAYBOOK=tests/upgrade.yml
+    - make ansible-role-test ANSIBLE_TEST_PLAYBOOK=tests/upgrade.yml; make -s matrix-ci NOTIFY_CI_RESULT=$?
 
-unit-tests: 
+unit-tests:
   <<: *test-defaults
   variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/unit-tests.yml 
-    EXTRA_VARS: aegir_skynet_enable=False
+    ANSIBLE_TEST_PLAYBOOK: tests/unit-tests.yml
+    ANSIBLE_EXTRA_VARS: aegir_skynet_enable=False
 
