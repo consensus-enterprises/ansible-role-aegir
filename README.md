@@ -24,7 +24,7 @@ For further details regarding installation of Aegir, see the relevant [Aegir doc
 The default Debian package install should suffice in the majority of cases.
 However, this role allows for extensive customization of all aspects of the
 Aegir install process via role variables. For more details, see
-[`defaults/main.yml`](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/blob/master/defaults/main.yml).
+[`defaults/main.yml`](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/blob/master/defaults/main.yml) and [`vars/main.yml`](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/blob/master/vars/main.yml).
 
 ## Example Playbook
 
