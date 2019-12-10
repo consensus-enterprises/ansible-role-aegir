@@ -63,4 +63,4 @@ See [the various included test playbooks](https://gitlab.com/consensus.enterpris
 
 This role was originally created in 2015 by [Christopher Gervais](https://consensus.enterprises/team/christopher/), lead maintainer of the [Aegir Hosting System](http://www.aegirproject.org).
 
-It has also had input from [Dan Friedman](https://consensus.enterprises/team/dan/) and other folks at [Consensus Enterprises](https://consensus.enterprises).
+It has also had input from [Dan Friedman](https://consensus.enterprises/team/dan/) and other folks at [Consensus Enterprises](https://consensus.enterprises). To contact us, please use our [Web contact form](https://consensus.enterprises/#contact).
