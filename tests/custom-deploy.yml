@@ -18,7 +18,7 @@
     # Custom Drush
     aegir_drush_install_method: git
     aegir_drush_source_repo: https://github.com/drush-ops/drush.git
-    aegir_drush_source_install_version: "8.1.16"
+    aegir_drush_source_install_version: "8.3.4"
     aegir_drush_source_update: True
     # Custom Provision
     aegir_provision_repo: 'https://gitlab.com/consensus.enterprises/aegir/provision.git'

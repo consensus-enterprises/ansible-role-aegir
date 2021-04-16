@@ -76,12 +76,12 @@ aegir_provision_update: false
 aegir_install_drush: true
 # Acceptable values: "phar", "git". When set to "git," see "Install Drush from source," below.
 aegir_drush_install_method: phar
-aegir_drush_version: 8.1.16
+aegir_drush_version: 8.3.4
 # Install Drush from source (git clone + composer-based install).
 aegir_drush_source_repo: https://github.com/drush-ops/drush.git
 aegir_drush_source_install_bin_path: /usr/local/bin/drush
 aegir_drush_source_install_path: /usr/local/share/drush
-aegir_drush_source_install_version: "8.1.16"
+aegir_drush_source_install_version: "8.3.4"
 aegir_drush_source_update: false
 aegir_drush_source_force_update: false
 aegir_drush_source_clone_depth: 1
