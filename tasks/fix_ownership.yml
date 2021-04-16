@@ -1,5 +1,8 @@
 ---
 
+- debug:
+    msg: Perform fix_ownership tasks.
+
 - name: Find the hostmaster platform path.
   shell: drush @hostmaster status --fields=root --field-labels=0
   become_user: "{{ aegir_user }}"
@@ -12,7 +15,7 @@
     hostmaster_platform_path: "{{ hostmaster_platform_path.stdout | trim }}"
 
 - name: Run the install script.
-  shell: "/bin/bash {{ hostmaster_platform_path }}/profiles/hostmaster/modules/aegir/hosting_tasks_extra/fix_ownership/scripts/install.sh"
+  shell: "/bin/bash {{ hostmaster_platform_path }}/sites/all/modules/hosting_tasks_extra/fix_ownership/scripts/install.sh"
   args:
     creates: /etc/sudoers.d/fix-drupal-platform-ownership
   become: yes

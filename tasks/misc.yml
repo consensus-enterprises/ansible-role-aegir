@@ -1,5 +1,8 @@
 ---
 
+- debug:
+    msg: Perform miscellaneous tasks.
+
 - name: Check if sites can be deleted without first being disabled
   shell: "drush @hostmaster vget hosting_require_disable_before_delete | grep 'false$'"
   become: yes

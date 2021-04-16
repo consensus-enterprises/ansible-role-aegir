@@ -8,3 +8,6 @@
   become_user: "{{ aegir_user }}"
   register: aegir_install_task_result
 
+- debug:
+    var: aegir_install_task_result
+  when: aegir_debug | bool
