@@ -1,4 +1,6 @@
 ---
+aegir_debug: false
+
 # Possible values include "deb", "git".
 # When requesting a deb install, aegir_deb_release and aegir_repo_key_id are required as shown here in the defaults.
 # For git-based deployments, see below.
