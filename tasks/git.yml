@@ -6,6 +6,7 @@
 # Ref.: https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/-/issues/3
 - name: Create 'aegir' user key pair.
   include: generate-keypair.yml
+  when: aegir_generate_keypair | bool
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#41-install-drush
 - name: Install Drush

@@ -45,9 +45,6 @@
   include: misc.yml
   when: aegir_extra_config | bool
 
-- include: generate-keypair.yml
-  when: aegir_generate_keypair | bool
-
 - include: fix_permissions.yml
   when: aegir_fix_permissions | bool
 
