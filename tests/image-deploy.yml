@@ -1,0 +1,35 @@
+---
+- name: "End-to-end Aegir build from git source."
+  hosts: all
+
+  vars:
+    # Dependencies
+    mysql_root_password: '123456'
+    nginx_manage_config: False
+    nginx_remove_default_vhost: True
+    php_cli_memory_limit: "2048M"
+    php_enable_php_fpm: True
+    php_enable_webserver: False
+    php_set_cli_memory_limit: True
+    # This role
+    aegir_http_service_type: nginx
+    aegir_install_method: git
+
+    # Stop before site install, allowing for creation of an Aegir server image:
+    aegir_stop_before_site_install: True
+
+  roles:
+    # Dependencies
+    - geerlingguy.mysql
+    - geerlingguy.nginx
+    - geerlingguy.php
+    # This role
+    - consensus.aegir
+
+  tasks:
+
+  - name: Check that Hostmaster platform is deployed.
+    shell: "[ -d {{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/profiles/hostmaster ]"
+
+  - name: Check that Aegir front-end site is *not* installed.
+    shell: "drush sa|grep -v '@hostmaster'"
