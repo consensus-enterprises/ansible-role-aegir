@@ -33,6 +33,11 @@
 - name: Build hostmaster platform.
   include: git/platform.yml
 
+# Ref.: https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/-/issues/3
+- name: "Stop right before front-end installation, if we've been asked to."
+  meta: end_play
+  when: aegir_stop_before_site_install | bool
+
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#44-running-hostmaster-install
 - name: Install Aegir front-end.
   include: git/install.yml

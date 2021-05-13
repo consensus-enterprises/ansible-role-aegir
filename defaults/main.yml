@@ -137,3 +137,6 @@ aegir_perform_legacy_cleanup: false
 
 # Configure HTTPS proxy settings for all Drupal sites, e.g.
 #aegir_https_proxy_ip_range: "192.168.177.0/24"
+
+# Ref.: https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/-/issues/3
+aegir_stop_before_site_install: false
