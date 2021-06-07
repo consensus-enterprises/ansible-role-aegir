@@ -6,7 +6,11 @@
     aegir_extra_modules:
       - hosting_skynet
 
+- name: Force task queue to run.
+  shell: drush @hostmaster hosting-tasks
+  become: yes
+  become_user: "{{ aegir_user }}"
+
 - name: Wait until the Skynet script is deployed.
   wait_for:
     path: "{{ default_aegir_skynet_bin_path }}"
-
