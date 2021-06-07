@@ -39,10 +39,6 @@
 
 # Ref.: https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/-/issues/3
 
-- debug:
-    msg: "Stop right before front-end installation, if we've been asked to."
-    when: aegir_stop_before_site_install | bool
-
 - name: "Stop right before front-end installation, if we've been asked to."
   meta: end_play
   when: aegir_stop_before_site_install | bool
