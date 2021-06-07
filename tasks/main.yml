@@ -45,12 +45,6 @@
   include: misc.yml
   when: aegir_extra_config | bool
 
-- include: fix_permissions.yml
-  when: aegir_fix_permissions | bool
-
-- include: fix_ownership.yml
-  when: aegir_fix_ownership | bool
-
 - include: registry_rebuild.yml
   when: aegir_registry_rebuild | bool
 

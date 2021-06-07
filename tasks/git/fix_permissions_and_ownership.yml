@@ -1,0 +1,33 @@
+- name: Find hosting_tasks_extra path.
+  # Provision installs hosting_tasks_extra in one of these two locations, and I haven't yet figured out when/why it uses each one; so, we search for it:
+  # - {{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/sites/all/modules/
+  # - {{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/profiles/hostmaster/module/aegir/
+  shell: "find {{ aegir_root }}/hostmaster-{{ aegir_platform_version }} -type d -name hosting_tasks_extra"
+  become_user: "{{ aegir_user }}"
+  become: yes
+  register: hosting_tasks_extra_path
+  changed_when: false
+
+- name: Set a fact for the hosting_tasks_extra path. 
+  set_fact:
+    hosting_tasks_extra_path: "{{ hosting_tasks_extra_path.stdout | trim }}"
+
+- debug:
+    msg: Perform fix_permissions tasks.
+
+- name: Run the install script.
+  shell: "/bin/bash {{ hosting_tasks_extra_path}}/fix_permissions/scripts/install.sh"
+  args:
+    creates: /etc/sudoers.d/fix-drupal-platform-permissions
+  become: yes
+  become_user: root
+
+- debug:
+    msg: Perform fix_ownership tasks.
+
+- name: Run the install script.
+  shell: "/bin/bash {{ hosting_tasks_extra_path}}/fix_ownership/scripts/install.sh"
+  args:
+    creates: /etc/sudoers.d/fix-drupal-platform-ownership
+  become: yes
+  become_user: root
