@@ -39,6 +39,12 @@
 
 # Ref.: https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/-/issues/3
 
+- name: "Stop right before front-end installation, and remove broken half-generated nginx config, if we've been asked to."
+  file: 
+    path: "/etc/nginx/conf.d/aegir.conf" 
+    state: absent
+  when: aegir_stop_before_site_install | bool
+
 - name: "Stop right before front-end installation, if we've been asked to."
   meta: end_play
   when: aegir_stop_before_site_install | bool

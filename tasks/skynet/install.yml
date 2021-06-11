@@ -7,7 +7,7 @@
       - hosting_skynet
 
 - name: Force task queue to run.
-  shell: drush @hostmaster hosting-tasks
+  shell: drush @hostmaster hosting-task @hostmaster verify --force
   become: yes
   become_user: "{{ aegir_user }}"
 
