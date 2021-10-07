@@ -34,7 +34,7 @@ Aegir install process via role variables. For more details, see
   hosts: all
 
   roles:
-    - geerlingguy.mysql
+    - consensus.mysql
     - consensus.aegir
 
   tasks: 
