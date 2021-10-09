@@ -25,7 +25,7 @@ deb-default: &test-defaults
     - pip3 install jinja2-cli matrix-client
     - make ansible
     # Fetch role dependencies
-    - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-mysql.git tests/roles/geerlingguy.mysql
+    - git clone https://github.com/consensus-enterprises/ansible-role-mysql.git tests/roles/consensus.mysql
     - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-nginx.git tests/roles/geerlingguy.nginx
     - git clone https://github.com/consensus-enterprises/ansible-role-php.git tests/roles/consensus.php
     # Make our base URL resolve.

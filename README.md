@@ -12,7 +12,7 @@ supports apt) should work, too, but YMMV.
 A MySQL server is required. This server can be installed on the same machine,
 or a separate one (hence why this isn't listed as a dependency). See below for
 [an example](#example-playbook) of how to install MySQL using the
-[geerlingguy.mysql](https://github.com/geerlingguy/ansible-role-mysql) role.
+[consensus.mysql](https://github.com/consensus-enterprises/ansible-role-mysql) role.
 For details on configuring this role to talk to local or remote MySQL servers,
 see the `aegir_mysql_*` [role
 variables](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/blob/master/defaults/main.yml).

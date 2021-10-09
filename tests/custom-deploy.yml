@@ -35,7 +35,7 @@
 
   roles:
     # Dependencies
-    - geerlingguy.mysql
+    - consensus.mysql
     - geerlingguy.nginx
     - consensus.php
     # This role
