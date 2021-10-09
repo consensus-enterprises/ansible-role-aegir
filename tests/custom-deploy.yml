@@ -37,7 +37,7 @@
     # Dependencies
     - geerlingguy.mysql
     - geerlingguy.nginx
-    - geerlingguy.php
+    - consensus.php
     # This role
     - consensus.aegir
 

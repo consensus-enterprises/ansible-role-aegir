@@ -27,7 +27,7 @@ deb-default: &test-defaults
     # Fetch role dependencies
     - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-mysql.git tests/roles/geerlingguy.mysql
     - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-nginx.git tests/roles/geerlingguy.nginx
-    - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-php.git tests/roles/geerlingguy.php
+    - git clone https://github.com/consensus-enterprises/ansible-role-php.git tests/roles/consensus.php
     # Make our base URL resolve.
     - echo `hostname -I` aegir.local >> /etc/hosts
 
