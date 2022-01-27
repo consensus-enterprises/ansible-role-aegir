@@ -1,12 +1,21 @@
 ---
 
+- name: Temporarily allow globally readable Ansible command files for next task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: yes
+
 - name: Install Aegir front-end
   shell: "drush @none --yes hostmaster-install --debug --working-copy --client_email={{ aegir_admin_email }} --aegir_db_host={{ aegir_db_host | default('localhost') }} --aegir_db_user={{ aegir_db_user }} --aegir_db_pass={{ aegir_db_password }} --aegir_version={{ aegir_platform_version }} --http_service_type={{ aegir_http_service_type }} {{ aegir_frontend_url }} --strict=0 --root={{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/"
   args:
     creates: "{{ aegir_root }}/.drush/hostmaster.alias.drushrc.php"
   become: yes
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
   register: aegir_install_task_result
+
+- name: Disable globally readable Ansible command files for previous task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: no
 
 - debug:
     var: aegir_install_task_result
