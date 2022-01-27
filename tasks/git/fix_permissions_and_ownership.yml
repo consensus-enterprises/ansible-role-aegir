@@ -3,8 +3,6 @@
   # - {{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/sites/all/modules/
   # - {{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/profiles/hostmaster/module/aegir/
   shell: "find {{ aegir_root }}/hostmaster-{{ aegir_platform_version }} -type d -name hosting_tasks_extra"
-  become_user: "{{ aegir_user }}"
-  become: yes
   register: hosting_tasks_extra_path
   changed_when: false
 
