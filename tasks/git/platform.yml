@@ -1,7 +1,16 @@
 ---
+- name: Temporarily allow globally readable Ansible command files for next task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: yes
+
 - name: Build Hostmaster platform.
-  shell: "drush make {{ aegir_makefile_path }} {{ aegir_root }}/hostmaster-{{ aegir_platform_version }} --working-copy --no-gitinfofile"
+  ansible.builtin.shell: "drush make {{ aegir_makefile_path }} {{ aegir_root }}/hostmaster-{{ aegir_platform_version }} --working-copy --no-gitinfofile"
   args:
     creates: "{{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/"
   become: yes
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
+
+- name: Disable globally readable Ansible command files for previous task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: no
