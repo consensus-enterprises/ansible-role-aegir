@@ -1,7 +1,19 @@
 ---
-- name: Generate an SSH key-pair
-  command: "ssh-keygen -q -t rsa -N '' -C 'Aegir SSH keypair' -f {{ aegir_root }}/.ssh/id_rsa"
-  args:
-    creates: "{{ aegir_root }}/.ssh/id_rsa"
+- name: Create the Aegir user's SSH directory if it doesn't exist
+  ansible.builtin.file:
+    path: "{{ aegir_ssh_directory }}"
+    state: directory
+    mode: '0700'
+    owner: "{{ aegir_user }}"
+    group: "{{ aegir_user }}"
   become: yes
-  become_user: "{{ aegir_user }}"
+
+- name: Generate an OpenSSH keypair
+  community.crypto.openssh_keypair:
+    path: "{{ aegir_ssh_directory }}/id_ed25519"
+    # TODO: Remove whenever it becomes the default.
+    type: ed25519
+    comment: "Aegir SSH keypair"
+    group: "{{ aegir_user }}"
+    owner: "{{ aegir_user }}"
+  become: yes
