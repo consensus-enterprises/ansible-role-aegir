@@ -1,15 +1,23 @@
 ---
 
 - name: Deploy Provision from custom repo and/or branch.
-  git:
+  ansible.builtin.git:
     repo: "{{ aegir_provision_repo }}"
-    dest: "{{ aegir_root }}/.drush/provision"
+    dest: "{{ aegir_provision_directory }}"
     update: "{{ aegir_provision_update }}"
     version: "{{ aegir_provision_version }}"
     force: yes
   become: yes
-  become_user: "{{ aegir_user }}"
   register: aegir_provision_git_deploy_result
+
+- name: Make the Aegir user the owner of the Provision code
+  ansible.builtin.file:
+    path: "{{ aegir_provision_directory }}"
+    state: directory
+    recurse: yes
+    owner: "{{ aegir_user }}"
+    group: "{{ aegir_user }}"
+  become: yes
 
 - name: Clear Drush cache for Provision extension
   shell: drush @none cc drush
