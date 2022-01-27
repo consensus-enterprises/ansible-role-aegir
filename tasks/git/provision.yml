@@ -20,16 +20,16 @@
   become: yes
 
 - name: Temporarily allow globally readable Ansible command files for next task
-  set_fact:
-    allow_world_readable_tmpfiles: yes
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: yes
 
 - name: Clear Drush cache for Provision extension
-  shell: drush @none cc drush
+  ansible.builtin.shell: drush @none cc drush
   become: yes
   # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
   when: aegir_provision_git_deploy_result.changed | bool
 
-- name: Disable globally readable Ansible command files
-  set_fact:
-    allow_world_readable_tmpfiles: no
+- name: Disable globally readable Ansible command files for previous task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: no
