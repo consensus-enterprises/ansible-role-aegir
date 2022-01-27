@@ -40,7 +40,6 @@ aegir_force_upgrade: false
 aegir_set_automatic_hostmaster_platform_version: "{{ aegir_force_upgrade }}"
 
 aegir_root: /var/aegir
-aegir_ssh_directory: "{{ aegir_root }}/.ssh"
 aegir_user: aegir
 aegir_web_group: www-data
 aegir_upgrade_composer: false
