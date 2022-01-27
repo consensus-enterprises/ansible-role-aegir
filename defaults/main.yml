@@ -67,11 +67,11 @@ aegir_db_user: "{{ mysql_root_username | default(_default_aegir_db_user) }}"
 aegir_db_host: 'localhost'
 
 # Hostmaster
-aegir_hostmaster_repo: http://git.drupal.org/project/hostmaster.git
+aegir_hostmaster_repo: https://git.drupalcode.org/project/hostmaster.git
 aegir_hostmaster_version: "{{ aegir_release }}"
 
 # Provision
-aegir_provision_repo: http://git.drupal.org/project/provision.git
+aegir_provision_repo: https://git.drupalcode.org/project/provision.git
 aegir_provision_version: 7.x-3.x
 aegir_provision_update: false
 
