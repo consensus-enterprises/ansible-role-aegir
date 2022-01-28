@@ -61,7 +61,7 @@ aegir_login_link: false
 aegir_admin_email: 'this.email@is.invalid'
 
 # Database
-aegir_db_password: "{{ mysql_root_password | default(_default_aegir_db_password) }}"
+aegir_db_password: "{{ mysql_root_password_written | default(_default_aegir_db_password) }}"
 aegir_db_user: "{{ mysql_root_username | default(_default_aegir_db_user) }}"
 aegir_db_host: 'localhost'
 

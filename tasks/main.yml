@@ -14,8 +14,8 @@
 
 - name: Default Aegir database password to MySQL root password
   set_fact:
-    aegir_db_password: "{{ mysql_root_password }}"
-  when: (aegir_db_password is not defined) and (mysql_root_password is defined)
+    aegir_db_password: "{{ mysql_root_password_written }}"
+  when: (aegir_db_password is not defined) and (mysql_root_password_written is defined)
 
 - name: Default Aegir database user to MySQL root user
   set_fact:
