@@ -1,8 +1,13 @@
 ---
 
+- name: Temporarily allow globally readable Ansible command files for next 2 tasks
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: yes
+
 - name: "Check if extra module {{ aegir_extra_module }} is enabled"
   shell: "drush @hostmaster pm-info --fields=status --format=list {{ aegir_extra_module }} | egrep 'enabled'"
   become: True
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
   register: aegir_extra_module_enabled
   changed_when: False
@@ -12,9 +17,14 @@
 - name: "Enable extra module {{ aegir_extra_module }}"
   shell: "drush @hostmaster --yes en {{ aegir_extra_module }} --no-verify --strict=0"
   become: True
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
   register: enable_extra_module_result
   when: (aegir_extra_module_enabled.rc is defined) and (aegir_extra_module_enabled.rc != 0)
+
+- name: Disable globally readable Ansible command files for previous 2 tasks
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: no
 
 - name: "Set semaphore to verify Aegir front-end after enabling module(s)."
   set_fact:
