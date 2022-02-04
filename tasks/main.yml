@@ -48,11 +48,20 @@
 - include: registry_rebuild.yml
   when: aegir_registry_rebuild | bool
 
+- name: Temporarily allow globally readable Ansible command files for next task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: yes
+
 - name: Ensure Hosting is recognized as enabled.
   shell: drush @none cc drush && drush @hostmaster cc drush
   become: yes
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
   changed_when: False
+
+- name: Disable globally readable Ansible command files for previous task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: no
 
 - name: Deploy Skynet queue daemon.
   include: skynet.yml
