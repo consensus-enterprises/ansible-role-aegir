@@ -3,9 +3,14 @@
 - debug:
     msg: Perform miscellaneous tasks.
 
+- name: Temporarily allow globally readable Ansible command files for next 2 tasks
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: yes
+
 - name: Check if sites can be deleted without first being disabled
   shell: "drush @hostmaster vget hosting_require_disable_before_delete | grep 'false$'"
   become: yes
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
   register: disable_before_delete_check
   changed_when: False
@@ -15,8 +20,13 @@
 - name: Allow site deletion without disabling first.
   shell: drush @hostmaster vset --format=boolean hosting_require_disable_before_delete 0
   become: yes
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
   when: disable_before_delete_check is failed
+
+- name: Disable globally readable Ansible command files for previous 2 tasks
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: no
 
 - name: Grant 'aegir' user access to system logs
   user:
