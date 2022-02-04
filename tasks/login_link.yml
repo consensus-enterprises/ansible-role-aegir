@@ -1,14 +1,23 @@
 ---
 
+- name: Temporarily allow globally readable Ansible command files for next task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: yes
+
 - name: Generate one-time login link
   shell: "
   echo '////////////// You can access the front-end of your Aegir install at: //////////////////////';
   drush @hostmaster uli;
   "
   become: True
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
   register: aegir_login_link_output
   changed_when: False
+
+- name: Disable globally readable Ansible command files for previous task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: no
 
 - name: Print the login link
   debug:
