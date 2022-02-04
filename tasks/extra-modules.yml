@@ -10,6 +10,11 @@
   loop_control:
     loop_var: aegir_extra_module
 
+- name: Temporarily allow globally readable Ansible command files for next task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: yes
+  when: aegir_frontend_verify_required | bool
+
 - name: Verify Aegir front-end after enabling module(s).
   block:
   - name: Clear drush cache.
@@ -19,5 +24,11 @@
   - name: Process task queue.
     shell: drush @hostmaster hosting-tasks
   become: yes
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
+  when: aegir_frontend_verify_required | bool
+
+- name: Disable globally readable Ansible command files for previous task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: no
   when: aegir_frontend_verify_required | bool
