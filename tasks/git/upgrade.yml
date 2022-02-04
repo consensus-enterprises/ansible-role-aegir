@@ -1,8 +1,17 @@
 ---
+- name: Temporarily allow globally readable Ansible command files for next task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: yes
+
 - name: Upgrade Aegir front-end.
   shell: "drush @hostmaster --yes hostmaster-migrate {{ aegir_frontend_url }} {{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/ --debug --working-copy"
   args:
     creates: "{{ aegir_root }}/hostmaster-{{ aegir_platform_version }}/sites/{{ aegir_frontend_url }}/"
   become: yes
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
   register: aegir_upgrade_task_result
+
+- name: Disable globally readable Ansible command files for previous task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: no
