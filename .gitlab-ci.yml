@@ -31,7 +31,7 @@ deb-default: &test-defaults
     - git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-nginx.git tests/roles/geerlingguy.nginx
     - git clone https://github.com/consensus-enterprises/ansible-role-php.git tests/roles/consensus.php
     # Fetch collection dependencies
-    - ansible-galaxy collection install community.crypto community.general
+    - ansible-galaxy collection install community.crypto community.general community.mysql
     # Make our base URL resolve.
     - echo `hostname -I` aegir.local >> /etc/hosts
 
