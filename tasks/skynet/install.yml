@@ -6,10 +6,19 @@
     aegir_extra_modules:
       - hosting_skynet
 
+- name: Temporarily allow globally readable Ansible command files for next task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: yes
+
 - name: Force task queue to run.
   shell: drush @hostmaster hosting-task @hostmaster verify --force
   become: yes
+  # See https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user
   become_user: "{{ aegir_user }}"
+
+- name: Disable globally readable Ansible command files for previous task
+  ansible.builtin.set_fact:
+    ansible_shell_allow_world_readable_temp: no
 
 - name: Wait until the Skynet script is deployed.
   wait_for:
