@@ -6,7 +6,7 @@ Installs the [Aegir](https://www.aegirproject.org/) hosting system, a control pa
 
 ## Requirements
 
-Ubuntu Bionic (18.04) is the currently supported OS version. Debian (or any OS that
+Ubuntu Focal (20.04) is the currently supported OS version. Debian (or any OS that
 supports apt) should work, too, but YMMV.
 
 A MySQL server is required. This server can be installed on the same machine,
@@ -16,6 +16,11 @@ or a separate one (hence why this isn't listed as a dependency). See below for
 For details on configuring this role to talk to local or remote MySQL servers,
 see the `aegir_mysql_*` [role
 variables](https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/blob/master/defaults/main.yml).
+
+[Ansible pipelining](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) must
+be enabled.  It's necessary because this role contains tasks that  run as the
+`aegir` user, who doesn't have permission to access Ansible's temporary command
+files.  [With pipelining turned on, these files aren't used.](https://docs.ansible.com/ansible/latest/user_guide/become.html#risks-of-becoming-an-unprivileged-user)
 
 For further details regarding installation of Aegir, see the relevant [Aegir documentation](https://docs.aegirproject.org/install/#system-requirements).
 
