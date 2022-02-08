@@ -21,7 +21,7 @@
     aegir_drush_source_install_version: "8.1.16"
     aegir_drush_source_update: True
     # Custom Provision
-    aegir_provision_repo: 'https://gitlab.com/consensus.enterprises/aegir/provision.git'
+    aegir_provision_repo: 'https://git.drupalcode.org/project/provision.git'
     aegir_provision_version: '7.x-3.x'
     aegir_provision_update: True
     # Custom Aegir front end
