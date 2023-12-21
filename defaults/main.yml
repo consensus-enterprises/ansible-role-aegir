@@ -95,22 +95,22 @@ aegir_dependencies:
   - cron
   - git
   - mysql-client
-  - php-cli
-  - php-curl
-  - php-gd
-  - php-mbstring
-  - php-mysql
-  - php-xml
+  - "php{{ php_version }}-cli"
+  - "php{{ php_version }}-curl"
+  - "php{{ php_version }}-gd"
+  - "php{{ php_version }}-mbstring"
+  - "php{{ php_version }}-mysql"
+  - "php{{ php_version }}-xml"
   - postfix
   - rsync
   - sudo
   - unzip
 aegir_dependencies_apache:
   - apache2
-  - libapache2-mod-php
+  - "libapache2-mod-php{{ php-version }}"
 aegir_dependencies_nginx:
   - nginx
-  - php-fpm
+  - "php{{ php_version }}-fpm"
 aegir_drush_dependencies:
   - curl
   - composer
