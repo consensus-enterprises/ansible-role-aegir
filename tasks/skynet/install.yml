@@ -13,4 +13,11 @@
 
 - name: Wait until the Skynet script is deployed.
   wait_for:
-    path: "{{ default_aegir_skynet_bin_path }}"
+    path: "{{ aegir_skynet_bin_path }}"
+
+- name: Ensure Skynet script is executable.
+  file:
+    path: "{{ aegir_skynet_bin_path }}"
+    mode: "740"
+  become: yes
+  become_user: "{{ aegir_user }}"
