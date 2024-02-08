@@ -13,6 +13,11 @@
   include: git/drush.yml
   when: aegir_install_drush | bool
 
+- name: Install Composer
+  include: git/composer.yml
+  when: aegir_upgrade_composer | bool
+  tags: composer
+
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#43-install-provision
 - name: Clone Provision
   include: git/provision.yml

@@ -1,0 +1,44 @@
+---
+
+- name: Read Composer Checksum
+  shell: curl https://composer.github.io/installer.sig
+  register: composer_checksum
+  tags: composer
+
+- name: Validate Composer checksum
+  get_url:
+    checksum: "sha384:{{ composer_checksum.stdout }}"
+    dest: /usr/src/
+    url: https://getcomposer.org/installer
+  become: yes
+  tags: composer
+
+- name: Download and install Composer
+  shell: curl -sS https://getcomposer.org/installer | php
+  args:
+    chdir: /usr/src/
+    creates: /usr/local/bin/composer
+    warn: false
+  become: yes
+  tags: composer
+
+- name: Add Composer to global path
+  copy: 
+    dest: /usr/local/bin/composer
+    group: root
+    mode: '0755'
+    owner: root
+    src: /usr/src/composer.phar
+    remote_src: yes
+  become: yes
+  tags: composer
+
+- name: Confirm composer runs
+  shell: composer --version
+  register: composer_version
+  tags: composer
+
+- name: Print composer version
+  debug:
+    msg: "{{ composer_version.stdout_lines }}"
+  tags: composer
