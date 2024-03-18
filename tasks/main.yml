@@ -31,7 +31,6 @@
 
 - name: Install Aegir via Debian packages.
   include_tasks: deb.yml
-  become: yes
   when: aegir_install_method == "deb"
 
 - name: Install global config file.
