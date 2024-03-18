@@ -23,4 +23,4 @@
 
   tasks:
 
-  - include: unit-tests/check-frontend.yml
+  - include_tasks: unit-tests/check-frontend.yml

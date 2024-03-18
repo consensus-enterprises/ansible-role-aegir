@@ -50,8 +50,8 @@
 
   tasks:
 
-  - include: unit-tests/check-frontend.yml
-  - include: unit-tests/check-skynet.yml
+  - include_tasks: unit-tests/check-frontend.yml
+  - include_tasks: unit-tests/check-skynet.yml
 
   - name: Check that Aegir front-end is on intended platform.
     shell: "drush sa @hostmaster|grep root|grep 'upgraded-platform'"

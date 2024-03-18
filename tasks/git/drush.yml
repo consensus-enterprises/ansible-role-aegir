@@ -7,5 +7,5 @@
   become: yes
  
 - name: Install Drush
-  include: "drush/{{ aegir_drush_install_method }}.yml"
+  include_tasks: "drush/{{ aegir_drush_install_method }}.yml"
 

@@ -1,6 +1,6 @@
 ---
 - name: Include tasks to enable Skynet module.
-  include: ../tasks/skynet/install.yml
+  include_tasks: ../tasks/skynet/install.yml
 
 - name: Check that Skynet module is enabled.
   shell: "drush @hostmaster pm-info --fields=status --format=list hosting_skynet | egrep 'enabled'"

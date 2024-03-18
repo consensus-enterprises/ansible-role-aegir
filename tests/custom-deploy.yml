@@ -43,5 +43,5 @@
 
   tasks:
 
-  - include: unit-tests/check-frontend.yml
-  - include: unit-tests/check-skynet.yml
+  - include_tasks: unit-tests/check-frontend.yml
+  - include_tasks: unit-tests/check-skynet.yml

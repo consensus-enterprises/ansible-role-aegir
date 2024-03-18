@@ -1,5 +1,5 @@
 - name: Include user creation tasks.
-  include: ../../../tasks/git/user.yml
+  include_tasks: ../../../tasks/git/user.yml
 
 - name: Check that 'aegir' user exists.
   shell: "getent passwd aegir"

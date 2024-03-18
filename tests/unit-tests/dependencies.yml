@@ -1,5 +1,5 @@
 - name: Include dependency installation tasks.
-  include: ../../tasks/dependencies.yml
+  include_tasks: ../../tasks/dependencies.yml
 
 - name: Check that dependency packages are installed
   shell: "dpkg -l|grep '^ii  {{ item }}'"

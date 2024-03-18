@@ -1,7 +1,7 @@
 ---
 
 - name: Enable Skynet module
-  include: ../extra-modules.yml
+  include_tasks: ../extra-modules.yml
   vars:
     aegir_extra_modules:
       - hosting_skynet

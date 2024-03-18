@@ -5,7 +5,7 @@
     aegir_frontend_verify_required: false
 
 - name: Enable extra modules.
-  include: extra-module.yml
+  include_tasks: extra-module.yml
   loop: "{{ aegir_extra_modules }}"
   loop_control:
     loop_var: aegir_extra_module

@@ -1,41 +1,41 @@
 ---
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#31-create-the-aegir-user
 - name: Create 'aegir' user, group, home and Drush directories.
-  include: git/user.yml
+  include_tasks: git/user.yml
 
 # Ref.: https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/-/issues/3
 - name: Create 'aegir' user key pair.
-  include: generate-keypair.yml
+  include_tasks: generate-keypair.yml
   when: aegir_generate_keypair | bool
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#41-install-drush
 - name: Install Drush
-  include: git/drush.yml
+  include_tasks: git/drush.yml
   when: aegir_install_drush | bool
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#43-install-provision
 - name: Clone Provision
-  include: git/provision.yml
+  include_tasks: git/provision.yml
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#321-apache-configuration
 - name: Setup Apache.
-  include: git/setup-apache.yml
+  include_tasks: git/setup-apache.yml
   when: aegir_http_service_type == 'apache'
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#322-nginx-configuration
 - name: Setup Nginx.
-  include: git/setup-nginx.yml
+  include_tasks: git/setup-nginx.yml
   when: aegir_http_service_type == 'nginx'
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#34-sudo-configuration 
 - name: Configure sudo for aegir user.
-  include: git/sudo.yml
+  include_tasks: git/sudo.yml
 
 - name: Build hostmaster platform.
-  include: git/platform.yml
+  include_tasks: git/platform.yml
 
 - name: Fix permissions and ownership before site install.
-  include: git/fix_permissions_and_ownership.yml
+  include_tasks: git/fix_permissions_and_ownership.yml
 
 # Ref.: https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/-/issues/3
 
@@ -51,7 +51,7 @@
 
 # Ref.: http://docs.aegirproject.org/en/3.x/install/#44-running-hostmaster-install
 - name: Install Aegir front-end.
-  include: git/install.yml
+  include_tasks: git/install.yml
 
 - name: Upgrade Aegir front-end.
-  include: git/upgrade.yml
+  include_tasks: git/upgrade.yml

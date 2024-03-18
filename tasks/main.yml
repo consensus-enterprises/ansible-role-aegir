@@ -2,7 +2,7 @@
 - meta: flush_handlers
 
 - name: Ensure Aegir's dependencies are installed.
-  include: dependencies.yml
+  include_tasks: dependencies.yml
   when: aegir_manage_dependencies | bool
 
 - name: Install additional packages.
@@ -23,29 +23,29 @@
   when: (aegir_db_user is not defined) and (mysql_root_user is defined)
 
 - name: Generate Aegir Drush makefile.
-  include: makefile.yml
+  include_tasks: makefile.yml
 
 - name: Install Aegir via Git.
-  include: git.yml
+  include_tasks: git.yml
   when: aegir_install_method == "git"
 
 - name: Install Aegir via Debian packages.
-  include: deb.yml
+  include_tasks: deb.yml
   become: yes
   when: aegir_install_method == "deb"
 
 - name: Install global config file.
-  include: global.yml
+  include_tasks: global.yml
 
 - name: Enable extra modules.
-  include: extra-modules.yml
+  include_tasks: extra-modules.yml
   when: aegir_extra_modules | length > 0
 
 - name: Perform miscellaneous tasks.
-  include: misc.yml
+  include_tasks: misc.yml
   when: aegir_extra_config | bool
 
-- include: registry_rebuild.yml
+- include_tasks: registry_rebuild.yml
   when: aegir_registry_rebuild | bool
 
 - name: Ensure Hosting is recognized as enabled.
@@ -55,8 +55,8 @@
   changed_when: False
 
 - name: Deploy Skynet queue daemon.
-  include: skynet.yml
+  include_tasks: skynet.yml
   when: aegir_skynet_enable | bool
 
-- include: login_link.yml
+- include_tasks: login_link.yml
   when: aegir_login_link | bool

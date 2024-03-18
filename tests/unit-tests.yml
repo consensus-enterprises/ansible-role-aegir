@@ -27,36 +27,36 @@
       aegir_http_service_type: nginx
 
   # Common tasks
-  - include: unit-tests/dependencies.yml
-  - include: unit-tests/platform/makefile.yml
+  - include_tasks: unit-tests/dependencies.yml
+  - include_tasks: unit-tests/platform/makefile.yml
 
   # Debian-specific
-  - include: unit-tests/debconf.yml
+  - include_tasks: unit-tests/debconf.yml
 
   # Git-build-specific
-  - include: unit-tests/git/user.yml
-  - include: unit-tests/git/drush.yml
-  - include: unit-tests/git/provision.yml
-  - include: unit-tests/git/nginx.yml
-  - include: unit-tests/git/sudo.yml
-  - include: unit-tests/git/platform.yml
-  - include: unit-tests/git/install.yml
-  - include: unit-tests/git/upgrade.yml
-  - include: unit-tests/git/custom-drush.yml
-  - include: unit-tests/git/custom-provision.yml
+  - include_tasks: unit-tests/git/user.yml
+  - include_tasks: unit-tests/git/drush.yml
+  - include_tasks: unit-tests/git/provision.yml
+  - include_tasks: unit-tests/git/nginx.yml
+  - include_tasks: unit-tests/git/sudo.yml
+  - include_tasks: unit-tests/git/platform.yml
+  - include_tasks: unit-tests/git/install.yml
+  - include_tasks: unit-tests/git/upgrade.yml
+  - include_tasks: unit-tests/git/custom-drush.yml
+  - include_tasks: unit-tests/git/custom-provision.yml
 
   # Custom front-end modules
-  - include: unit-tests/platform/default-modules.yml
-  - include: unit-tests/platform/contrib-modules.yml
-  - include: unit-tests/platform/custom-modules.yml
+  - include_tasks: unit-tests/platform/default-modules.yml
+  - include_tasks: unit-tests/platform/contrib-modules.yml
+  - include_tasks: unit-tests/platform/custom-modules.yml
 
   # Miscellaneous
-  - include: unit-tests/global.yml
-  - include: unit-tests/vault.yml
+  - include_tasks: unit-tests/global.yml
+  - include_tasks: unit-tests/vault.yml
 
   # Skynet
-  - include: unit-tests/skynet/dependencies.yml
-  - include: unit-tests/skynet/sudo.yml
-  - include: unit-tests/skynet/install.yml
-  - include: unit-tests/skynet/service.yml
-  - include: unit-tests/check-skynet.yml
+  - include_tasks: unit-tests/skynet/dependencies.yml
+  - include_tasks: unit-tests/skynet/sudo.yml
+  - include_tasks: unit-tests/skynet/install.yml
+  - include_tasks: unit-tests/skynet/service.yml
+  - include_tasks: unit-tests/check-skynet.yml

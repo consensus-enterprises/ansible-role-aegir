@@ -1,7 +1,7 @@
 ---
 
 - name: Deploy Aegir Drush makefile from template with updated contrib modules.
-  include: ../../../tasks/makefile.yml
+  include_tasks: ../../../tasks/makefile.yml
   vars:
     aegir_generate_makefile: yes
     aegir_makefile_path: /tmp/aegir-contrib-test.make.yml
@@ -16,7 +16,7 @@
   changed_when: false
 
 - name: Build a platform using generated Aegir Drush makefile with updated contrib modules.
-  include: ../../../tasks/git/platform.yml
+  include_tasks: ../../../tasks/git/platform.yml
   vars:
     # We set this to the current Unix timestamp to ensure a new platform is
     # always built.

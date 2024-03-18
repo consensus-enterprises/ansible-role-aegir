@@ -1,5 +1,5 @@
 - name: Include dependency installation tasks.
-  include: ../tasks/skynet/dependencies.yml
+  include_tasks: ../tasks/skynet/dependencies.yml
 
 - name: Check that dependency packages are installed.
   shell: "dpkg -l|grep '^ii  {{ item }}'"
