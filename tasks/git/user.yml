@@ -19,6 +19,7 @@
     state: directory
     owner: "{{ aegir_user }}"
     group: "{{ aegir_user }}"
+    mode: "755"
   become: yes
 - name: Create ~/.drush/ for 'aegir' user.
   file:
