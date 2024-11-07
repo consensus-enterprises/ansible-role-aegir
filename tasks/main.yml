@@ -35,6 +35,12 @@
   become: true
   when: php_set_cli_memory_limit | bool
 
+- name: Template trimmed-down global nginx.conf to avoid duplicates in /var/aegir/config/server_master/nginx.conf'
+  template:
+    src: nginx.conf.j2
+    dest: "/etc/nginx/nginx.conf"
+  become: true
+
 - name: Generate Aegir Drush makefile.
   include_tasks: makefile.yml
 
