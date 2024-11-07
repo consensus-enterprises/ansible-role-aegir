@@ -141,3 +141,7 @@ aegir_perform_legacy_cleanup: false
 
 # Ref.: https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/-/issues/3
 aegir_stop_before_site_install: false
+
+# Manage PHP CLI memory limit.
+php_set_cli_memory_limit: true
+php_cli_memory_limit: "512M"
