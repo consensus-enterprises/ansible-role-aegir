@@ -43,7 +43,8 @@
 # Once that is resolved, we should use the changes in 4d83eb6c.
 #    - consensus.mysql
 #    - geerlingguy.nginx
-#    - consensus.php
+#    #- consensus.php
+#    - geerlingguy.php
 
     # This role
     - consensus.aegir
