@@ -1,6 +1,8 @@
 ---
 - name: Escalate privileges to install packages.
   become: yes
+  vars:
+    php_version: "8.3"
   block:
   - name: Ensure Aegir's common dependencies are installed.
     apt:
