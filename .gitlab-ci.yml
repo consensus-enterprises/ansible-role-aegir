@@ -21,7 +21,7 @@ deb-default: &test-defaults
     - apt-get install -yqq git make unzip
     # TODO: Figure out a way to install these system packages as dependecies of
     # the targets that use them.
-    - apt-get install -yqq python3-minimal python3-pip python3-yaml python3-jinja2 python3-apt python3-packaging
+    - apt-get install -yqq python3-minimal python3-pip python3-yaml python3-jinja2 python3-apt python3-packaging python3-resolvelib
     - update-alternatives --install /usr/bin/python python /usr/bin/python3 1
     - pip3 install jinja2-cli matrix-client --break-system-packages
     - make ansible-all
