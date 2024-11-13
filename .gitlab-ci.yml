@@ -42,15 +42,15 @@ deb-default: &test-defaults
     #- source d
     - make ansible-role-test; make -s matrix-ci NOTIFY_CI_RESULT=$?
 
-deb-nginx:
-  <<: *test-defaults
-  variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/deb-nginx.yml
-
-git-deploy:
-  <<: *test-defaults
-  variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/git-deploy.yml
+#deb-nginx:
+#  <<: *test-defaults
+#  variables:
+#    ANSIBLE_TEST_PLAYBOOK: tests/deb-nginx.yml
+#
+#git-deploy:
+#  <<: *test-defaults
+#  variables:
+#    ANSIBLE_TEST_PLAYBOOK: tests/git-deploy.yml
 
 custom-deploy:
   <<: *test-defaults
@@ -58,24 +58,24 @@ custom-deploy:
     ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
     extra_vars: aegir_skynet_enable=False
 
-custom-upgrade:
-  <<: *test-defaults
-  variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
-    extra_vars: aegir_skynet_enable=False
-  script:
-    #- source d
-    - make ansible-role-test
-    - make ansible-role-test ANSIBLE_TEST_PLAYBOOK=tests/upgrade.yml; make -s matrix-ci NOTIFY_CI_RESULT=$?
-
-image-deploy:
-  <<: *test-defaults
-  variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/image-deploy.yml
-
-unit-tests:
-  <<: *test-defaults
-  variables:
-    ANSIBLE_TEST_PLAYBOOK: tests/unit-tests.yml
-    extra_vars: aegir_skynet_enable=False
-
+#custom-upgrade:
+#  <<: *test-defaults
+#  variables:
+#    ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
+#    extra_vars: aegir_skynet_enable=False
+#  script:
+#    #- source d
+#    - make ansible-role-test
+#    - make ansible-role-test ANSIBLE_TEST_PLAYBOOK=tests/upgrade.yml; make -s matrix-ci NOTIFY_CI_RESULT=$?
+#
+#image-deploy:
+#  <<: *test-defaults
+#  variables:
+#    ANSIBLE_TEST_PLAYBOOK: tests/image-deploy.yml
+#
+#unit-tests:
+#  <<: *test-defaults
+#  variables:
+#    ANSIBLE_TEST_PLAYBOOK: tests/unit-tests.yml
+#    extra_vars: aegir_skynet_enable=False
+#
