@@ -26,7 +26,7 @@
     aegir_drush_source_install_version: '8-boa-micro'
     aegir_drush_source_update: True
     # Custom Provision
-    aegir_provision_repo: 'https://git.drupalcode.org/project/provision.git'
+    aegir_provision_repo: https://gitlab.com/consensus.enterprises/aegir/provision
     aegir_provision_version: '3445832-host-drupal-10-on-aegir-3'
     aegir_provision_update: True
     # Custom Aegir front end
