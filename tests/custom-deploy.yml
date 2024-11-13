@@ -31,16 +31,16 @@
     aegir_provision_update: True
     # Custom Aegir front end
     aegir_generate_makefile: yes
-    aegir_hostmaster_repo: https://git.drupalcode.org/project/hostmaster.git
-    aegir_hostmaster_version: 7.x-3.x
-    aegir_custom_module_repos:
-      hosting: https://gitlab.com/consensus.enterprises/aegir/hosting
-    aegir_custom_module_versions:
-      hosting: dev/consensus
+#    aegir_hostmaster_repo: https://git.drupalcode.org/project/hostmaster.git
+#    aegir_hostmaster_version: 7.x-3.x
+#    aegir_custom_module_repos:
+#      hosting: https://gitlab.com/consensus.enterprises/aegir/hosting
+#    aegir_custom_module_versions:
+#      hosting: dev/consensus
 
   roles:
     # Dependencies
-    - geerlingguy.mysql
+    - consensus.mysql
     - geerlingguy.nginx
     - geerlingguy.php-versions
     - geerlingguy.php
