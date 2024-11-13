@@ -28,13 +28,13 @@ deb-default: &test-defaults
     # Necessary to get `ansible-galaxy`.
     #- apt-get install --assume-yes ansible
     # Fetch role dependencies
-    - git clone https://github.com/consensus-enterprises/ansible-role-mysql.git tests/roles/consensus.mysql
+    #- git clone https://github.com/consensus-enterprises/ansible-role-mysql.git tests/roles/consensus.mysql
     #- git clone https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-nginx.git tests/roles/geerlingguy.nginx
     #- git clone https://github.com/consensus-enterprises/ansible-role-php.git tests/roles/consensus.php
     # Fetch collection dependencies
     - source d
     - ansible-galaxy collection install community.crypto community.general community.mysql
-    - ansible-galaxy role install geerlingguy.php geerlingguy.nginx
+    - ansible-galaxy role install geerlingguy.php geerlingguy.nginx geerlingguy.mysql geerlingguy.composer geerlingguy.php-versions
     # Make our base URL resolve.
     - echo `hostname -I` aegir.local >> /etc/hosts
 
