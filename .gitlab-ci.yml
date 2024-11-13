@@ -23,7 +23,7 @@ deb-default: &test-defaults
     # the targets that use them.
     - apt-get install -yqq python3-minimal python3-pip python3-yaml python3-jinja2 python3-apt
     - update-alternatives --install /usr/bin/python python /usr/bin/python3 1
-    - pip3 install jinja2-cli matrix-client
+    - pip3 install jinja2-cli matrix-client --break-system-packages
     - make ansible
     # Necessary to get `ansible-galaxy`.
     #- apt-get install --assume-yes ansible
