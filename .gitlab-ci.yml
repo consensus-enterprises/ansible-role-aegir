@@ -38,7 +38,7 @@ deb-nginx:
     ANSIBLE_TEST_PLAYBOOK: tests/deb-nginx.yml
 
 git-deploy:
- <<: *test-defaults
+  <<: *test-defaults
   variables:
     ANSIBLE_TEST_PLAYBOOK: tests/git-deploy.yml
 
