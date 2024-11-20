@@ -5,6 +5,9 @@
   vars:
     # Dependencies
     mysql_root_password: '123456'
+    aegir_db_password: "{{ mysql_root_password }}"
+    aegir_db_host: "127.0.0.1"
+    php_version: "8.2"
 
   roles:
     - geerlingguy.mysql
