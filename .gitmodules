@@ -1,3 +1,0 @@
-[submodule ".mk"]
-	path = .mk
-	url = https://gitlab.com/consensus.enterprises/drumkit.git
