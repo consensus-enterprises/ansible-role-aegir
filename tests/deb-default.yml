@@ -3,7 +3,7 @@
   hosts: all
 
   roles:
-    - consensus.mysql
+    - geerlingguy.mysql
     - consensus.aegir
 
   tasks: 

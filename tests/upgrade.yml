@@ -47,9 +47,9 @@
 # Also: we see a strange unicode parsing error when consensus.php is run more than once in Gitlab CI:
 # https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/-/jobs/338888221
 # Once that is resolved, we should use the changes in 4d83eb6c.
-#    - consensus.mysql
+#    - geerlingguy.mysql
 #    - geerlingguy.nginx
-#    #- consensus.php
+#    - geerlingguy.php-versions
 #    - geerlingguy.php
 
     # This role
@@ -65,4 +65,3 @@
     changed_when: False
     become: yes
     become_user: "aegir"
-

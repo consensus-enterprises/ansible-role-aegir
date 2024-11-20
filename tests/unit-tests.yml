@@ -7,7 +7,7 @@
     mysql_root_password: '123456'
 
   roles:
-    - consensus.mysql
+    - geerlingguy.mysql
 
   tasks:
 
