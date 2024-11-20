@@ -5,9 +5,10 @@
   vars:
     # Dependencies
     mysql_root_password: '123456'
+    aegir_db_password: "{{ mysql_root_password }}"
     nginx_manage_config: False
     nginx_remove_default_vhost: True
-    php_version: "7.3"
+    php_version: "8.2"
     php_cli_memory_limit: "2048M"
     php_enable_php_fpm: True
     php_enable_webserver: False
@@ -15,12 +16,19 @@
     # This role
     aegir_http_service_type: nginx
     aegir_install_method: git
+    aegir_admin_email: "do-no-reply@example.com"
+    aegir_fix_ownership: True
+    aegir_fix_permissions: True
+    aegir_db_host: 127.0.0.1
 
   roles:
     # Dependencies
-    - consensus.mysql
+    - geerlingguy.mysql
     - geerlingguy.nginx
+    - geerlingguy.php-versions
     - geerlingguy.php
+    - geerlingguy.composer
+
     # This role
     - consensus.aegir
 
