@@ -12,12 +12,15 @@
     php_set_cli_memory_limit: True
     # This role
     aegir_http_service_type: nginx
+    php_version: "8.2"
 
   roles:
     # Dependencies
-    - consensus.mysql
+    - geerlingguy.mysql
     - geerlingguy.nginx
-    - consensus.php
+    - geerlingguy.php-versions
+    - geerlingguy.php
+    - geerlingguy.composer
     # This role
     - consensus.aegir
 

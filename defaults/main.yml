@@ -107,7 +107,7 @@ aegir_dependencies:
   - unzip
 aegir_dependencies_apache:
   - apache2
-  - "libapache2-mod-php{{ php-version }}"
+  - "libapache2-mod-php{{ php_version }}"
 aegir_dependencies_nginx:
   - nginx
   - "php{{ php_version }}-fpm"
@@ -141,3 +141,12 @@ aegir_perform_legacy_cleanup: false
 
 # Ref.: https://gitlab.com/consensus.enterprises/ansible-roles/ansible-role-aegir/-/issues/3
 aegir_stop_before_site_install: false
+
+# Manage PHP CLI memory limit.
+php_set_cli_memory_limit: true
+php_cli_memory_limit: "512M"
+
+nginx_log_format: |-
+  '$remote_addr - $remote_user [$time_local] "$request" '
+  '$status $body_bytes_sent "$http_referer" '
+  '"$http_user_agent" "$http_x_forwarded_for"'

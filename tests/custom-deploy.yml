@@ -5,8 +5,10 @@
   vars:
     # Dependencies
     mysql_root_password: '123456'
+    aegir_db_password: "{{ mysql_root_password }}"
     nginx_manage_config: False
     nginx_remove_default_vhost: True
+    php_version: "8.2"
     php_cli_memory_limit: "2048M"
     php_enable_php_fpm: True
     php_enable_webserver: False
@@ -15,29 +17,29 @@
     aegir_http_service_type: nginx
     aegir_install_method: git
     aegir_skynet_enable: true
+    aegir_admin_email: "do-not-reply@example.com"
+    aegir_fix_ownership: True
+    aegir_fix_permissions: True
     # Custom Drush
     aegir_drush_install_method: git
-    aegir_drush_source_repo: https://github.com/drush-ops/drush.git
-    aegir_drush_source_install_version: "8.3.4"
+    aegir_drush_source_repo: 'https://github.com/omega8cc/drush'
+    aegir_drush_source_install_version: '8-boa-micro'
     aegir_drush_source_update: True
     # Custom Provision
-    aegir_provision_repo: 'https://git.drupalcode.org/project/provision.git'
-    aegir_provision_version: '7.x-3.x'
+    aegir_provision_repo: https://gitlab.com/consensus.enterprises/aegir/provision
+    aegir_provision_version: '3445832-host-drupal-10-on-aegir-3'
     aegir_provision_update: True
     # Custom Aegir front end
     aegir_generate_makefile: yes
-    aegir_hostmaster_repo: https://git.drupalcode.org/project/hostmaster.git
-    aegir_hostmaster_version: 7.x-3.x
-    aegir_custom_module_repos:
-      hosting: https://gitlab.com/consensus.enterprises/aegir/hosting
-    aegir_custom_module_versions:
-      hosting: dev/consensus
+    aegir_db_host: 127.0.0.1
 
   roles:
     # Dependencies
-    - consensus.mysql
+    - geerlingguy.mysql
     - geerlingguy.nginx
-    - consensus.php
+    - geerlingguy.php-versions
+    - geerlingguy.php
+    - geerlingguy.composer
     # This role
     - consensus.aegir
 

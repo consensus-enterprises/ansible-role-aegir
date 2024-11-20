@@ -22,6 +22,25 @@
     aegir_db_user: "{{ mysql_root_user }}"
   when: (aegir_db_user is not defined) and (mysql_root_user is defined)
 
+- name: Set PHP CLI memory limit.
+  block:
+    - name: Ensure PHP CLI config directory exists.
+      file:
+        dest: "/etc/php/{{ php_version }}/cli/conf.d/"
+        state: directory
+    - name: Set PHP CLI memory limit.
+      template:
+        src: memory_limit.ini.j2
+        dest: "/etc/php/{{ php_version }}/cli/conf.d/20-memory_limit.ini"
+  become: true
+  when: php_set_cli_memory_limit | bool
+
+- name: Template trimmed-down global nginx.conf to avoid duplicates in /var/aegir/config/server_master/nginx.conf'
+  template:
+    src: nginx.conf.j2
+    dest: "/etc/nginx/nginx.conf"
+  become: true
+
 - name: Generate Aegir Drush makefile.
   include_tasks: makefile.yml
 
