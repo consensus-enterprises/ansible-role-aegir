@@ -19,6 +19,7 @@ variables:
 custom-deploy: &test-defaults
   variables:
     ANSIBLE_TEST_PLAYBOOK: tests/custom-deploy.yml
+    extra_vars: aegir_skynet_enable=False
   stage: test
   before_script:
     # Install Git and GNU Make
