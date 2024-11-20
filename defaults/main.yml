@@ -107,7 +107,7 @@ aegir_dependencies:
   - unzip
 aegir_dependencies_apache:
   - apache2
-  - "libapache2-mod-php{{ php-version }}"
+  - "libapache2-mod-php{{ php_version }}"
 aegir_dependencies_nginx:
   - nginx
   - "php{{ php_version }}-fpm"
