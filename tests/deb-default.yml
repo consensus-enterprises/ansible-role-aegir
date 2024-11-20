@@ -4,6 +4,7 @@
 
   roles:
     - geerlingguy.mysql
+    - geerlingguy.php-versions
     - consensus.aegir
 
   tasks: 

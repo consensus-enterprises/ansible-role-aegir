@@ -12,7 +12,7 @@
     php_set_cli_memory_limit: True
     # This role
     aegir_http_service_type: nginx
-    php_version: 8.2
+    php_version: "8.2"
 
   roles:
     # Dependencies
